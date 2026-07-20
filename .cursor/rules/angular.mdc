@@ -1,5 +1,5 @@
 ---
-description: Conventions Angular, commentaires FR, code EN
+description: Conventions Angular — feature-oriented, réutilisable, tokens
 globs: src/**/*.{ts,html,scss}
 alwaysApply: false
 ---
@@ -14,6 +14,34 @@ alwaysApply: false
 - Lazy-load des routes feature dès qu'une page n'est pas critique au first paint.
 - Accessibilité tactile : cibles assez grandes, pas d'actions essentielles en hover-only.
 
+## Feature-oriented
+
+```
+src/app/
+├── core/              # shell, auth, config, guards
+├── shared/            # UI réutilisable (dumb) + utilitaires
+└── features/<name>/   # gallery | puzzle | admin
+    ├── components/
+    ├── services/
+    ├── models/
+    └── <name>.routes.ts
+```
+
+- Logique métier et HTTP dans la **feature** (smart) ou ses services.
+- `shared/` : composants **dumb** (présentationnels), `input()` / `output()` uniquement — **réutilisables**, sans appel Supabase.
+
+## Réutilisabilité
+
+- Factoriser dès qu'un motif UI ou une logique apparaît **deux fois**.
+- Préférer un composant / pipe / util `shared/` plutôt que copier-coller.
+- Une responsabilité visuelle claire par composant atomique.
+
+## Tokens SCSS (obligatoire)
+
+- Aucune couleur, espacement, rayon, ombre ou taille de police **en dur** dans un `.component.scss`.
+- Tout passe par **`src/styles/_tokens.scss`** (variables CSS ou SCSS).
+- Nouvelle valeur de charte → d'abord le token, puis consommation dans le composant.
+
 ## Langue
 
 - Code (identifiants) : **anglais**.
@@ -22,35 +50,4 @@ alwaysApply: false
 
 ## Commentaires (obligatoires)
 
-Chaque **classe**, **interface**, **type**, **enum**, **composant**, **service** et **méthode** (publique ou privée) a un en-tête JSDoc en français : rôle, `@param`, `@returns` si besoin.
-
-```typescript
-/**
- * Galerie publique des œuvres.
- * Affiche la grille et ouvre le mode puzzle.
- */
-@Component({
-  selector: 'app-gallery',
-  imports: [RouterLink],
-  templateUrl: './gallery.html',
-  styleUrl: './gallery.scss',
-})
-export class Gallery {
-  /** Liste des œuvres chargées depuis Supabase. */
-  protected readonly artworks = signal<Artwork[]>([]);
-
-  /**
-   * Ouvre le puzzle pour l'œuvre sélectionnée.
-   * @param artworkId - Identifiant de l'œuvre.
-   */
-  protected openPuzzle(artworkId: string): void { /* ... */ }
-}
-```
-
-À l'intérieur des fichiers : commentaires de **structure** (`// --- Chargement ---`) pour les blocs non triviaux. Ne pas commenter l'évident ; ne jamais livrer une classe sans en-tête.
-
-## Domaine
-
-- **Gallery** : consultation publique.
-- **Puzzle** : Facile / Moyen / Difficile ; snap ; confettis à la victoire.
-- **Admin** : upload PNG/JPEG + titre, description, temps passé — derrière Auth Supabase.
+Chaque **classe**, **interface**, **type**, **enum**, **composant**, **service** et **méthode** a un en-tête JSDoc en français : rôle, `@param`, `@returns` si besoin. Commentaires de structure pour les blocs non triviaux.

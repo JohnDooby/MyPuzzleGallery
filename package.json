@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "build:pages": "ng build --configuration production --base-href /MyPuzzleGallery/",
+    "icons:generate": "node scripts/generate-icons.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -18,6 +19,7 @@
     "@angular/forms": "^22.0.0",
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
+    "@angular/service-worker": "^22.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -27,6 +29,7 @@
     "@angular/compiler-cli": "^22.0.0",
     "jsdom": "^28.0.0",
     "prettier": "^3.8.1",
+    "sharp": "^0.35.3",
     "typescript": "~6.0.2",
     "vitest": "^4.0.8"
   }

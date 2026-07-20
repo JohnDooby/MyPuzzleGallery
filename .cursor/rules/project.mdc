@@ -14,7 +14,14 @@ Référence détaillée versionnée : **`devrules.md`** à la racine du dépôt.
 - Frontend : **Angular 22** (standalone, SCSS, Prettier, Vitest)
 - Backend : **Supabase** (Auth, PostgreSQL + RLS, Storage)
 - Hébergement : **GitHub Pages** via Actions (`npm run build:pages`, base-href `/MyPuzzleGallery/`)
+- PWA : `@angular/service-worker` + `manifest.webmanifest` (installable sur mobile)
 - Drag & drop : `@angular/cdk/drag-drop`
+
+## Architecture (obligatoire)
+
+- Découpage **feature-oriented** : `core/` + `shared/` + `features/<feature>/`.
+- Tout UI récurrent doit être **réutilisable** (composants `shared/` dumb, pas de duplication).
+- Design via **tokens SCSS** centralisés (`src/styles/_tokens.scss`) — pas de couleurs / espacements en dur dans les composants.
 
 ## Principes
 

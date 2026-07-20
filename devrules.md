@@ -43,21 +43,47 @@ Usage prioritaire **mobile / tablette**, public familial, thème clair.
 | Drag & drop | `@angular/cdk/drag-drop` |
 | Backend | Supabase (Auth, PostgreSQL + RLS, Storage) |
 | Hébergement | GitHub Pages (`npm run build:pages`, base-href `/MyPuzzleGallery/`) |
+| PWA | `@angular/service-worker`, `public/manifest.webmanifest`, icônes dans `public/icons/` |
 
 ---
 
 ## Architecture cible
 
+Découpage **feature-oriented** obligatoire :
+
 ```
 src/app/
-├── core/           # config, auth Supabase, layout shell
-├── shared/         # composants UI dumb / présentationnels
-└── features/
-    ├── gallery/
-    ├── puzzle/
-    └── admin/
-public/             # assets statiques
+├── core/           # layout shell, auth Supabase, config, guards
+├── shared/         # composants UI réutilisables (dumb) + utilitaires
+└── features/       # une feature par domaine métier
+    └── <feature>/
+        ├── components/
+        ├── services/
+        ├── models/
+        └── <feature>.routes.ts
+src/styles/
+└── _tokens.scss    # charte graphique (couleurs, espacements, typo…)
+public/             # assets statiques (icônes PWA, etc.)
 ```
+
+### Feature-oriented
+
+- Chaque domaine (`gallery`, `puzzle`, `admin`) vit dans `features/<name>/`.
+- Smart (état, appels Supabase) dans la feature ; dumb dans `shared/`.
+- Routes lazy-loadées par feature dès que pertinent.
+
+### Réutilisabilité
+
+- Tout motif UI ou logique qui se répète doit être **factorisé** (composant, pipe, util, token).
+- `shared/` : composants **présentationnels** uniquement (`input()` / `output()`), **sans** logique métier ni HTTP.
+- Une responsabilité visuelle claire par composant atomique — pas de duplication par copier-coller.
+
+### Tokens SCSS (obligatoire)
+
+- **Aucune** couleur, espacement, rayon, ombre ou taille de police de charte **en dur** dans un composant.
+- Source de vérité : **`src/styles/_tokens.scss`** (custom properties CSS et/ou variables SCSS).
+- `styles.scss` importe les tokens en premier.
+- Nouvelle valeur de charte → d'abord `_tokens.scss`, puis usage dans les composants.
 
 - Serverless : pas de backend custom.
 - Images dans **Storage** ; BDD = métadonnées + URLs publiques.
@@ -84,6 +110,8 @@ Ne pas commenter l'évident ; ne jamais livrer une API publique sans en-tête.
 ## Conventions Angular
 
 - Standalone only ; `inject()` ; signals first.
+- Architecture **feature-oriented** (`core` / `shared` / `features`).
+- Composants et styles **réutilisables** ; tokens SCSS obligatoires.
 - `templateUrl` / `styleUrl` ; SCSS ; préfixe `app-`.
 - Prettier : `singleQuote`, `printWidth: 100`.
 - Diff minimal : ne pas toucher hors scope.

@@ -1,0 +1,37 @@
+---
+description: Tokens SCSS et styles — pas de valeurs en dur
+globs: "**/*.{scss,css}"
+alwaysApply: false
+---
+
+# Styles & tokens SCSS
+
+## Règle
+
+**Aucune** couleur (`#…`, `rgb(…)`, noms CSS arbitraires), espacement, rayon, ombre ou font-size de charte en dur dans un composant.
+
+Tout est défini dans **`src/styles/_tokens.scss`** et consommé via `var(--…)` ou variables SCSS.
+
+```scss
+// ❌ BAD
+.card {
+  padding: 16px;
+  color: #c62828;
+  border-radius: 8px;
+}
+
+// ✅ GOOD
+.card {
+  padding: var(--spacing-md);
+  color: var(--color-accent);
+  border-radius: var(--radius-md);
+}
+```
+
+## Organisation
+
+- `src/styles/_tokens.scss` : source de vérité de la charte.
+- `src/styles.scss` : importe les tokens en premier, puis styles globaux minimaux.
+- Fichiers `*.component.scss` : uniquement layout local + tokens.
+
+Toute nouvelle teinte / spacing passe **d'abord** par `_tokens.scss`.
