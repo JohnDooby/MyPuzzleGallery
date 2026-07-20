@@ -1,0 +1,56 @@
+---
+description: Conventions Angular, commentaires FR, code EN
+globs: src/**/*.{ts,html,scss}
+alwaysApply: false
+---
+
+# Angular
+
+- Composants **standalone** uniquement (pas de NgModules).
+- **Signals** pour l'état local ; `input()` / `output()` / `computed()` ; `inject()` pour les deps.
+- Templates et styles **externes** (`templateUrl`, `styleUrl`).
+- Styles en **SCSS** ; préfixe `app-`.
+- Prettier : `singleQuote`, `printWidth: 100`, parser `angular` pour le HTML.
+- Lazy-load des routes feature dès qu'une page n'est pas critique au first paint.
+- Accessibilité tactile : cibles assez grandes, pas d'actions essentielles en hover-only.
+
+## Langue
+
+- Code (identifiants) : **anglais**.
+- Commentaires / JSDoc : **français** (obligatoires).
+- Libellés UI : **français**.
+
+## Commentaires (obligatoires)
+
+Chaque **classe**, **interface**, **type**, **enum**, **composant**, **service** et **méthode** (publique ou privée) a un en-tête JSDoc en français : rôle, `@param`, `@returns` si besoin.
+
+```typescript
+/**
+ * Galerie publique des œuvres.
+ * Affiche la grille et ouvre le mode puzzle.
+ */
+@Component({
+  selector: 'app-gallery',
+  imports: [RouterLink],
+  templateUrl: './gallery.html',
+  styleUrl: './gallery.scss',
+})
+export class Gallery {
+  /** Liste des œuvres chargées depuis Supabase. */
+  protected readonly artworks = signal<Artwork[]>([]);
+
+  /**
+   * Ouvre le puzzle pour l'œuvre sélectionnée.
+   * @param artworkId - Identifiant de l'œuvre.
+   */
+  protected openPuzzle(artworkId: string): void { /* ... */ }
+}
+```
+
+À l'intérieur des fichiers : commentaires de **structure** (`// --- Chargement ---`) pour les blocs non triviaux. Ne pas commenter l'évident ; ne jamais livrer une classe sans en-tête.
+
+## Domaine
+
+- **Gallery** : consultation publique.
+- **Puzzle** : Facile / Moyen / Difficile ; snap ; confettis à la victoire.
+- **Admin** : upload PNG/JPEG + titre, description, temps passé — derrière Auth Supabase.

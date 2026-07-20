@@ -1,0 +1,31 @@
+---
+description: Contexte produit et architecture MyPuzzleGallery
+alwaysApply: true
+---
+
+# MyPuzzleGallery
+
+Galerie d'art numérique + puzzles tactiles (dessins Ibis Paint X). Public familial, usage prioritaire **mobile / tablette**.
+
+Référence détaillée versionnée : **`devrules.md`** à la racine du dépôt.
+
+## Stack
+
+- Frontend : **Angular 22** (standalone, SCSS, Prettier, Vitest)
+- Backend : **Supabase** (Auth, PostgreSQL + RLS, Storage)
+- Hébergement : **GitHub Pages** via Actions (`npm run build:pages`, base-href `/MyPuzzleGallery/`)
+- Drag & drop : `@angular/cdk/drag-drop`
+
+## Principes
+
+- Serverless / BaaS : pas de backend custom. Images dans Supabase Storage ; BDD = métadonnées + URLs publiques.
+- RLS : seul le compte artiste authentifié peut créer / modifier / supprimer.
+- UI publique en **français**, thème **clair**, vitrine épurée.
+- Puzzle 100 % client (CSS/HTML) : pas de découpage serveur.
+- Toujours penser tactile (doigt) avant souris.
+- **Credentials** : jamais dans Git ni dans un fichier fetchable (voir règle sécurité / `devrules.md`).
+
+## Déploiement
+
+- Ne pas casser `.github/workflows/deploy-github-pages.yml`.
+- Conserver le fallback `404.html` pour le routing SPA sur Pages.

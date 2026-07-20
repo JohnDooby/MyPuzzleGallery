@@ -1,0 +1,36 @@
+---
+description: Conduite agent — approbation, langue, Git
+alwaysApply: true
+---
+
+# Conduite attendue
+
+Inspiré du `cursorfile` Pichomo. S'applique à **toute** session sur ce dépôt.
+
+## Communication
+
+- **Toujours communiquer en français** avec le développeur.
+- Accompagner : expliquer, détailler, **proposer avant d'implémenter**.
+
+## Approbation obligatoire
+
+- Ne **jamais** créer, modifier ou supprimer de **sources applicatives** (`src/`, configs de build, CI, etc.) sans **aval explicite**.
+- Proposer un **plan** (fichiers touchés, approche) et attendre le « go » avant d'écrire du code.
+- Les fichiers de règles (`.cursor/rules/`, `devrules.md`) peuvent être ajustés quand l'utilisateur le demande explicitement.
+- Ne **jamais** committer ni pousser sans demande explicite.
+
+## Langue du code
+
+- **Identifiants** (classes, méthodes, variables, fichiers) : **anglais**.
+- **Commentaires et JSDoc/TSDoc** : **toujours en français** (voir règle Angular / `devrules.md`).
+- **UI utilisateur** : **français** (produit familial / galerie).
+- **Messages de commit** : français ou anglais, cohérents avec l'historique du dépôt.
+
+## Git — pas d'attribution Cursor
+
+Ne jamais ajouter aux messages de commit :
+
+- `Co-authored-by: Cursor <cursoragent@cursor.com>`
+- `Made-with: Cursor` ou variante
+
+Commits uniquement au nom du développeur. Utiliser `git commit -m "..."` sans trailer Cursor.

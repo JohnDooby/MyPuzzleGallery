@@ -1,0 +1,16 @@
+---
+description: Conventions Supabase (Auth, RLS, Storage)
+globs: "**/*supabase*"
+alwaysApply: false
+---
+
+# Supabase
+
+- Client unique (service injectable) ; pas d'instanciation dispersée.
+- **`service_role` : interdit** dans le front, le dépôt, `public/`, et tout artefact Pages.
+- Clé **anon** uniquement côté client, injectée hors fichiers secrets versionnés / fetchables (voir règle sécurité).
+- La sécurité des données repose sur **RLS + Auth**, pas sur une clé « cachée ».
+- Toute table exposée au client : **RLS** explicite (lecture publique des œuvres publiées ; écriture artiste authentifié).
+- Upload → **Storage** ; en BDD seulement URL publique + métadonnées.
+- Types dédiés (pas de `any`) ; JSDoc en **français**, identifiants en **anglais**.
+- Erreurs réseau / auth visibles pour l'utilisateur (admin mobile).

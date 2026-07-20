@@ -1,0 +1,30 @@
+---
+description: Sécurité — aucun credential dans le dépôt ni fetchable
+alwaysApply: true
+---
+
+# Sécurité des credentials
+
+Règle **non négociable** :
+
+1. **Aucun credential** ne doit apparaître dans le dépôt Git (sources, historique, issues, artefacts commités).
+2. **Aucun credential** ne doit être récupérable par un client via un `fetch` / URL publique (fichiers sous `public/`, JSON de config servi en statique, assets GitHub Pages, etc.).
+
+## Interdit
+
+- Mots de passe, tokens, clés privées, `service_role` Supabase, secrets CI en clair.
+- Fichiers `.env`, `.env.*`, `credentials.json`, etc. **versionnés**.
+- Secrets placés dans `public/` ou tout chemin copié tel quel dans le build Pages.
+- Exemples de code ou README contenant de vraies valeurs secrètes.
+
+## Autorisé (avec prudence)
+
+- La clé Supabase **anon** est *publishable* (conçue pour le front + RLS). Elle ne remplace **jamais** la `service_role`.
+- Si une config client est nécessaire : injection au **build** via secrets CI / variables d'environnement **non commités**, pas un fichier secret téléchargeable.
+- Toute protection réelle des données passe par **RLS** et Auth, pas par l'obscurcissement de clés.
+
+## Réflexe agent
+
+Avant tout commit ou ajout de fichier : vérifier qu'aucun secret n'est inclus. En cas de doute → **ne pas écrire** la valeur, alerter le développeur.
+
+Le `.gitignore` exclut déjà `.env`, `.env.*`, `credentials.json`, clés `*.pem` / `*.p12`. Un `.env.example` **sans valeurs secrètes** reste autorisé.
