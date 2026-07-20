@@ -22,6 +22,7 @@ Règle **non négociable** :
 - La clé Supabase **anon** est *publishable* (conçue pour le front + RLS). Elle ne remplace **jamais** la `service_role`.
 - Si une config client est nécessaire : injection au **build** via secrets CI / variables d'environnement **non commités**, pas un fichier secret téléchargeable.
 - Toute protection réelle des données passe par **RLS** et Auth, pas par l'obscurcissement de clés.
+- Contexte produit **mineurs** : une faille RLS = contenu potentiellement exposé — traiter comme incident critique (voir `docs/backlog/E07` / E10).
 
 ## Réflexe agent
 
