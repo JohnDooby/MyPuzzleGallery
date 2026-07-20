@@ -1,0 +1,40 @@
+@if (visible()) {
+  <div class="pwa-prompt" role="dialog" aria-labelledby="pwa-prompt-title" aria-modal="true">
+    <div class="pwa-prompt__backdrop" (click)="onDismiss()"></div>
+
+    <div class="pwa-prompt__sheet">
+      <img
+        class="pwa-prompt__icon"
+        src="icons/icon-192x192.png"
+        width="64"
+        height="64"
+        alt=""
+      />
+
+      <h2 id="pwa-prompt-title" class="pwa-prompt__title">Installer {{ appName }}</h2>
+
+      @if (isIos()) {
+        <p class="pwa-prompt__text">
+          Pour l’avoir comme une appli sur ton iPhone : appuie sur
+          <strong>Partager</strong> puis
+          <strong>Sur l’écran d’accueil</strong>.
+        </p>
+        <button type="button" class="pwa-prompt__btn pwa-prompt__btn--primary" (click)="onDismiss()">
+          Compris
+        </button>
+      } @else {
+        <p class="pwa-prompt__text">
+          Ajoute l’appli sur ton écran d’accueil pour y accéder plus vite, comme un jeu.
+        </p>
+        <div class="pwa-prompt__actions">
+          <button type="button" class="pwa-prompt__btn pwa-prompt__btn--ghost" (click)="onDismiss()">
+            Plus tard
+          </button>
+          <button type="button" class="pwa-prompt__btn pwa-prompt__btn--primary" (click)="onInstall()">
+            Installer
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+}

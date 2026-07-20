@@ -1,0 +1,43 @@
+// =============================================================================
+// Design tokens — source de vérité de la charte MyPuzzleGallery
+// Aucune couleur / espacement de charte en dur dans les composants.
+// =============================================================================
+
+:root {
+  /* --- Couleurs --- */
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #5c5c5c;
+  --color-accent: #c62828;
+  --color-accent-contrast: #ffffff;
+  --color-overlay: rgba(0, 0, 0, 0.45);
+  --color-border: #e0e0e0;
+
+  /* --- Espacements --- */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* --- Rayons --- */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+
+  /* --- Ombres --- */
+  --shadow-prompt: 0 -0.25rem 1.5rem rgba(0, 0, 0, 0.18);
+
+  /* --- Typo --- */
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-weight-semibold: 600;
+
+  /* --- Z-index --- */
+  --z-prompt: 1000;
+
+  /* --- Cibles tactiles --- */
+  --touch-target-min: 2.75rem;
+}

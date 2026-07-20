@@ -22,6 +22,7 @@ Référence détaillée versionnée : **`devrules.md`** à la racine du dépôt.
 - Découpage **feature-oriented** : `core/` + `shared/` + `features/<feature>/`.
 - Tout UI récurrent doit être **réutilisable** (composants `shared/` dumb, pas de duplication).
 - Design via **tokens SCSS** centralisés (`src/styles/_tokens.scss`) — pas de couleurs / espacements en dur dans les composants.
+- Libellés de marque (titre, PWA) centralisés dans `src/app/core/branding/branding.json` (+ `npm run branding:sync`).
 
 ## Principes
 
