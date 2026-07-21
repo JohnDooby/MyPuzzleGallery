@@ -8,8 +8,10 @@ import { SupabaseClientService } from '../../../core/supabase/supabase-client.se
 import type { AdminAccount } from '../models/admin-account.model';
 
 /**
- * Gestion des comptes côté Admin / SuperAdmin (lecture + actions SuperAdmin).
- * Les écritures `role` / `is_banned` sont restreintes par RLS au SuperAdmin.
+ * Gestion des comptes côté Admin / SuperAdmin.
+ * - Lecture : staff (RPC admin_list_profiles)
+ * - Ban : Admin + SuperAdmin (RLS + trigger)
+ * - Rôle : SuperAdmin uniquement
  */
 @Injectable({ providedIn: 'root' })
 export class AdminAccountsService {
@@ -44,7 +46,7 @@ export class AdminAccountsService {
   }
 
   /**
-   * Bannit ou débannit un compte (SuperAdmin uniquement côté RLS).
+   * Bannit ou débannit un compte (Admin ou SuperAdmin côté RLS).
    * @param profileId Identifiant du profil cible.
    * @param isBanned true pour bannir.
    */
@@ -78,8 +80,11 @@ export class AdminAccountsService {
    */
   private mapError(message: string): string {
     const normalized = message.toLowerCase();
-    if (normalized.includes('superadmin')) {
+    if (normalized.includes('rôle') || normalized.includes('role')) {
       return 'Action réservée aux SuperAdmin.';
+    }
+    if (normalized.includes('is_banned') || normalized.includes('staff')) {
+      return 'Action réservée aux Admin / SuperAdmin.';
     }
     return message;
   }

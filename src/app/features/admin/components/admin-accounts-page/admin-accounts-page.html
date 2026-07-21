@@ -4,12 +4,13 @@
 
     @if (isSuperAdmin()) {
       <p class="admin-accounts__hint">
-        Vous êtes SuperAdmin : vous pouvez promouvoir, rétrograder et bannir (sauf votre propre
-        compte).
+        SuperAdmin : promotion / rétrogradation des rôles, et ban (sauf votre compte et les
+        SuperAdmin).
       </p>
     } @else {
       <p class="admin-accounts__hint">
-        Consultation seule. Les modifications de rôle et de ban sont réservées au SuperAdmin.
+        Admin : consultation et ban / débannir (sauf votre compte et les SuperAdmin). La gestion des
+        rôles est réservée au SuperAdmin.
       </p>
     }
 
@@ -75,9 +76,9 @@
               </p>
             </div>
 
-            @if (canManage(account)) {
+            @if (canChangeRole(account) || canBan(account)) {
               <div class="admin-accounts__actions">
-                @if (account.role === 'normal') {
+                @if (canChangeRole(account) && account.role === 'normal') {
                   <button
                     type="button"
                     class="admin-accounts__btn"
@@ -87,7 +88,7 @@
                     Promouvoir Admin
                   </button>
                 }
-                @if (account.role === 'admin') {
+                @if (canChangeRole(account) && account.role === 'admin') {
                   <button
                     type="button"
                     class="admin-accounts__btn"
@@ -97,7 +98,7 @@
                     Rétrograder Normal
                   </button>
                 }
-                @if (!account.is_banned) {
+                @if (canBan(account) && !account.is_banned) {
                   <button
                     type="button"
                     class="admin-accounts__btn admin-accounts__btn--danger"
@@ -106,7 +107,8 @@
                   >
                     Bannir
                   </button>
-                } @else {
+                }
+                @if (canBan(account) && account.is_banned) {
                   <button
                     type="button"
                     class="admin-accounts__btn"

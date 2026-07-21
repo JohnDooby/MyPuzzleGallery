@@ -7,7 +7,7 @@ import type { AdminAccount, AdminAccountSortField } from '../../models/admin-acc
 import { AdminAccountsService } from '../../services/admin-accounts.service';
 
 /**
- * Page Admin — liste des comptes, tri, et actions SuperAdmin (rôle / ban).
+ * Page Admin — liste des comptes, tri, ban (staff) et rôles (SuperAdmin).
  */
 @Component({
   selector: 'app-admin-accounts-page',
@@ -19,7 +19,10 @@ export class AdminAccountsPage implements OnInit {
   private readonly auth = inject(AuthService);
   private readonly accounts = inject(AdminAccountsService);
 
-  /** true si le compte connecté est SuperAdmin (actions écriture). */
+  /** true si Admin ou SuperAdmin. */
+  protected readonly isStaff = this.auth.isStaff;
+
+  /** true si le compte connecté est SuperAdmin (gestion des rôles). */
   protected readonly isSuperAdmin = this.auth.isSuperAdmin;
 
   /** Identifiant du compte connecté (pour désactiver actions sur soi). */
@@ -129,13 +132,26 @@ export class AdminAccountsPage implements OnInit {
   }
 
   /**
-   * Indique si des actions SuperAdmin sont possibles sur ce compte.
+   * Indique si le titulaire peut changer le rôle de la cible (SuperAdmin only).
    * @param account Compte cible.
    */
-  protected canManage(account: AdminAccount): boolean {
-    if (!this.isSuperAdmin()) {
-      return false;
-    }
+  protected canChangeRole(account: AdminAccount): boolean {
+    return this.isSuperAdmin() && this.isActionableTarget(account);
+  }
+
+  /**
+   * Indique si le titulaire peut bannir / débannir (Admin ou SuperAdmin).
+   * @param account Compte cible.
+   */
+  protected canBan(account: AdminAccount): boolean {
+    return this.isStaff() && this.isActionableTarget(account);
+  }
+
+  /**
+   * Cible actionnable : pas soi-même, pas un SuperAdmin.
+   * @param account Compte cible.
+   */
+  private isActionableTarget(account: AdminAccount): boolean {
     if (account.id === this.currentUserId()) {
       return false;
     }

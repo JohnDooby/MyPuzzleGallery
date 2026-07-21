@@ -26,6 +26,7 @@ npx supabase db push
 | `20260721090000_profiles_roles_rls.sql` | Enum rôles, `profiles`, trigger signup, helpers RLS, policies |
 | `20260721090500_fix_superadmin_bootstrap.sql` | Correctif seed 1er SuperAdmin (SQL Editor) |
 | `20260721120000_admin_list_profiles.sql` | RPC staff : profils + e-mail Auth |
+| `20260721133000_admin_can_ban.sql` | Admin peut bannir ; rôle reste SuperAdmin |
 
 ## Seed SuperAdmin
 

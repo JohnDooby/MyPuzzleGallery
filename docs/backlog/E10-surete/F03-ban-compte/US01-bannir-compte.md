@@ -11,7 +11,7 @@ afin d’**empêcher un usage dangereux** et de **couper la diffusion publique**
 
 ## Critères d’acceptation
 
-- [x] Action **Bannir / Désactiver** *(MVP : SuperAdmin uniquement, aligné RLS)*
+- [x] Action **Bannir / Désactiver** réservée **Admin + SuperAdmin** (RLS + UI)
 - [x] Le compte banni **ne peut plus se connecter** *(AuthService déconnecte si `is_banned`)*
 - [ ] Toutes les œuvres de ce compte qui étaient **visibles publiquement** sont **retirées du public** immédiatement *(dépend E03)*
 - [ ] On **ne supprime pas** le fait qu’elles étaient publiques *(dépend E03 / E08)*
@@ -26,4 +26,5 @@ afin d’**empêcher un usage dangereux** et de **couper la diffusion publique**
 ## Notes
 
 Important PO : retirer du public **sans effacer** le marqueur « était en public ».  
-Branche `feature/admin` : UI + flag `is_banned` ; retrait œuvres / audit = suite.
+Branche `feature/admin` : UI + flag `is_banned` ; retrait œuvres / audit = suite.  
+Gestion des **rôles** (promouvoir Admin) reste **SuperAdmin only**.
