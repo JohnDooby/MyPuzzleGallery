@@ -1,7 +1,7 @@
 # US01 — Empêcher toute fuite de contenus non publics
 
 **Feature :** F03  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 

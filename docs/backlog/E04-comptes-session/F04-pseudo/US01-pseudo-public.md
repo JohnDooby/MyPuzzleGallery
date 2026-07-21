@@ -1,7 +1,7 @@
 # US01 — Définir et afficher un pseudo
 
 **Feature :** F04  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 

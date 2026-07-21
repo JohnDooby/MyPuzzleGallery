@@ -1,0 +1,44 @@
+.rules__title {
+  margin: 0 0 var(--spacing-sm);
+  font-size: var(--font-size-lg);
+}
+
+.rules__lead {
+  margin: 0 0 var(--spacing-lg);
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.rules__section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.rules__section h2 {
+  margin: 0 0 var(--spacing-sm);
+  font-size: var(--font-size-md);
+}
+
+.rules__section p,
+.rules__section ul {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.rules__section ul {
+  padding-left: var(--spacing-lg);
+}
+
+.rules__section li + li {
+  margin-top: var(--spacing-xs);
+}
+
+.rules__back {
+  margin: var(--spacing-xl) 0 0;
+  font-size: var(--font-size-sm);
+}
+
+.rules__back a {
+  color: var(--color-accent);
+}

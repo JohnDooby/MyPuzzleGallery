@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 
-import { APP_BRANDING } from '../../core/branding/app-branding';
-import { SupabaseClientService } from '../../core/supabase/supabase-client.service';
+import { APP_BRANDING } from '../../../../core/branding/app-branding';
+import { SupabaseClientService } from '../../../../core/supabase/supabase-client.service';
 
 /**
  * Page d'accueil provisoire : smoke test shell + connexion Supabase.

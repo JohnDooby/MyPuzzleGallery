@@ -6,6 +6,7 @@ import { Routes } from '@angular/router';
 export const GALLERY_ROUTES: Routes = [
   {
     path: '',
-    loadComponent: () => import('./gallery-page').then((m) => m.GalleryPage),
+    loadComponent: () =>
+      import('./components/gallery-page/gallery-page').then((m) => m.GalleryPage),
   },
 ];

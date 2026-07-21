@@ -25,9 +25,9 @@ Vue d’ensemble du backlog.
 | Statut | Nb (approx.) |
 |--------|----------------|
 | done | 1 |
-| doing | 0 |
+| doing | 3 (vague auth A) |
 | ready | 0 |
-| draft | ~30 |
+| draft | ~27 |
 | later | 2 (cadrages E09 / E11) |
 
 ---
@@ -42,27 +42,27 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
+Branche macro : **`feature/auth`** — itération **A** (schéma `profiles` + RLS).
+
 | US | Titre | Branche | Lien |
 |----|-------|---------|------|
-| — | — | — | — |
+| E04-F01-US01 | Trois rôles | feature/auth | [US](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
+| E04-F04-US01 | Pseudo public *(colonne + contrainte)* | feature/auth | [US](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) |
+| E07-F03-US01 | RLS *(partiel : `profiles` seulement)* | feature/auth | [US](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) |
 
 ---
 
-## Ready (prochaine vague — safe first)
+## Ready (suite vague auth — après A)
 
-*À remplir quand on lance une itération (passer des `draft` → `ready`).*
+| Ordre | US | Titre | Itération |
+|--------|----|-------|-----------|
+| 1 | E04-F02-US01 / US02 | Créer compte + sans validation MVP | B |
+| 2 | E04-F03-US01 / US02 | Login / logout + session | B |
+| 3 | E10-F06-US01 | Disclaimer à l’inscription | B |
+| 4 | E10-F07-US01 | Lien cadre âge / conditions | B |
+| 5 | Guard Admin + route stub | *(pas d’US dédiée encore)* | C |
 
-| Ordre suggéré | US | Titre |
-|----------------|----|-------|
-| 1 | E10-F04-US01 | Cycle privé / public (règles + UI texts) |
-| 2 | E10-F06-US01 | Disclaimer clair (audit + modération) |
-| 3 | E10-F07-US01 | Cadre âge & famille / conditions d’accès |
-| 4 | E10-F05-US01 | Garde-fous médias PNG/JPEG 10 Mo |
-| 5 | E04-F01-US01 | Trois rôles |
-| 6 | E04-F02-US01 / US02 | Créer compte + sans validation MVP |
-| 7 | E04-F03-US01 / US02 | Login / logout + session |
-| 8 | E04-F04-US01 | Pseudo public |
-| 9 | E07-F03-US01 | RLS : pas de fuite contenus non publics |
+*Hors vague auth (plus tard) : E10-F04, E10-F05, artworks, modération, invites…*
 
 ---
 
@@ -98,12 +98,12 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Trois rôles | draft | [lien](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
+| F01-US01 | Trois rôles | doing | [lien](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
 | F02-US01 | Créer un compte | draft | [lien](./backlog/E04-comptes-session/F02-creation-compte/US01-creer-compte.md) |
 | F02-US02 | Sans validation compte (MVP) | draft | [lien](./backlog/E04-comptes-session/F02-creation-compte/US02-compte-valide.md) |
 | F03-US01 | Login / logout | draft | [lien](./backlog/E04-comptes-session/F03-session/US01-login-logout.md) |
 | F03-US02 | Session persistante | draft | [lien](./backlog/E04-comptes-session/F03-session/US02-session-persistante.md) |
-| F04-US01 | Pseudo public | draft | [lien](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) |
+| F04-US01 | Pseudo public | doing | [lien](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) |
 | F05-US01 | Invitation e-mail | draft | [lien](./backlog/E04-comptes-session/F05-inviter/US01-envoyer-invitation.md) |
 
 ### E05 — Modération
@@ -116,7 +116,7 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F03-US01 | Pas de fuite contenus non publics | draft | [lien](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) |
+| F03-US01 | Pas de fuite contenus non publics | doing | [lien](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) |
 
 ### E08 — Audit
 
