@@ -1,4 +1,55 @@
-<section class="page">
-  <h1>Compte</h1>
-  <p>Bientôt : connexion, inscription et pseudo.</p>
+<section class="auth-page">
+  <h1 class="auth-page__title">Compte</h1>
+
+  @if (isLoading()) {
+    <p class="auth-page__muted" aria-live="polite">Chargement de la session…</p>
+  } @else if (isAuthenticated()) {
+    <div class="auth-page__connected">
+      <p class="auth-page__welcome">
+        Connecté en tant que <strong>{{ pseudo() }}</strong>
+      </p>
+      @if (role()) {
+        <p class="auth-page__muted">Rôle : {{ role() }}</p>
+      }
+      <button
+        class="auth-page__logout"
+        type="button"
+        [disabled]="isSigningOut()"
+        (click)="onSignOut()"
+      >
+        {{ isSigningOut() ? 'Déconnexion…' : 'Se déconnecter' }}
+      </button>
+    </div>
+  } @else {
+    <div class="auth-page__tabs" role="tablist" aria-label="Connexion ou inscription">
+      <button
+        type="button"
+        role="tab"
+        class="auth-page__tab"
+        [class.is-active]="viewMode() === 'login'"
+        [attr.aria-selected]="viewMode() === 'login'"
+        (click)="showLogin()"
+      >
+        Connexion
+      </button>
+      <button
+        type="button"
+        role="tab"
+        class="auth-page__tab"
+        [class.is-active]="viewMode() === 'signup'"
+        [attr.aria-selected]="viewMode() === 'signup'"
+        (click)="showSignup()"
+      >
+        Inscription
+      </button>
+    </div>
+
+    <div role="tabpanel">
+      @if (viewMode() === 'login') {
+        <app-login-form />
+      } @else {
+        <app-signup-form />
+      }
+    </div>
+  }
 </section>
