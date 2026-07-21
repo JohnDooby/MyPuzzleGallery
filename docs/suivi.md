@@ -1,0 +1,159 @@
+# Suivi d’avancement — User Stories
+
+Vue d’ensemble du backlog.  
+**Source de vérité du détail** = fichier US dans `docs/backlog/…`.  
+**Ce fichier** = tableau de bord : on le met à jour dès qu’une US change de statut.
+
+## Statuts
+
+| Statut | Signification |
+|--------|----------------|
+| `draft` | Écrite, pas encore priorisée pour build |
+| `ready` | Prête à développer (critères OK) |
+| `doing` | En cours (branche / PR) |
+| `done` | Livrée sur `main` (éventuellement « à valider device ») |
+| `later` | Explicitement reportée |
+
+## Règle de mise à jour
+
+1. Modifier `**Statut :**` dans le fichier US.  
+2. Déplacer / mettre à jour la ligne ici.  
+3. Indiquer la branche si `doing`.
+
+## Synthèse
+
+| Statut | Nb (approx.) |
+|--------|----------------|
+| done | 1 |
+| doing | 0 |
+| ready | 0 |
+| draft | ~30 |
+| later | 2 (cadrages E09 / E11) |
+
+---
+
+## Done
+
+| US | Titre | Lien | Notes |
+|----|-------|------|-------|
+| E06-F01-US01 | Proposition d’installation PWA | [US](./backlog/E06-mobile-pwa/F01-installation-pwa/US01-proposition-installation.md) | À valider sur téléphone réel |
+
+---
+
+## Doing
+
+| US | Titre | Branche | Lien |
+|----|-------|---------|------|
+| — | — | — | — |
+
+---
+
+## Ready (prochaine vague — safe first)
+
+*À remplir quand on lance une itération (passer des `draft` → `ready`).*
+
+| Ordre suggéré | US | Titre |
+|----------------|----|-------|
+| 1 | E10-F04-US01 | Cycle privé / public (règles + UI texts) |
+| 2 | E10-F06-US01 | Disclaimer clair (audit + modération) |
+| 3 | E10-F07-US01 | Cadre âge & famille / conditions d’accès |
+| 4 | E10-F05-US01 | Garde-fous médias PNG/JPEG 10 Mo |
+| 5 | E04-F01-US01 | Trois rôles |
+| 6 | E04-F02-US01 / US02 | Créer compte + sans validation MVP |
+| 7 | E04-F03-US01 / US02 | Login / logout + session |
+| 8 | E04-F04-US01 | Pseudo public |
+| 9 | E07-F03-US01 | RLS : pas de fuite contenus non publics |
+
+---
+
+## Backlog (draft) — par épique
+
+### E01 — Accueil & explore
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F01-US01 | Carousel 20 dernières | draft | [lien](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
+| F02-US01 | Voir galerie publique | draft | [lien](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) |
+| F03-US01 | Feed plein écran | draft | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) |
+| F03-US02 | Recherche auteur / galerie / dates | draft | [lien](./backlog/E01-galerie-publique/F03-exploration/US02-recherche-mots-clefs.md) |
+
+### E02 — Puzzle
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F01 | Jouer un puzzle | draft | [feature](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/feature.md) — *US détaillée à écrire* |
+| F02-US01 | Voir stats puzzle | draft | [lien](./backlog/E02-mode-puzzle/F02-stats-puzzle/US01-voir-stats.md) |
+| F02-US02 | Enregistrer réussite | draft | [lien](./backlog/E02-mode-puzzle/F02-stats-puzzle/US02-enregistrer-reussite.md) |
+
+### E03 — Publication & galeries
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F01-US01 | Publier depuis le device | draft | [lien](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
+| F02-US01 | Galeries nommées | draft | [lien](./backlog/E03-publication/F02-galerie-utilisateur/US01-relier-galleries.md) |
+| F03-US01 | Modifier une œuvre | draft | [lien](./backlog/E03-publication/F03-editer-oeuvre/US01-modifier-oeuvre.md) |
+| F04-US01 | Supprimer avec confirmation | draft | [lien](./backlog/E03-publication/F04-supprimer-oeuvre/US01-supprimer-oeuvre.md) |
+
+### E04 — Comptes & session
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F01-US01 | Trois rôles | draft | [lien](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
+| F02-US01 | Créer un compte | draft | [lien](./backlog/E04-comptes-session/F02-creation-compte/US01-creer-compte.md) |
+| F02-US02 | Sans validation compte (MVP) | draft | [lien](./backlog/E04-comptes-session/F02-creation-compte/US02-compte-valide.md) |
+| F03-US01 | Login / logout | draft | [lien](./backlog/E04-comptes-session/F03-session/US01-login-logout.md) |
+| F03-US02 | Session persistante | draft | [lien](./backlog/E04-comptes-session/F03-session/US02-session-persistante.md) |
+| F04-US01 | Pseudo public | draft | [lien](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) |
+| F05-US01 | Invitation e-mail | draft | [lien](./backlog/E04-comptes-session/F05-inviter/US01-envoyer-invitation.md) |
+
+### E05 — Modération
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F01-US01 | Valider / refuser demande publique | draft | [lien](./backlog/E05-moderation/F01-moderer-oeuvre/US01-valider-publication.md) |
+
+### E07 — Plateforme / RLS
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F03-US01 | Pas de fuite contenus non publics | draft | [lien](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) |
+
+### E08 — Audit
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F01-US01 | Tracer publications | draft | [lien](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) |
+| F01-US02 | Consulter journal Admin+ | draft | [lien](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) |
+| F02-US01 | Disclaimer (E08) | draft | [lien](./backlog/E08-audit/F02-disclaimer/US01-afficher-disclaimer.md) |
+
+*Note : le disclaimer UX prioritaire est **E10-F06** ; E08-F02 reste aligné.*
+
+### E10 — Sûreté
+
+| Id | Titre | Statut | Lien |
+|----|-------|--------|------|
+| F01-US01 | Signaler une œuvre | draft | [lien](./backlog/E10-surete/F01-signalement/US01-signaler-oeuvre.md) |
+| F02-US01 | Traiter un signalement | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US01-traiter-signalement.md) |
+| F02-US02 | Retrait rapide du public | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US02-retrait-rapide-public.md) |
+| F03-US01 | Bannir un compte | draft | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
+| F04-US01 | Cycle privé / public | draft | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
+| F05-US01 | Formats / taille médias | draft | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
+| F06-US01 | Disclaimer clair | draft | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
+| F07-US01 | Cadre âge & famille | draft | [lien](./backlog/E10-surete/F07-cadre-age-famille/US01-cadre-age-famille.md) |
+
+---
+
+## Later (reporté)
+
+| US | Titre | Lien |
+|----|-------|------|
+| E09-F01-US01 | Cadrage commentaires | [lien](./backlog/E09-commentaires/F01-commenter/US01-cadrage.md) |
+| E11-F01-US01 | Cadrage J’aime (login) | [lien](./backlog/E11-jaime/F01-aimer/US01-cadrage.md) |
+
+---
+
+## Dette doc / technique repérée
+
+- [ ] Écrire les US détaillées pour **E02-F01 Jouer un puzzle**
+- [ ] Harmoniser disclaimer E08-F02 vs E10-F06 (une seule US « done » à la fin)
+- [ ] Valider PWA sur device réel (E06)

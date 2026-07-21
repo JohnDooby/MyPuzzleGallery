@@ -8,6 +8,7 @@ Organisation : **Épique → Feature → User Story**. Priorité produit : **saf
 |--------|---------|
 | [vision.md](./vision.md) | Vision + priorité Safe |
 | [conditions-acces.md](./conditions-acces.md) | **Conditions d’accès**, audit, modération |
+| [suivi.md](./suivi.md) | **Avancement des User Stories** |
 | [roadmap.md](./roadmap.md) | Now / Next / Later |
 | [glossaire.md](./glossaire.md) | Vocabulaire |
 | [_templates.md](./_templates.md) | Modèles |

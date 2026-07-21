@@ -52,7 +52,9 @@ Une capacité livrable, en 2–3 phrases.
 # US0X — Titre court
 
 **Feature :** F0X  
-**Statut :** draft | ready | doing | done
+**Statut :** draft | ready | doing | done | later
+
+> Penser à mettre à jour [`docs/suivi.md`](./suivi.md) quand le statut change.
 
 ## Récit
 

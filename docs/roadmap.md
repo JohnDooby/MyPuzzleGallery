@@ -2,6 +2,7 @@
 
 ## Now
 
+- [suivi.md](./suivi.md) — tableau d’avancement des US
 - Documentation produit (priorité **Safe** / E10)
 - PWA *(base livrée — validation device)*
 
