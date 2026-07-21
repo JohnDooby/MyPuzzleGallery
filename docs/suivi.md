@@ -26,9 +26,9 @@ Vue d’ensemble du backlog.
 |--------|----------------|
 | done | 21 |
 | doing | 0 |
-| ready | 0 |
-| draft | ~12 |
-| later | 2 (cadrages E09 / E11) |
+| ready | ~3 (puzzle / polish / explore suite) |
+| draft | ~8 |
+| later | ~5 (signalements, commentaires, j’aime) |
 
 ---
 
@@ -68,7 +68,13 @@ Vue d’ensemble du backlog.
 
 ## Ready (suite priorisée)
 
-*Aucune US ready — suite = puzzle E02, signalements, polish UI, ou IP Edge Function.*
+| Ordre | US / sujet | Notes |
+|--------|------------|-------|
+| 1 | E02 Puzzle | Promesse produit ; US F01 à écrire |
+| 2 | Polish UI/UX | Accueil / explore / admin |
+| 3 | E01-F02 / F03-US02 | Galerie listée + recherche (si besoin) |
+
+*Signalements & complétion ban : **dépriorisés** (voir Later / dette) — le safe-first MVP repose sur la modération humaine + absence de j’aime / commentaires.*
 
 ---
 
@@ -138,10 +144,10 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Signaler une œuvre | draft | [lien](./backlog/E10-surete/F01-signalement/US01-signaler-oeuvre.md) |
-| F02-US01 | Traiter un signalement | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US01-traiter-signalement.md) |
-| F02-US02 | Retrait rapide du public | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US02-retrait-rapide-public.md) |
-| F03-US01 | Bannir un compte | done *(partiel)* | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
+| F01-US01 | Signaler une œuvre | later | [lien](./backlog/E10-surete/F01-signalement/US01-signaler-oeuvre.md) — *repoussé : modération Admin suffit au MVP* |
+| F02-US01 | Traiter un signalement | later | [lien](./backlog/E10-surete/F02-traitement-signalements/US01-traiter-signalement.md) |
+| F02-US02 | Retrait rapide du public | later | [lien](./backlog/E10-surete/F02-traitement-signalements/US02-retrait-rapide-public.md) |
+| F03-US01 | Bannir un compte | done *(partiel)* | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) — *retrait œuvres au ban = basse priorité* |
 | F04-US01 | Cycle privé / public | done | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
 | F05-US01 | Formats / taille médias | done | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
 | F06-US01 | Disclaimer clair | done | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
@@ -153,8 +159,11 @@ Vue d’ensemble du backlog.
 
 | US | Titre | Lien |
 |----|-------|------|
+| E10-F01 / F02 | Signalements + retrait rapide | Modération Admin couvre le MVP ; pas de feed social ouvert |
 | E09-F01-US01 | Cadrage commentaires | [lien](./backlog/E09-commentaires/F01-commenter/US01-cadrage.md) |
 | E11-F01-US01 | Cadrage J’aime (login) | [lien](./backlog/E11-jaime/F01-aimer/US01-cadrage.md) |
+
+*Safe-first actuel : **modération humaine** des demandes publiques + pas de j’aime / commentaires → surface d’abus limitée.*
 
 ---
 
@@ -164,7 +173,7 @@ Vue d’ensemble du backlog.
 - [x] Harmoniser disclaimer E08-F02 vs E10-F06 — *E10-F06 livré ; E08-F02 marqué done (couvert)*
 - [ ] Valider PWA sur device réel (E06)
 - [x] Brancher secrets Supabase en CI (Pages) via GitHub Secrets + injection build — *workflow prêt (`env:sync:ci`)*
-- [ ] Compléter E07-F03 / E10-F03 : retrait œuvres au ban + tests de non-fuite
+- [ ] Compléter E07-F03 / E10-F03 : retrait œuvres au ban + tests de non-fuite — *basse priorité (ban UI déjà là)*
 - [ ] Élargir E08 : IP fiable via Edge Function (+ filtres période si besoin)
 - [ ] E03-F02 : UI multi-galeries nommées (au-delà de « Ma galerie »)
 
@@ -173,4 +182,4 @@ Vue d’ensemble du backlog.
 - Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore, Disclaimer, Audit (`audit_events` + `/admin/audit`).
 - Menu Admin déroulant : **Comptes** | **Modération** | **Journal**.
 - Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721170000_audit_events.sql`).
-- Suite possible : **E02 puzzle**, signalements, polish UI, IP Edge Function.
+- Suite prioritaire : **E02 puzzle** (puis polish UI). Signalements / ban complet / social = plus tard.

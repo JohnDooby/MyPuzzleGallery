@@ -1,7 +1,7 @@
 # US01 — Signaler une œuvre
 
 **Feature :** F01  
-**Statut :** draft
+**Statut :** later
 
 ## Récit
 
@@ -25,3 +25,5 @@ afin qu’**un Admin puisse la traiter rapidement** si elle est inappropriée.
 ## Notes
 
 Pour la protection mineurs, privilégier un signalement **facile** et visible.
+
+Repoussé pour le MVP : la modération Admin des demandes publiques + l’absence de j’aime / commentaires limitent la surface d’abus.

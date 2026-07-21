@@ -1,7 +1,7 @@
 # US02 — Retrait rapide du public
 
 **Feature :** F02  
-**Statut :** draft
+**Statut :** later
 
 ## Récit
 
