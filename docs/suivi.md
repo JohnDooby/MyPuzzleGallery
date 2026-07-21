@@ -24,8 +24,8 @@ Vue d’ensemble du backlog.
 
 | Statut | Nb (approx.) |
 |--------|----------------|
-| done | 16 |
-| doing | 2 (explore) |
+| done | 18 |
+| doing | 0 |
 | ready | 2 |
 | draft | ~13 |
 | later | 2 (cadrages E09 / E11) |
@@ -52,17 +52,14 @@ Vue d’ensemble du backlog.
 | E10-F04-US01 | Cycle privé / public | [US](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) | Privé → pending → public/rejected ; unpublish auteur |
 | E10-F05-US01 | Formats / taille médias | [US](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) | PNG/JPEG, 2048 px, 2 Mo post-compress |
 | E05-F01-US01 | Valider / refuser demande publique | [US](./backlog/E05-moderation/F01-moderer-oeuvre/US01-valider-publication.md) | Menu Admin → Modération + mini-journal |
+| E01-F01-US01 | Carousel 20 dernières | [US](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) | Accueil ; polish UI/UX plus tard |
+| E01-F03-US01 | Feed plein écran | [US](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) | `/explore` lightbox ; sans puzzle / signalement |
 
 ---
 
 ## Doing
 
-Branche macro : **`feature/explore`** — carousel accueil + feed lightbox.
-
-| US | Titre | Branche | Lien |
-|----|-------|---------|------|
-| E01-F01-US01 | Carousel 20 dernières | feature/explore | [US](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
-| E01-F03-US01 | Feed plein écran | feature/explore | [US](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) |
+*Aucune US en cours — `main` à jour après merge `feature/explore`.*
 
 ---
 
@@ -81,9 +78,9 @@ Branche macro : **`feature/explore`** — carousel accueil + feed lightbox.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Carousel 20 dernières | doing | [lien](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
+| F01-US01 | Carousel 20 dernières | done | [lien](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
 | F02-US01 | Voir galerie publique | draft | [lien](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) |
-| F03-US01 | Feed plein écran | doing | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) — *MVP sans puzzle / signalement* |
+| F03-US01 | Feed plein écran | done | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) — *MVP sans puzzle / signalement* |
 | F03-US02 | Recherche auteur / galerie / dates | draft | [lien](./backlog/E01-galerie-publique/F03-exploration/US02-recherche-mots-clefs.md) |
 
 ### E02 — Puzzle
@@ -173,7 +170,7 @@ Branche macro : **`feature/explore`** — carousel accueil + feed lightbox.
 
 ## Notes techniques
 
-- Livré sur **`main`** : Auth, Admin comptes, Publication (E03), Modération (E05) + mini-journal.
+- Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore (carousel + feed).
 - Menu Admin déroulant : **Comptes** | **Modération**.
 - Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721160000_list_public_artworks.sql`).
-- En cours : **`feature/explore`** (carousel + feed lightbox).
+- Prochaine macro proposée : **E08 audit** ou **E10-F06 disclaimer** (ou polish UI/UX explore).
