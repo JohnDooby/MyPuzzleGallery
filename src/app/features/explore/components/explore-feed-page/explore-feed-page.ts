@@ -1,11 +1,11 @@
-import { afterNextRender, Component, ElementRef, OnInit, inject, signal, viewChild } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import type { PublicArtwork } from '../../models/public-artwork.model';
 import { PublicExploreService } from '../../services/public-explore.service';
 
 /**
- * Feed plein écran type lightbox — œuvres publiques (scroll vertical snap).
+ * Lightbox d'une seule œuvre publique (pas de fil multi-images).
  */
 @Component({
   selector: 'app-explore-feed-page',
@@ -18,86 +18,57 @@ export class ExploreFeedPage implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
-  private readonly feedList = viewChild<ElementRef<HTMLElement>>('feedList');
-
-  protected readonly items = signal<PublicArtwork[]>([]);
-  protected readonly imageUrls = signal<Record<string, string>>({});
+  protected readonly artwork = signal<PublicArtwork | null>(null);
+  protected readonly imageUrl = signal<string | null>(null);
   protected readonly isLoading = signal(true);
   protected readonly errorMessage = signal<string | null>(null);
-  protected readonly missingTarget = signal(false);
-
-  constructor() {
-    afterNextRender(() => {
-      this.scrollToTarget();
-    });
-  }
+  protected readonly notFound = signal(false);
 
   /**
-   * Charge le feed public au montage.
+   * Charge l'œuvre ciblée au montage.
    */
   ngOnInit(): void {
-    void this.loadFeed();
+    void this.loadArtwork();
   }
 
   /**
-   * Charge les œuvres + URLs signées, puis positionne le scroll.
+   * Charge une seule œuvre publique + URL signée.
    */
-  private async loadFeed(): Promise<void> {
+  private async loadArtwork(): Promise<void> {
     this.isLoading.set(true);
     this.errorMessage.set(null);
-    this.missingTarget.set(false);
+    this.notFound.set(false);
+    this.artwork.set(null);
+    this.imageUrl.set(null);
 
-    const result = await this.explore.listLatestPublic(20);
-    if (result.error) {
-      this.errorMessage.set(result.error);
-      this.items.set([]);
+    const artworkId = this.route.snapshot.paramMap.get('artworkId');
+    if (!artworkId) {
+      this.notFound.set(true);
       this.isLoading.set(false);
       return;
     }
 
-    const targetId = this.route.snapshot.paramMap.get('artworkId');
-    if (targetId && !result.items.some((item) => item.id === targetId)) {
-      this.missingTarget.set(true);
+    const result = await this.explore.getPublicById(artworkId);
+    if (result.error) {
+      this.errorMessage.set(result.error);
+      this.isLoading.set(false);
+      return;
+    }
+    if (!result.item) {
+      this.notFound.set(true);
+      this.isLoading.set(false);
+      return;
     }
 
-    this.items.set(result.items);
-
-    const urls: Record<string, string> = {};
-    await Promise.all(
-      result.items.map(async (item) => {
-        const url = await this.explore.getSignedImageUrl(item.storage_path);
-        if (url) {
-          urls[item.id] = url;
-        }
-      }),
-    );
-    this.imageUrls.set(urls);
+    this.artwork.set(result.item);
+    this.imageUrl.set(await this.explore.getSignedImageUrl(result.item.storage_path));
     this.isLoading.set(false);
-
-    // Repositionne après paint (images / liste prêtes).
-    queueMicrotask(() => this.scrollToTarget());
   }
 
   /**
-   * Scroll jusqu'à l'œuvre ciblée par l'URL, si présente.
-   */
-  private scrollToTarget(): void {
-    const targetId = this.route.snapshot.paramMap.get('artworkId');
-    if (!targetId) {
-      return;
-    }
-    const host = this.feedList()?.nativeElement;
-    if (!host) {
-      return;
-    }
-    const slide = host.querySelector<HTMLElement>(`[data-artwork-id="${targetId}"]`);
-    slide?.scrollIntoView({ block: 'start', behavior: 'auto' });
-  }
-
-  /**
-   * Ferme le feed et revient à l'accueil.
+   * Ferme le lightbox et revient à la grille Galerie.
    */
   protected close(): void {
-    void this.router.navigateByUrl('/');
+    void this.router.navigateByUrl('/explore');
   }
 }

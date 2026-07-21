@@ -9,6 +9,7 @@
       <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }"
         >Accueil</a
       >
+      <a routerLink="/explore" routerLinkActive="is-active">Galerie</a>
       @if (isAuthenticated()) {
         <a
           routerLink="/gallery"
@@ -17,8 +18,6 @@
           >Mes œuvres</a
         >
         <a routerLink="/gallery/publish" routerLinkActive="is-active">Publier</a>
-      } @else {
-        <a routerLink="/gallery" routerLinkActive="is-active">Galerie</a>
       }
       @if (isStaff()) {
         <div class="shell__dropdown" [class.is-open]="adminMenuOpen()">

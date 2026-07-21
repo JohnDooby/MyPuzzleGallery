@@ -14,11 +14,14 @@ afin de **découvrir rapidement les nouveautés**.
 - [ ] L’accueil affiche un **carousel** (défilement horizontal ou équivalent tactile)
 - [ ] Le carousel contient au plus les **20 dernières** publications éligibles (publiques + modérées)
 - [ ] Chaque item montre au minimum l’image (et idéalement le **pseudo** auteur)
-- [ ] Un tap sur un item mène à la fiche / au fil explore / au puzzle selon règles UX à figer
+- [ ] Un tap sur un item ouvre le **lightbox d’une seule œuvre** (Galerie / explore)
 - [ ] Comportement correct s’il y a **moins de 20** publications
 
 ## Hors scope
 
 - Stories éphémères type Instagram Stories
+- Paging du carousel (la grille Galerie gère le volume via infinite scroll)
 
 ## Notes
+
+Le volume important se gère sur **Galerie** (`/explore`) : chargement **10 par 10** au scroll, pas sur le carousel d’accueil.

@@ -25,9 +25,9 @@ Vue d’ensemble du backlog.
 | Statut | Nb (approx.) |
 |--------|----------------|
 | done | 21 |
-| doing | 0 |
-| ready | ~3 (puzzle / polish / explore suite) |
-| draft | ~8 |
+| doing | 1 (galerie publique) |
+| ready | ~2 (puzzle / polish) |
+| draft | ~7 |
 | later | ~5 (signalements, commentaires, j’aime) |
 
 ---
@@ -53,7 +53,7 @@ Vue d’ensemble du backlog.
 | E10-F05-US01 | Formats / taille médias | [US](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) | PNG/JPEG, 2048 px, 2 Mo post-compress |
 | E05-F01-US01 | Valider / refuser demande publique | [US](./backlog/E05-moderation/F01-moderer-oeuvre/US01-valider-publication.md) | Menu Admin → Modération + mini-journal |
 | E01-F01-US01 | Carousel 20 dernières | [US](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) | Accueil ; polish UI/UX plus tard |
-| E01-F03-US01 | Feed plein écran | [US](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) | `/explore` lightbox ; sans puzzle / signalement |
+| E01-F03-US01 | Lightbox mono-œuvre | [US](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) | Tap → une image ; paging = grille F02 |
 | E10-F06-US01 | Disclaimer bandeau 1er usage | [US](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) | localStorage `mpg.disclaimer.accepted` |
 | E08-F01-US01 | Tracer publications / éditions / suppressions | [US](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) | `audit_events` ; IP Edge Function = suite |
 | E08-F01-US02 | Consulter journal Admin+ | [US](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) | Menu Admin → Journal |
@@ -62,7 +62,11 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-*Aucune US en cours — `main` à jour après merge `feature/audit`.*
+Branche macro : **`feature/public-gallery`** — grille publique pour tous.
+
+| US | Titre | Branche | Lien |
+|----|-------|---------|------|
+| E01-F02-US01 | Voir galerie publique | feature/public-gallery | [US](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) |
 
 ---
 
@@ -72,7 +76,6 @@ Vue d’ensemble du backlog.
 |--------|------------|-------|
 | 1 | E02 Puzzle | Promesse produit ; US F01 à écrire |
 | 2 | Polish UI/UX | Accueil / explore / admin |
-| 3 | E01-F02 / F03-US02 | Galerie listée + recherche (si besoin) |
 
 *Signalements & complétion ban : **dépriorisés** (voir Later / dette) — le safe-first MVP repose sur la modération humaine + absence de j’aime / commentaires.*
 
@@ -85,8 +88,8 @@ Vue d’ensemble du backlog.
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
 | F01-US01 | Carousel 20 dernières | done | [lien](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
-| F02-US01 | Voir galerie publique | draft | [lien](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) |
-| F03-US01 | Feed plein écran | done | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) — *MVP sans puzzle / signalement* |
+| F02-US01 | Voir galerie publique | doing | [lien](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) — *grille `/explore` ; **paging 10×10** au scroll à faire* |
+| F03-US01 | Lightbox mono-œuvre | done | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) — *plus de fil multi-images* |
 | F03-US02 | Recherche auteur / galerie / dates | draft | [lien](./backlog/E01-galerie-publique/F03-exploration/US02-recherche-mots-clefs.md) |
 
 ### E02 — Puzzle
@@ -183,3 +186,4 @@ Vue d’ensemble du backlog.
 - Menu Admin déroulant : **Comptes** | **Modération** | **Journal**.
 - Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721170000_audit_events.sql`).
 - Suite prioritaire : **E02 puzzle** (puis polish UI). Signalements / ban complet / social = plus tard.
+- En cours : **`feature/public-gallery`** — nav **Galerie** (`/explore`) pour tous ≠ **Mes œuvres** ; lightbox mono-œuvre OK ; **reste : infinite scroll 10×10**.

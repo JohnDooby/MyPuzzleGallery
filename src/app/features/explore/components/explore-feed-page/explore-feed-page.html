@@ -1,4 +1,4 @@
-<section class="explore-feed" aria-label="Exploration des œuvres publiques">
+<section class="explore-feed" aria-label="Aperçu de l’œuvre">
   <header class="explore-feed__chrome">
     <button type="button" class="explore-feed__close" (click)="close()" aria-label="Fermer">
       Fermer
@@ -11,32 +11,23 @@
     <p class="explore-feed__message explore-feed__message--error" role="alert">
       {{ errorMessage() }}
     </p>
-    <a class="explore-feed__back" routerLink="/">Retour à l’accueil</a>
-  } @else if (items().length === 0) {
-    <p class="explore-feed__message">Aucune œuvre publique pour le moment.</p>
-    <a class="explore-feed__back" routerLink="/">Retour à l’accueil</a>
+    <a class="explore-feed__back" routerLink="/explore">Retour à la galerie</a>
+  } @else if (notFound() || !artwork()) {
+    <p class="explore-feed__message">Cette œuvre n’est pas disponible.</p>
+    <a class="explore-feed__back" routerLink="/explore">Retour à la galerie</a>
   } @else {
-    @if (missingTarget()) {
-      <p class="explore-feed__banner" role="status">
-        Cette œuvre n’est plus disponible. Voici les dernières publications.
-      </p>
-    }
-    <div class="explore-feed__list" #feedList>
-      @for (item of items(); track item.id) {
-        <article class="explore-feed__slide" [attr.data-artwork-id]="item.id">
-          <div class="explore-feed__media">
-            @if (imageUrls()[item.id]; as url) {
-              <img class="explore-feed__image" [src]="url" [alt]="item.title" />
-            } @else {
-              <div class="explore-feed__image explore-feed__image--empty" aria-hidden="true"></div>
-            }
-          </div>
-          <div class="explore-feed__meta">
-            <p class="explore-feed__pseudo">{{ item.author_pseudo }}</p>
-            <p class="explore-feed__title">{{ item.title }}</p>
-          </div>
-        </article>
-      }
-    </div>
+    <article class="explore-feed__slide">
+      <div class="explore-feed__media">
+        @if (imageUrl(); as url) {
+          <img class="explore-feed__image" [src]="url" [alt]="artwork()!.title" />
+        } @else {
+          <div class="explore-feed__image explore-feed__image--empty" aria-hidden="true"></div>
+        }
+      </div>
+      <div class="explore-feed__meta">
+        <p class="explore-feed__pseudo">{{ artwork()!.author_pseudo }}</p>
+        <p class="explore-feed__title">{{ artwork()!.title }}</p>
+      </div>
+    </article>
   }
 </section>

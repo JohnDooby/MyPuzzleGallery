@@ -1,0 +1,40 @@
+<section class="explore-gallery">
+  <header class="explore-gallery__header">
+    <h1 class="explore-gallery__title">Galerie</h1>
+    <p class="explore-gallery__lead">
+      Dessins publics validés par un Admin. Espace familial supervisé.
+    </p>
+  </header>
+
+  @if (isLoading()) {
+    <p class="explore-gallery__muted">Chargement…</p>
+  } @else if (errorMessage()) {
+    <p class="explore-gallery__error" role="alert">{{ errorMessage() }}</p>
+  } @else if (items().length === 0) {
+    <p class="explore-gallery__muted">
+      Aucune œuvre publique pour le moment.
+      <a routerLink="/">Retour à l’accueil</a>
+    </p>
+  } @else {
+    <ul class="explore-gallery__grid" aria-label="Œuvres publiques">
+      @for (item of items(); track item.id) {
+        <li>
+          <button
+            type="button"
+            class="explore-gallery__card"
+            (click)="openArtwork(item)"
+            [attr.aria-label]="'Voir « ' + item.title + ' » de ' + item.author_pseudo"
+          >
+            @if (thumbUrls()[item.id]; as url) {
+              <img class="explore-gallery__image" [src]="url" [alt]="item.title" />
+            } @else {
+              <div class="explore-gallery__image explore-gallery__image--empty" aria-hidden="true"></div>
+            }
+            <span class="explore-gallery__pseudo">{{ item.author_pseudo }}</span>
+            <span class="explore-gallery__work-title">{{ item.title }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</section>
