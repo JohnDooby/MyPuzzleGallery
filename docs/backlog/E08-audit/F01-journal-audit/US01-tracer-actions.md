@@ -1,7 +1,7 @@
 # US01 — Tracer les publications (images + métadonnées)
 
 **Feature :** F01  
-**Statut :** doing
+**Statut :** done
 
 ## Récit
 

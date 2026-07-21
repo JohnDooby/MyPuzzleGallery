@@ -24,8 +24,8 @@ Vue d’ensemble du backlog.
 
 | Statut | Nb (approx.) |
 |--------|----------------|
-| done | 19 |
-| doing | 2 (audit) |
+| done | 21 |
+| doing | 0 |
 | ready | 0 |
 | draft | ~12 |
 | later | 2 (cadrages E09 / E11) |
@@ -55,17 +55,14 @@ Vue d’ensemble du backlog.
 | E01-F01-US01 | Carousel 20 dernières | [US](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) | Accueil ; polish UI/UX plus tard |
 | E01-F03-US01 | Feed plein écran | [US](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) | `/explore` lightbox ; sans puzzle / signalement |
 | E10-F06-US01 | Disclaimer bandeau 1er usage | [US](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) | localStorage `mpg.disclaimer.accepted` |
+| E08-F01-US01 | Tracer publications / éditions / suppressions | [US](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) | `audit_events` ; IP Edge Function = suite |
+| E08-F01-US02 | Consulter journal Admin+ | [US](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) | Menu Admin → Journal |
 
 ---
 
 ## Doing
 
-Branche macro : **`feature/audit`** — journal unifié + page Admin.
-
-| US | Titre | Branche | Lien |
-|----|-------|---------|------|
-| E08-F01-US01 | Tracer publications / éditions / suppressions | feature/audit | [US](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) |
-| E08-F01-US02 | Consulter journal Admin+ | feature/audit | [US](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) |
+*Aucune US en cours — `main` à jour après merge `feature/audit`.*
 
 ---
 
@@ -131,8 +128,8 @@ Branche macro : **`feature/audit`** — journal unifié + page Admin.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Tracer publications | doing | [lien](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) |
-| F01-US02 | Consulter journal Admin+ | doing | [lien](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) |
+| F01-US01 | Tracer publications | done | [lien](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) — *IP serveur = suite* |
+| F01-US02 | Consulter journal Admin+ | done | [lien](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) |
 | F02-US01 | Disclaimer (E08) | done | [lien](./backlog/E08-audit/F02-disclaimer/US01-afficher-disclaimer.md) — *couvert par E10-F06* |
 
 *Note : le disclaimer UX prioritaire est **E10-F06** ; E08-F02 reste aligné.*
@@ -168,12 +165,12 @@ Branche macro : **`feature/audit`** — journal unifié + page Admin.
 - [ ] Valider PWA sur device réel (E06)
 - [x] Brancher secrets Supabase en CI (Pages) via GitHub Secrets + injection build — *workflow prêt (`env:sync:ci`)*
 - [ ] Compléter E07-F03 / E10-F03 : retrait œuvres au ban + tests de non-fuite
-- [ ] Élargir E08 au-delà du mini-journal modération (publish / edit / delete + IP)
+- [ ] Élargir E08 : IP fiable via Edge Function (+ filtres période si besoin)
 - [ ] E03-F02 : UI multi-galeries nommées (au-delà de « Ma galerie »)
 
 ## Notes techniques
 
-- Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore, Disclaimer 1er usage.
+- Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore, Disclaimer, Audit (`audit_events` + `/admin/audit`).
 - Menu Admin déroulant : **Comptes** | **Modération** | **Journal**.
 - Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721170000_audit_events.sql`).
-- En cours : **`feature/audit`** (table `audit_events` + `/admin/audit` ; IP Edge Function plus tard).
+- Suite possible : **E02 puzzle**, signalements, polish UI, IP Edge Function.
