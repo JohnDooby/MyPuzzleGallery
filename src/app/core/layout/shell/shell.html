@@ -9,7 +9,17 @@
       <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }"
         >Accueil</a
       >
-      <a routerLink="/gallery" routerLinkActive="is-active">Galerie</a>
+      @if (isAuthenticated()) {
+        <a
+          routerLink="/gallery"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Mes œuvres</a
+        >
+        <a routerLink="/gallery/publish" routerLinkActive="is-active">Publier</a>
+      } @else {
+        <a routerLink="/gallery" routerLinkActive="is-active">Galerie</a>
+      }
       @if (isStaff()) {
         <a routerLink="/admin" routerLinkActive="is-active">Admin</a>
       }

@@ -51,15 +51,15 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-Branche macro : **`feature/publication`** — itération **P1** (schéma galleries / artworks / Storage).
+Branche macro : **`feature/publication`** — itération **P2** (UI publish + Mes œuvres).
 
 | US | Titre | Branche | Lien |
 |----|-------|---------|------|
-| E03-F01-US01 | Publier depuis le device *(socle BDD)* | feature/publication | [US](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
+| E03-F01-US01 | Publier depuis le device | feature/publication | [US](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
 | E03-F03-US01 | Modifier une œuvre *(prévu P3)* | feature/publication | [US](./backlog/E03-publication/F03-editer-oeuvre/US01-modifier-oeuvre.md) |
 | E03-F04-US01 | Supprimer *(prévu P3)* | feature/publication | [US](./backlog/E03-publication/F04-supprimer-oeuvre/US01-supprimer-oeuvre.md) |
-| E10-F04-US01 | Cycle privé / public *(modèle)* | feature/publication | [US](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
-| E10-F05-US01 | Formats / taille *(contraintes BDD + Storage)* | feature/publication | [US](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
+| E10-F04-US01 | Cycle privé / public | feature/publication | [US](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
+| E10-F05-US01 | Formats / taille + compression client | feature/publication | [US](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
 
 ---
 

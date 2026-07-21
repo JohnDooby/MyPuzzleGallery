@@ -1,4 +1,46 @@
-<section class="page">
-  <h1>Galerie</h1>
-  <p>Bientôt : carousel, explore et publications.</p>
+<section class="my-artworks">
+  <header class="my-artworks__header">
+    <div>
+      <h1 class="my-artworks__title">Mes œuvres</h1>
+      <p class="my-artworks__lead">Vos publications privées et demandes publiques.</p>
+    </div>
+    <a class="my-artworks__publish" routerLink="/gallery/publish">Publier</a>
+  </header>
+
+  @if (errorMessage()) {
+    <p class="my-artworks__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (isLoading()) {
+    <p class="my-artworks__muted">Chargement…</p>
+  } @else if (artworks().length === 0) {
+    <p class="my-artworks__muted">
+      Aucune œuvre pour l’instant.
+      <a routerLink="/gallery/publish">Publier la première</a>
+    </p>
+  } @else {
+    <ul class="my-artworks__list">
+      @for (artwork of artworks(); track artwork.id) {
+        <li class="my-artworks__card">
+          <div class="my-artworks__thumb-wrap">
+            @if (thumbUrls()[artwork.id]; as url) {
+              <img class="my-artworks__thumb" [src]="url" [alt]="artwork.title" />
+            } @else {
+              <div class="my-artworks__thumb my-artworks__thumb--empty" aria-hidden="true"></div>
+            }
+          </div>
+          <div class="my-artworks__meta">
+            <p class="my-artworks__name">{{ artwork.title }}</p>
+            <p class="my-artworks__muted">
+              {{ visibilityLabel(artwork.visibility_status) }}
+              @if (artwork.puzzle_enabled) {
+                · Puzzle
+              }
+              · {{ artwork.created_at | date: 'dd/MM/yyyy' }}
+            </p>
+          </div>
+        </li>
+      }
+    </ul>
+  }
 </section>

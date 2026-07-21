@@ -1,0 +1,120 @@
+<section class="publish">
+  <header class="publish__header">
+    <h1 class="publish__title">Publier une œuvre</h1>
+    <a class="publish__back" routerLink="/gallery">Mes œuvres</a>
+  </header>
+
+  <p class="publish__hint">
+    Par défaut l’œuvre reste <strong>privée</strong>. Si vous demandez le passage en public, elle
+    entrera en <strong>file de modération</strong> : elle ne sera visible des autres qu’après
+    validation d’un Admin. Le mode puzzle ne sera jouable par les autres qu’une fois l’œuvre
+    publique validée.
+  </p>
+
+  <form class="publish__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="publish__field">
+      <label class="publish__label" for="artwork-file">Image (PNG ou JPEG)</label>
+      <input
+        id="artwork-file"
+        class="publish__file"
+        type="file"
+        accept="image/png,image/jpeg,.png,.jpg,.jpeg"
+        (change)="onFileSelected($event)"
+      />
+      @if (previewUrl(); as url) {
+        <img class="publish__preview" [src]="url" alt="Aperçu" />
+      }
+    </div>
+
+    <div class="publish__field">
+      <label class="publish__label" for="artwork-title">Titre</label>
+      <input id="artwork-title" class="publish__input" type="text" formControlName="title" maxlength="120" />
+      @if (form.controls.title.touched && form.controls.title.invalid) {
+        <p class="publish__error" role="alert">Titre obligatoire (max 120 caractères).</p>
+      }
+    </div>
+
+    <div class="publish__field">
+      <label class="publish__label" for="artwork-description">Description</label>
+      <textarea
+        id="artwork-description"
+        class="publish__textarea"
+        rows="4"
+        formControlName="description"
+        maxlength="2000"
+      ></textarea>
+    </div>
+
+    <div class="publish__field">
+      <label class="publish__label" for="artwork-hours">Heures passées (optionnel)</label>
+      <input
+        id="artwork-hours"
+        class="publish__input"
+        type="text"
+        inputmode="decimal"
+        formControlName="hoursSpent"
+        placeholder="ex. 3 ou 2,5"
+      />
+    </div>
+
+    @if (!showNewGallery()) {
+      <div class="publish__field">
+        <label class="publish__label" for="artwork-gallery">Galerie</label>
+        <select
+          id="artwork-gallery"
+          class="publish__input"
+          formControlName="galleryId"
+          [disabled]="isLoadingGalleries()"
+        >
+          @for (gallery of galleries(); track gallery.id) {
+            <option [value]="gallery.id">{{ gallery.name }}</option>
+          }
+        </select>
+        <button type="button" class="publish__link-btn" (click)="toggleNewGallery()">
+          Créer une nouvelle galerie
+        </button>
+      </div>
+    } @else {
+      <div class="publish__field">
+        <label class="publish__label" for="artwork-new-gallery">Nouvelle galerie</label>
+        <input
+          id="artwork-new-gallery"
+          class="publish__input"
+          type="text"
+          formControlName="newGalleryName"
+          maxlength="64"
+        />
+        <button type="button" class="publish__link-btn" (click)="toggleNewGallery()">
+          Choisir une galerie existante
+        </button>
+      </div>
+    }
+
+    <label class="publish__check">
+      <input type="checkbox" formControlName="requestPublic" />
+      <span>
+        Demander le passage en <strong>public</strong> (modération obligatoire — pas de diffusion
+        immédiate)
+      </span>
+    </label>
+
+    <label class="publish__check">
+      <input type="checkbox" formControlName="puzzleEnabled" />
+      <span>
+        Ouvrir au mode <strong>puzzle</strong> (jouable par les autres seulement si publique
+        validée)
+      </span>
+    </label>
+
+    @if (infoMessage()) {
+      <p class="publish__info" role="status">{{ infoMessage() }}</p>
+    }
+    @if (errorMessage()) {
+      <p class="publish__error publish__error--banner" role="alert">{{ errorMessage() }}</p>
+    }
+
+    <button class="publish__submit" type="submit" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? 'Publication…' : 'Publier' }}
+    </button>
+  </form>
+</section>
