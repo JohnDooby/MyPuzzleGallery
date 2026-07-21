@@ -1,7 +1,7 @@
 # US01 — Voir la galerie publique
 
 **Feature :** F02  
-**Statut :** doing
+**Statut :** done
 
 ## Récit
 
