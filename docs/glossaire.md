@@ -4,6 +4,7 @@
 |-------|------------|
 | **Safe** | Priorité produit : légal/RGPD + protection mineurs |
 | **Conditions d’accès** | Règles d’entrée — `docs/conditions-acces.md` |
+| Invitation | Membre connecté envoie un e-mail avec le **lien** PWA (E04-F05) — API e-mail, pas SMTP maison |
 | Validation de compte | *Non au MVP* — usage immédiat après inscription |
 | Consentement parental technique | *Non au MVP* — supervision familiale **déclarée**, formulation honnête |
 | Pseudo | Seule info personnelle publique |

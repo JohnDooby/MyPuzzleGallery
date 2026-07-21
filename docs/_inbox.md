@@ -2,6 +2,10 @@
 
 ## Décisions figées
 
+### Distribution
+- **Pas** de Play Store : on reste sur le **lien** PWA / GitHub Pages
+- Feature **Inviter** (connecté) : saisie e-mail → envoi du lien (sans SMTP maison : API e-mail + Edge Function)
+
 ### Comptes & accès (2026-07-21)
 - Comptes **faciles** (style jeux)
 - **Pas** de validation de compte au MVP

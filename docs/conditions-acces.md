@@ -23,6 +23,7 @@ Ce n’est **pas** :
 - **Pas de validation de compte** au MVP : pas d’obligation de confirmer l’e-mail ni d’attendre une activation Admin pour utiliser le compte.
 - Dès l’inscription réussie, le compte **Normal** est utilisable (publier en privé, etc.).
 - L’inscription s’accompagne de la **prise de connaissance / acceptation** du disclaimer et de ces conditions d’accès.
+- Un membre connecté peut **inviter** quelqu’un par e-mail (envoi du **lien** de l’appli) — voir E04-F05. Distribution = **lien web / PWA**, pas les stores.
 
 ### Ce que ce n’est pas
 

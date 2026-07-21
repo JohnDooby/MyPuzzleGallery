@@ -8,7 +8,7 @@
 ## Next (ordre suggéré « safe first »)
 
 1. **E10** sûreté (disclaimer, privé/public, médias PNG/JPEG, signalement, retrait rapide, ban)
-2. **E04** comptes + pseudo + roles
+2. **E04** comptes + pseudo + roles + **invitations e-mail** (lien PWA, sans SMTP maison)
 3. **E07** Supabase Auth + **RLS** strict (aucune fuite de contenus privés / non modérés)
 4. **E03** publication + **E05** modération
 5. **E08** audit publications (consultable Admin+)
@@ -19,6 +19,7 @@
 
 - E09 Commentaires (login / modération à trancher)
 - E11 J’aime **avec** login
+- Play Store / TWA : **non** (on reste sur le lien)
 
 ## Done (repères)
 
