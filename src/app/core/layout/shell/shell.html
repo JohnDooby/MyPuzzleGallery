@@ -10,7 +10,16 @@
         >Accueil</a
       >
       <a routerLink="/gallery" routerLinkActive="is-active">Galerie</a>
-      <a routerLink="/auth" routerLinkActive="is-active">Compte</a>
+      @if (isAuthenticated()) {
+        <a routerLink="/auth" class="shell__user-link" routerLinkActive="is-active"
+          >{{ pseudo() }}</a
+        >
+        <button class="shell__logout" type="button" (click)="onSignOut()">
+          Se déconnecter
+        </button>
+      } @else {
+        <a routerLink="/auth" routerLinkActive="is-active">Compte</a>
+      }
     </nav>
   </header>
 
