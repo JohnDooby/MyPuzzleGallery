@@ -1,7 +1,7 @@
 # US02 — Session persistante et dernier compte
 
 **Feature :** F03  
-**Statut :** draft
+**Statut :** done
 
 ## Récit
 

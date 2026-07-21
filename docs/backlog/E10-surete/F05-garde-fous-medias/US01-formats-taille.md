@@ -1,7 +1,7 @@
 # US01 — Restreindre les uploads aux PNG/JPEG avec taille max
 
 **Feature :** F05  
-**Statut :** draft
+**Statut :** ready
 
 ## Récit
 

@@ -1,7 +1,7 @@
 # US01 — Créer un compte
 
 **Feature :** F02  
-**Statut :** draft
+**Statut :** done
 
 ## Récit
 

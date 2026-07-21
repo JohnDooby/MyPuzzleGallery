@@ -1,7 +1,7 @@
 # US02 — Compte utilisable sans validation (MVP)
 
 **Feature :** F02  
-**Statut :** draft
+**Statut :** done
 
 ## Récit
 

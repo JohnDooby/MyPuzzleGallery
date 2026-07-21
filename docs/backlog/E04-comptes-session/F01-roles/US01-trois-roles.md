@@ -1,7 +1,7 @@
 # US01 — Distinguer les trois rôles
 
 **Feature :** F01  
-**Statut :** doing
+**Statut :** done
 
 ## Récit
 

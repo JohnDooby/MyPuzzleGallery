@@ -1,7 +1,7 @@
 # US01 — Se connecter et se déconnecter
 
 **Feature :** F03  
-**Statut :** draft
+**Statut :** done
 
 ## Récit
 

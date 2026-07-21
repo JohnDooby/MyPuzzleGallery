@@ -1,7 +1,7 @@
 # US01 — Afficher et faire accepter le disclaimer
 
 **Feature :** F06  
-**Statut :** draft
+**Statut :** ready
 
 ## Récit
 
@@ -27,4 +27,5 @@ afin de **savoir qu’il y a audit et modération**.
 
 ## Notes
 
-Le disclaimer doit faire **figurer clairement audit + modération**, pas seulement « on utilise des cookies ».
+Le disclaimer doit faire **figurer clairement audit + modération**, pas seulement « on utilise des cookies ».  
+*Livré partiellement : texte + case à l’inscription + page `/regles`. Reste : bandeau / modal 1er usage mémorisé sur device.*

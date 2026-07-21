@@ -1,7 +1,7 @@
 # US01 — Bannir / désactiver un compte
 
 **Feature :** F03  
-**Statut :** doing
+**Statut :** done *(partiel : flag + session + UI ; œuvres/audit = suite)*
 
 ## Récit
 

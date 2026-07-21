@@ -1,7 +1,7 @@
 # US01 — Empêcher toute fuite de contenus non publics
 
 **Feature :** F03  
-**Statut :** doing
+**Statut :** done *(partiel : profiles ; artworks/Storage avec E03)*
 
 ## Récit
 

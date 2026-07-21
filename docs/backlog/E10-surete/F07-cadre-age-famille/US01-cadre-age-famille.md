@@ -1,7 +1,7 @@
 # US01 — Afficher le cadre âge & famille
 
 **Feature :** F07  
-**Statut :** draft
+**Statut :** done
 
 ## Récit
 

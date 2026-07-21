@@ -24,10 +24,10 @@ Vue d’ensemble du backlog.
 
 | Statut | Nb (approx.) |
 |--------|----------------|
-| done | 1 |
-| doing | 2 (vague admin C) |
-| ready | 0 |
-| draft | ~28 |
+| done | 10 |
+| doing | 0 |
+| ready | ~4 (prochaine vague E03 + suites) |
+| draft | ~20 |
 | later | 2 (cadrages E09 / E11) |
 
 ---
@@ -37,29 +37,36 @@ Vue d’ensemble du backlog.
 | US | Titre | Lien | Notes |
 |----|-------|------|-------|
 | E06-F01-US01 | Proposition d’installation PWA | [US](./backlog/E06-mobile-pwa/F01-installation-pwa/US01-proposition-installation.md) | À valider sur téléphone réel |
+| E04-F01-US01 | Trois rôles | [US](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) | Enum + RLS + UI Admin |
+| E04-F02-US01 | Créer un compte | [US](./backlog/E04-comptes-session/F02-creation-compte/US01-creer-compte.md) | Inscription UI |
+| E04-F02-US02 | Sans validation compte (MVP) | [US](./backlog/E04-comptes-session/F02-creation-compte/US02-compte-valide.md) | Confirm e-mail désactivée côté Supabase |
+| E04-F03-US01 | Login / logout | [US](./backlog/E04-comptes-session/F03-session/US01-login-logout.md) | |
+| E04-F03-US02 | Session persistante | [US](./backlog/E04-comptes-session/F03-session/US02-session-persistante.md) | |
+| E04-F04-US01 | Pseudo public | [US](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) | Colonne + shell ; filtre explore = E01 |
+| E10-F07-US01 | Cadre âge & famille | [US](./backlog/E10-surete/F07-cadre-age-famille/US01-cadre-age-famille.md) | Page `/regles` + lien inscription |
+| E10-F03-US01 | Bannir un compte | [US](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) | **Partiel** : flag + session + UI Admin/SuperAdmin ; retrait œuvres + audit = suite |
+| E07-F03-US01 | Pas de fuite (RLS) | [US](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) | **Partiel** : `profiles` OK ; artworks / Storage = avec E03 |
 
 ---
 
 ## Doing
 
-Branche macro : **`feature/admin`** — itération **C** (gestion comptes Admin).
-
 | US | Titre | Branche | Lien |
 |----|-------|---------|------|
-| E04-F01-US01 | Trois rôles *(UI admin)* | feature/admin | [US](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
-| E10-F03-US01 | Bannir un compte *(partiel : flag + session, pas encore œuvres/audit)* | feature/admin | [US](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
+| — | — | — | — |
 
 ---
 
-## Ready (suite)
+## Ready (prochaine vague)
 
 | Ordre | US | Titre | Notes |
 |--------|----|-------|-------|
-| 1 | E03… | Publication / artworks | Prochaine vague produit |
-| 2 | E05… | Modération œuvres | Après artworks |
-| 3 | E10-F03 suite | Ban : retrait public + audit | Dépend E03 / E08 |
+| 1 | E03-F01-US01 | Publier depuis le device | Macro publication |
+| 2 | E10-F05-US01 | Formats / taille médias | Avec formulaire publish |
+| 3 | E10-F04-US01 | Cycle privé / public | Avec artworks |
+| 4 | E10-F06-US01 | Disclaimer bandeau 1er usage | Acceptation inscription déjà faite ; reste bandeau device |
 
-*Auth (A/B/C partiel) : merge `feature/auth` puis `feature/admin` quand validés.*
+*Ensuite : E05 modération, E08 audit, suite ban (retrait public), E01 galerie.*
 
 ---
 
@@ -86,7 +93,7 @@ Branche macro : **`feature/admin`** — itération **C** (gestion comptes Admin)
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Publier depuis le device | draft | [lien](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
+| F01-US01 | Publier depuis le device | ready | [lien](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
 | F02-US01 | Galeries nommées | draft | [lien](./backlog/E03-publication/F02-galerie-utilisateur/US01-relier-galleries.md) |
 | F03-US01 | Modifier une œuvre | draft | [lien](./backlog/E03-publication/F03-editer-oeuvre/US01-modifier-oeuvre.md) |
 | F04-US01 | Supprimer avec confirmation | draft | [lien](./backlog/E03-publication/F04-supprimer-oeuvre/US01-supprimer-oeuvre.md) |
@@ -95,12 +102,12 @@ Branche macro : **`feature/admin`** — itération **C** (gestion comptes Admin)
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Trois rôles | doing | [lien](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
-| F02-US01 | Créer un compte | draft | [lien](./backlog/E04-comptes-session/F02-creation-compte/US01-creer-compte.md) |
-| F02-US02 | Sans validation compte (MVP) | draft | [lien](./backlog/E04-comptes-session/F02-creation-compte/US02-compte-valide.md) |
-| F03-US01 | Login / logout | draft | [lien](./backlog/E04-comptes-session/F03-session/US01-login-logout.md) |
-| F03-US02 | Session persistante | draft | [lien](./backlog/E04-comptes-session/F03-session/US02-session-persistante.md) |
-| F04-US01 | Pseudo public | doing | [lien](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) |
+| F01-US01 | Trois rôles | done | [lien](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
+| F02-US01 | Créer un compte | done | [lien](./backlog/E04-comptes-session/F02-creation-compte/US01-creer-compte.md) |
+| F02-US02 | Sans validation compte (MVP) | done | [lien](./backlog/E04-comptes-session/F02-creation-compte/US02-compte-valide.md) |
+| F03-US01 | Login / logout | done | [lien](./backlog/E04-comptes-session/F03-session/US01-login-logout.md) |
+| F03-US02 | Session persistante | done | [lien](./backlog/E04-comptes-session/F03-session/US02-session-persistante.md) |
+| F04-US01 | Pseudo public | done | [lien](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) |
 | F05-US01 | Invitation e-mail | draft | [lien](./backlog/E04-comptes-session/F05-inviter/US01-envoyer-invitation.md) |
 
 ### E05 — Modération
@@ -113,7 +120,7 @@ Branche macro : **`feature/admin`** — itération **C** (gestion comptes Admin)
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F03-US01 | Pas de fuite contenus non publics | doing | [lien](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) |
+| F03-US01 | Pas de fuite contenus non publics | done *(partiel profiles)* | [lien](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) |
 
 ### E08 — Audit
 
@@ -132,11 +139,11 @@ Branche macro : **`feature/admin`** — itération **C** (gestion comptes Admin)
 | F01-US01 | Signaler une œuvre | draft | [lien](./backlog/E10-surete/F01-signalement/US01-signaler-oeuvre.md) |
 | F02-US01 | Traiter un signalement | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US01-traiter-signalement.md) |
 | F02-US02 | Retrait rapide du public | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US02-retrait-rapide-public.md) |
-| F03-US01 | Bannir un compte | doing | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
-| F04-US01 | Cycle privé / public | draft | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
-| F05-US01 | Formats / taille médias | draft | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
-| F06-US01 | Disclaimer clair | draft | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
-| F07-US01 | Cadre âge & famille | draft | [lien](./backlog/E10-surete/F07-cadre-age-famille/US01-cadre-age-famille.md) |
+| F03-US01 | Bannir un compte | done *(partiel)* | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
+| F04-US01 | Cycle privé / public | ready | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
+| F05-US01 | Formats / taille médias | ready | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
+| F06-US01 | Disclaimer clair | ready | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) — *bandeau 1er usage reste* |
+| F07-US01 | Cadre âge & famille | done | [lien](./backlog/E10-surete/F07-cadre-age-famille/US01-cadre-age-famille.md) |
 
 ---
 
@@ -154,8 +161,11 @@ Branche macro : **`feature/admin`** — itération **C** (gestion comptes Admin)
 - [ ] Écrire les US détaillées pour **E02-F01 Jouer un puzzle**
 - [ ] Harmoniser disclaimer E08-F02 vs E10-F06 (une seule US « done » à la fin)
 - [ ] Valider PWA sur device réel (E06)
-- [ ] Brancher secrets Supabase en CI (Pages) via GitHub Secrets + injection build — *workflow prêt (`env:sync:ci`)*
+- [x] Brancher secrets Supabase en CI (Pages) via GitHub Secrets + injection build — *workflow prêt (`env:sync:ci`)*
+- [ ] Compléter E07-F03 / E10-F03 après artworks (Storage RLS, retrait public, audit ban)
 
-## Notes techniques en cours
+## Notes techniques
 
-Branche `feature/shell-routes-supabase` : shell + routes lazy + client Supabase (clé anon via `.env` local, non commitée).
+- Auth + Admin comptes livrés sur **`main`** (merges `feature/auth` + `feature/admin`).
+- Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`).
+- Prochaine macro : **E03 publication**.
