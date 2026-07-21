@@ -1,7 +1,7 @@
 # US01 — Modifier une œuvre existante
 
 **Feature :** F03  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 

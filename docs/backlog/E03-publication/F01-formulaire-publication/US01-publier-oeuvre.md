@@ -1,7 +1,7 @@
 # US01 — Publier une œuvre depuis le device
 
 **Feature :** F01  
-**Statut :** ready
+**Statut :** doing
 
 ## Récit
 

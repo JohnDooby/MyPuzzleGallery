@@ -1,7 +1,7 @@
 # US01 — Supprimer une œuvre avec confirmation
 
 **Feature :** F04  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 

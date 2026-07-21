@@ -25,9 +25,9 @@ Vue d’ensemble du backlog.
 | Statut | Nb (approx.) |
 |--------|----------------|
 | done | 10 |
-| doing | 0 |
-| ready | ~4 (prochaine vague E03 + suites) |
-| draft | ~20 |
+| doing | 5 (vague publication P1) |
+| ready | ~2 |
+| draft | ~18 |
 | later | 2 (cadrages E09 / E11) |
 
 ---
@@ -51,22 +51,27 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
+Branche macro : **`feature/publication`** — itération **P1** (schéma galleries / artworks / Storage).
+
 | US | Titre | Branche | Lien |
 |----|-------|---------|------|
-| — | — | — | — |
+| E03-F01-US01 | Publier depuis le device *(socle BDD)* | feature/publication | [US](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
+| E03-F03-US01 | Modifier une œuvre *(prévu P3)* | feature/publication | [US](./backlog/E03-publication/F03-editer-oeuvre/US01-modifier-oeuvre.md) |
+| E03-F04-US01 | Supprimer *(prévu P3)* | feature/publication | [US](./backlog/E03-publication/F04-supprimer-oeuvre/US01-supprimer-oeuvre.md) |
+| E10-F04-US01 | Cycle privé / public *(modèle)* | feature/publication | [US](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
+| E10-F05-US01 | Formats / taille *(contraintes BDD + Storage)* | feature/publication | [US](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
 
 ---
 
-## Ready (prochaine vague)
+## Ready (suite après P1)
 
 | Ordre | US | Titre | Notes |
 |--------|----|-------|-------|
-| 1 | E03-F01-US01 | Publier depuis le device | Macro publication |
-| 2 | E10-F05-US01 | Formats / taille médias | Avec formulaire publish |
-| 3 | E10-F04-US01 | Cycle privé / public | Avec artworks |
-| 4 | E10-F06-US01 | Disclaimer bandeau 1er usage | Acceptation inscription déjà faite ; reste bandeau device |
+| 1 | E03-F01 UI | Formulaire `/gallery/publish` + Mes œuvres | P2 |
+| 2 | E03-F03 / F04 UI | Édition + suppression | P3 |
+| 3 | E10-F06-US01 | Disclaimer bandeau 1er usage | Plus tard |
 
-*Ensuite : E05 modération, E08 audit, suite ban (retrait public), E01 galerie.*
+*Ensuite : E05 modération Admin, E08 audit, E01 explore.*
 
 ---
 
@@ -93,10 +98,10 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Publier depuis le device | ready | [lien](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
+| F01-US01 | Publier depuis le device | doing | [lien](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
 | F02-US01 | Galeries nommées | draft | [lien](./backlog/E03-publication/F02-galerie-utilisateur/US01-relier-galleries.md) |
-| F03-US01 | Modifier une œuvre | draft | [lien](./backlog/E03-publication/F03-editer-oeuvre/US01-modifier-oeuvre.md) |
-| F04-US01 | Supprimer avec confirmation | draft | [lien](./backlog/E03-publication/F04-supprimer-oeuvre/US01-supprimer-oeuvre.md) |
+| F03-US01 | Modifier une œuvre | doing | [lien](./backlog/E03-publication/F03-editer-oeuvre/US01-modifier-oeuvre.md) |
+| F04-US01 | Supprimer avec confirmation | doing | [lien](./backlog/E03-publication/F04-supprimer-oeuvre/US01-supprimer-oeuvre.md) |
 
 ### E04 — Comptes & session
 
@@ -140,8 +145,8 @@ Vue d’ensemble du backlog.
 | F02-US01 | Traiter un signalement | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US01-traiter-signalement.md) |
 | F02-US02 | Retrait rapide du public | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US02-retrait-rapide-public.md) |
 | F03-US01 | Bannir un compte | done *(partiel)* | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
-| F04-US01 | Cycle privé / public | ready | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
-| F05-US01 | Formats / taille médias | ready | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
+| F04-US01 | Cycle privé / public | doing | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
+| F05-US01 | Formats / taille médias | doing | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
 | F06-US01 | Disclaimer clair | ready | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) — *bandeau 1er usage reste* |
 | F07-US01 | Cadre âge & famille | done | [lien](./backlog/E10-surete/F07-cadre-age-famille/US01-cadre-age-famille.md) |
 
