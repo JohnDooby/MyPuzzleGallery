@@ -3,15 +3,16 @@ import { Title } from '@angular/platform-browser';
 import { RouterOutlet } from '@angular/router';
 
 import { APP_BRANDING } from './core/branding/app-branding';
+import { DisclaimerBanner } from './shared/components/disclaimer-banner/disclaimer-banner';
 import { PwaInstallPrompt } from './shared/components/pwa-install-prompt/pwa-install-prompt';
 
 /**
  * Composant racine de l'application.
- * Affiche le routeur et la proposition d'installation PWA.
+ * Affiche le routeur, le disclaimer 1er usage et la proposition PWA.
  */
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PwaInstallPrompt],
+  imports: [RouterOutlet, DisclaimerBanner, PwaInstallPrompt],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

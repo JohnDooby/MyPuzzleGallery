@@ -1,6 +1,6 @@
 /**
  * Tests unitaires du composant racine App.
- * Vérifie le montage et la présence du routeur / prompt PWA.
+ * Vérifie le montage et la présence du routeur / disclaimer / prompt PWA.
  */
 import { provideRouter } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
@@ -26,7 +26,7 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('affiche le routeur et le prompt PWA', async () => {
+  it('affiche le routeur, le disclaimer et le prompt PWA', async () => {
     // --- Arrange / Act ---
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
@@ -34,6 +34,7 @@ describe('App', () => {
 
     // --- Assert ---
     expect(compiled.querySelector('router-outlet')).toBeTruthy();
+    expect(compiled.querySelector('app-disclaimer-banner')).toBeTruthy();
     expect(compiled.querySelector('app-pwa-install-prompt')).toBeTruthy();
   });
 });

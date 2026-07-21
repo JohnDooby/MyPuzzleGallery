@@ -1,6 +1,7 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, effect, inject, signal } from '@angular/core';
 
 import { APP_BRANDING } from '../../../core/branding/app-branding';
+import { DisclaimerService } from '../../../core/disclaimer/disclaimer.service';
 import { PwaInstallService } from '../../../core/pwa/pwa-install.service';
 
 /** Délai avant d'afficher automatiquement la popup (laisse charger la page). */
@@ -10,6 +11,7 @@ const AUTO_SHOW_DELAY_MS = 1200;
  * Bannière / bottom-sheet proposant l'installation PWA.
  * - Chromium : bouton qui ouvre le dialogue natif (sans passer par le menu ⋮).
  * - iOS : instructions « Partager → Sur l'écran d'accueil ».
+ * Attendu après acceptation du disclaimer 1er usage.
  */
 @Component({
   selector: 'app-pwa-install-prompt',
@@ -19,6 +21,7 @@ const AUTO_SHOW_DELAY_MS = 1200;
 })
 export class PwaInstallPrompt implements OnInit {
   private readonly pwaInstall = inject(PwaInstallService);
+  private readonly disclaimer = inject(DisclaimerService);
 
   /** Nom complet de l'appli (issu du branding centralisé). */
   protected readonly appName = APP_BRANDING.name;
@@ -28,6 +31,15 @@ export class PwaInstallPrompt implements OnInit {
 
   /** Mode iOS (instructions) vs install native. */
   protected readonly isIos = this.pwaInstall.isIos;
+
+  constructor() {
+    // Dès que le disclaimer est accepté (même session), re-évalue la proposition PWA.
+    effect(() => {
+      if (this.disclaimer.isAccepted()) {
+        this.tryShow();
+      }
+    });
+  }
 
   ngOnInit(): void {
     // --- Proposition automatique si les conditions sont réunies ---
@@ -40,9 +52,13 @@ export class PwaInstallPrompt implements OnInit {
   }
 
   /**
-   * Affiche la popup si l'installation n'est pas déjà faite / reportée.
+   * Affiche la popup si l'installation n'est pas déjà faite / reportée
+   * et si le disclaimer a été accepté.
    */
   private tryShow(): void {
+    if (!this.disclaimer.isAccepted()) {
+      return;
+    }
     if (this.pwaInstall.shouldOfferInstall()) {
       this.visible.set(true);
     }

@@ -1,0 +1,27 @@
+@if (visible()) {
+  <div
+    class="disclaimer-banner"
+    role="dialog"
+    aria-labelledby="disclaimer-banner-title"
+    aria-describedby="disclaimer-banner-text"
+    aria-modal="false"
+  >
+    <div class="disclaimer-banner__panel">
+      <h2 id="disclaimer-banner-title" class="disclaimer-banner__title">Avant de continuer</h2>
+      <p id="disclaimer-banner-text" class="disclaimer-banner__text">
+        Espace <strong>familial supervisé</strong> : les publications sont
+        <strong>auditées</strong> (image, titre, description, date, adresse IP). Les modérateurs
+        (Admin) peuvent consulter ces traces. <strong>Aucun contenu public</strong> sans
+        modération humaine.
+        <a routerLink="/regles" class="disclaimer-banner__link">En savoir plus</a>
+      </p>
+      <button
+        type="button"
+        class="disclaimer-banner__btn"
+        (click)="onAccept()"
+      >
+        J’ai compris
+      </button>
+    </div>
+  </div>
+}

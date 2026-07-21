@@ -25,8 +25,8 @@ Vue d’ensemble du backlog.
 | Statut | Nb (approx.) |
 |--------|----------------|
 | done | 18 |
-| doing | 0 |
-| ready | 2 |
+| doing | 1 (disclaimer) |
+| ready | 1 |
 | draft | ~13 |
 | later | 2 (cadrages E09 / E11) |
 
@@ -59,7 +59,11 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-*Aucune US en cours — `main` à jour après merge `feature/explore`.*
+Branche macro : **`feature/disclaimer`** — bandeau 1er usage.
+
+| US | Titre | Branche | Lien |
+|----|-------|---------|------|
+| E10-F06-US01 | Disclaimer bandeau 1er usage | feature/disclaimer | [US](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
 
 ---
 
@@ -68,7 +72,6 @@ Vue d’ensemble du backlog.
 | Ordre | US | Titre | Notes |
 |--------|----|-------|-------|
 | 1 | E08-F01-US01 / US02 | Audit élargi + consultation | Mini-journal modération déjà posé ; manque publish/edit/delete + IP |
-| 2 | E10-F06-US01 | Disclaimer bandeau 1er usage | Page `/regles` existe ; bandeau device reste |
 
 ---
 
@@ -130,7 +133,7 @@ Vue d’ensemble du backlog.
 |----|-------|--------|------|
 | F01-US01 | Tracer publications | draft | [lien](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) — *partiel : décisions modération dans `moderation_events`* |
 | F01-US02 | Consulter journal Admin+ | draft | [lien](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) — *partiel : journal récent sur `/admin/moderation`* |
-| F02-US01 | Disclaimer (E08) | draft | [lien](./backlog/E08-audit/F02-disclaimer/US01-afficher-disclaimer.md) |
+| F02-US01 | Disclaimer (E08) | draft | [lien](./backlog/E08-audit/F02-disclaimer/US01-afficher-disclaimer.md) — *couvert côté UX par E10-F06* |
 
 *Note : le disclaimer UX prioritaire est **E10-F06** ; E08-F02 reste aligné.*
 
@@ -144,7 +147,7 @@ Vue d’ensemble du backlog.
 | F03-US01 | Bannir un compte | done *(partiel)* | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
 | F04-US01 | Cycle privé / public | done | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
 | F05-US01 | Formats / taille médias | done | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
-| F06-US01 | Disclaimer clair | ready | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) — *bandeau 1er usage reste* |
+| F06-US01 | Disclaimer clair | doing | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
 | F07-US01 | Cadre âge & famille | done | [lien](./backlog/E10-surete/F07-cadre-age-famille/US01-cadre-age-famille.md) |
 
 ---
@@ -173,4 +176,4 @@ Vue d’ensemble du backlog.
 - Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore (carousel + feed).
 - Menu Admin déroulant : **Comptes** | **Modération**.
 - Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721160000_list_public_artworks.sql`).
-- Prochaine macro proposée : **E08 audit** ou **E10-F06 disclaimer** (ou polish UI/UX explore).
+- En cours : **`feature/disclaimer`** (bandeau 1er usage).
