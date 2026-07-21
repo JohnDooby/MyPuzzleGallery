@@ -24,10 +24,10 @@ Vue d’ensemble du backlog.
 
 | Statut | Nb (approx.) |
 |--------|----------------|
-| done | 22 |
+| done | 23 |
 | doing | 0 |
-| ready | ~2 (puzzle / polish) |
-| draft | ~7 |
+| ready | 1 (polish) |
+| draft | ~6 |
 | later | ~5 (signalements, commentaires, j’aime) |
 
 ---
@@ -58,12 +58,13 @@ Vue d’ensemble du backlog.
 | E08-F01-US01 | Tracer publications / éditions / suppressions | [US](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) | `audit_events` ; IP Edge Function = suite |
 | E08-F01-US02 | Consulter journal Admin+ | [US](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) | Menu Admin → Journal |
 | E01-F02-US01 | Voir galerie publique | [US](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) | `/explore` pour tous ; paging 10×10 |
+| E02-F01-US01 | Jouer un puzzle tactile | [US](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/US01-jouer-puzzle.md) | Plein écran 6×5 ; entrée Accueil / Galerie |
 
 ---
 
 ## Doing
 
-*Aucune US en cours — `main` stable (auth, admin, galerie publique, accueil).*
+*Aucune US en cours.*
 
 ---
 
@@ -71,10 +72,10 @@ Vue d’ensemble du backlog.
 
 | Ordre | US / sujet | Notes |
 |--------|------------|-------|
-| 1 | E02 Puzzle | Promesse produit ; US F01 à écrire |
-| 2 | Polish UI/UX | Accueil / explore / admin |
+| 1 | Polish UI/UX | Accueil / explore / admin |
+| 2 | E02-F02 | Stats puzzle (après le jeu) |
 
-*Signalements & complétion ban : **dépriorisés** (voir Later / dette) — le safe-first MVP repose sur la modération humaine + absence de j’aime / commentaires.*
+*Signalements & complétion ban : **dépriorisés**.*
 
 ---
 
@@ -93,7 +94,7 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01 | Jouer un puzzle | draft | [feature](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/feature.md) — *US détaillée à écrire* |
+| F01 | Jouer un puzzle | done | [feature](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/feature.md) / [US01](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/US01-jouer-puzzle.md) |
 | F02-US01 | Voir stats puzzle | draft | [lien](./backlog/E02-mode-puzzle/F02-stats-puzzle/US01-voir-stats.md) |
 | F02-US02 | Enregistrer réussite | draft | [lien](./backlog/E02-mode-puzzle/F02-stats-puzzle/US02-enregistrer-reussite.md) |
 
@@ -169,7 +170,7 @@ Vue d’ensemble du backlog.
 
 ## Dette doc / technique repérée
 
-- [ ] Écrire les US détaillées pour **E02-F01 Jouer un puzzle**
+- [x] Écrire les US détaillées pour **E02-F01 Jouer un puzzle**
 - [x] Harmoniser disclaimer E08-F02 vs E10-F06 — *E10-F06 livré ; E08-F02 marqué done (couvert)*
 - [ ] Valider PWA sur device réel (E06)
 - [x] Brancher secrets Supabase en CI (Pages) via GitHub Secrets + injection build — *workflow prêt (`env:sync:ci`)*

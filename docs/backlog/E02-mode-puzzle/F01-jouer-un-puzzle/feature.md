@@ -4,15 +4,17 @@
 
 ## Résumé
 
-Lancer un puzzle à partir d’une œuvre, choisir une difficulté, assembler les pièces au doigt jusqu’à la victoire.
+Lancer un puzzle à partir d’une œuvre publique, assembler les pièces au doigt jusqu’à la victoire (plein écran).
 
 ## User Stories
 
 | Id | Titre | Statut |
 |----|-------|--------|
-| *(à créer)* | | draft |
+| US01 | Jouer un puzzle tactile (plein écran) | done |
 
-## Notes techniques (optionnel)
+## Notes techniques
 
-- Feature Angular cible : `features/puzzle`
-- CDK drag-drop
+- Feature Angular : `features/puzzle`
+- Route hors shell : `/puzzle/:artworkId`
+- Grille MVP : **6×5 = 30** pièces, formes jigsaw client
+- Drag : pointer events (tactile d’abord)

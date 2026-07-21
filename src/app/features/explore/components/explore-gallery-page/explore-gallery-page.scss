@@ -52,6 +52,10 @@
   gap: var(--spacing-md);
 }
 
+.explore-gallery__cell {
+  position: relative;
+}
+
 .explore-gallery__card {
   display: flex;
   flex-direction: column;
@@ -62,6 +66,22 @@
   background: transparent;
   color: inherit;
   text-align: left;
+  cursor: pointer;
+}
+
+.explore-gallery__puzzle-btn {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  z-index: 1;
+  min-height: var(--touch-target-min);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
 }
 

@@ -27,6 +27,11 @@
       <div class="explore-feed__meta">
         <p class="explore-feed__pseudo">{{ artwork()!.author_pseudo }}</p>
         <p class="explore-feed__title">{{ artwork()!.title }}</p>
+        @if (artwork()!.puzzle_enabled) {
+          <button type="button" class="explore-feed__puzzle" (click)="playPuzzle()">
+            Jouer en puzzle
+          </button>
+        }
       </div>
     </article>
   }

@@ -71,4 +71,17 @@ export class ExploreFeedPage implements OnInit {
   protected close(): void {
     void this.router.navigateByUrl('/explore');
   }
+
+  /**
+   * Lance le puzzle plein écran pour l'œuvre courante.
+   */
+  protected playPuzzle(): void {
+    const art = this.artwork();
+    if (!art?.puzzle_enabled) {
+      return;
+    }
+    void this.router.navigate(['/puzzle', art.id], {
+      queryParams: { returnUrl: `/explore/${art.id}` },
+    });
+  }
 }

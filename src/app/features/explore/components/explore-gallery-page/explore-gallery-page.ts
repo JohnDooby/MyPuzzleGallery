@@ -93,6 +93,18 @@ export class ExploreGalleryPage implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /**
+   * Lance le puzzle plein écran.
+   * @param artwork Œuvre publique avec puzzle activé.
+   * @param event Clic.
+   */
+  protected playPuzzle(artwork: PublicArtwork, event: Event): void {
+    event.stopPropagation();
+    void this.router.navigate(['/puzzle', artwork.id], {
+      queryParams: { returnUrl: '/explore' },
+    });
+  }
+
+  /**
    * Premier lot (offset 0) — pas de lots suivants sans scroll.
    */
   private async loadInitial(): Promise<void> {

@@ -18,7 +18,7 @@
   } @else {
     <ul class="explore-gallery__grid" aria-label="Œuvres publiques">
       @for (item of items(); track item.id) {
-        <li>
+        <li class="explore-gallery__cell">
           <button
             type="button"
             class="explore-gallery__card"
@@ -33,6 +33,15 @@
             <span class="explore-gallery__pseudo">{{ item.author_pseudo }}</span>
             <span class="explore-gallery__work-title">{{ item.title }}</span>
           </button>
+          @if (item.puzzle_enabled) {
+            <button
+              type="button"
+              class="explore-gallery__puzzle-btn"
+              (click)="playPuzzle(item, $event)"
+            >
+              Puzzle
+            </button>
+          }
         </li>
       }
     </ul>

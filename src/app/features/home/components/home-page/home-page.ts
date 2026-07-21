@@ -34,11 +34,23 @@ export class HomePage implements OnInit {
   }
 
   /**
-   * Ouvre le feed lightbox sur l'œuvre choisie.
+   * Ouvre le lightbox sur l'œuvre choisie.
    * @param artwork Œuvre publique.
    */
   protected openArtwork(artwork: PublicArtwork): void {
     void this.router.navigate(['/explore', artwork.id]);
+  }
+
+  /**
+   * Lance le puzzle plein écran.
+   * @param artwork Œuvre publique avec puzzle activé.
+   * @param event Clic (stoppe la propagation vers le lightbox).
+   */
+  protected playPuzzle(artwork: PublicArtwork, event: Event): void {
+    event.stopPropagation();
+    void this.router.navigate(['/puzzle', artwork.id], {
+      queryParams: { returnUrl: '/' },
+    });
   }
 
   /**

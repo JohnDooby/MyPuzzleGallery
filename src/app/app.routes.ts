@@ -36,5 +36,9 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'puzzle',
+    loadChildren: () => import('./features/puzzle/puzzle.routes').then((m) => m.PUZZLE_ROUTES),
+  },
   { path: '**', redirectTo: '' },
 ];

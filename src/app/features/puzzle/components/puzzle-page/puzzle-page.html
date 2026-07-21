@@ -1,0 +1,125 @@
+<div class="puzzle-page">
+  <button type="button" class="puzzle-page__close" (click)="close()" aria-label="Fermer">
+    ×
+  </button>
+
+  @if (isLoading()) {
+    <p class="puzzle-page__message">Préparation du puzzle…</p>
+  } @else if (errorMessage()) {
+    <div class="puzzle-page__message-block">
+      <p class="puzzle-page__message" role="alert">{{ errorMessage() }}</p>
+      <button type="button" class="puzzle-page__btn" (click)="close()">Retour</button>
+    </div>
+  } @else if (artwork(); as art) {
+    <div class="puzzle-page__board-wrap">
+      <div
+        class="puzzle-page__board"
+        #boardSurface
+        [style.aspect-ratio]="cols + ' / ' + rows"
+      >
+        <div
+          class="puzzle-page__grid"
+          [style.grid-template-columns]="'repeat(' + cols + ', 1fr)'"
+          [style.grid-template-rows]="'repeat(' + rows + ', 1fr)'"
+        >
+          @for (r of rowIndexes; track r) {
+            @for (c of colIndexes; track c) {
+              <div class="puzzle-page__slot"></div>
+            }
+          }
+        </div>
+
+        @for (id of placedList(); track id) {
+          @if (pieceById(id); as piece) {
+            <div class="puzzle-page__piece puzzle-page__piece--placed" [ngStyle]="placedStyle(piece)">
+              <svg
+                class="puzzle-page__svg"
+                [attr.viewBox]="viewMin + ' ' + viewMin + ' ' + viewSize + ' ' + viewSize"
+              >
+                <defs>
+                  <clipPath [attr.id]="'clip-placed-' + piece.id">
+                    <path [attr.d]="piece.pathD" />
+                  </clipPath>
+                </defs>
+                <image
+                  [attr.href]="imageUrl()"
+                  [attr.width]="cols * 100"
+                  [attr.height]="rows * 100"
+                  [attr.x]="-piece.col * 100"
+                  [attr.y]="-piece.row * 100"
+                  [attr.clip-path]="'url(#clip-placed-' + piece.id + ')'"
+                  preserveAspectRatio="none"
+                />
+              </svg>
+            </div>
+          }
+        }
+      </div>
+    </div>
+
+    <div class="puzzle-page__tray" aria-label="Pièces restantes">
+      @for (piece of visibleTrayPieces(); track piece.id) {
+        <button
+          type="button"
+          class="puzzle-page__tray-piece"
+          (pointerdown)="onTrayPointerDown($event, piece)"
+          [attr.aria-label]="'Pièce ' + piece.id"
+        >
+          <svg
+            class="puzzle-page__svg"
+            [attr.viewBox]="viewMin + ' ' + viewMin + ' ' + viewSize + ' ' + viewSize"
+          >
+            <defs>
+              <clipPath [attr.id]="'clip-tray-' + piece.id">
+                <path [attr.d]="piece.pathD" />
+              </clipPath>
+            </defs>
+            <image
+              [attr.href]="imageUrl()"
+              [attr.width]="cols * 100"
+              [attr.height]="rows * 100"
+              [attr.x]="-piece.col * 100"
+              [attr.y]="-piece.row * 100"
+              [attr.clip-path]="'url(#clip-tray-' + piece.id + ')'"
+              preserveAspectRatio="none"
+            />
+          </svg>
+        </button>
+      }
+    </div>
+
+    @if (drag(); as d) {
+      @if (pieceById(d.pieceId); as piece) {
+        <div class="puzzle-page__ghost" [style.transform]="'translate(' + d.x + 'px,' + d.y + 'px)'">
+          <svg
+            class="puzzle-page__svg"
+            [attr.viewBox]="viewMin + ' ' + viewMin + ' ' + viewSize + ' ' + viewSize"
+          >
+            <defs>
+              <clipPath [attr.id]="'clip-drag-' + piece.id">
+                <path [attr.d]="piece.pathD" />
+              </clipPath>
+            </defs>
+            <image
+              [attr.href]="imageUrl()"
+              [attr.width]="cols * 100"
+              [attr.height]="rows * 100"
+              [attr.x]="-piece.col * 100"
+              [attr.y]="-piece.row * 100"
+              [attr.clip-path]="'url(#clip-drag-' + piece.id + ')'"
+              preserveAspectRatio="none"
+            />
+          </svg>
+        </div>
+      }
+    }
+
+    @if (won()) {
+      <div class="puzzle-page__win" role="status">
+        <p class="puzzle-page__win-title">Bravo !</p>
+        <p class="puzzle-page__win-text">Puzzle terminé — « {{ art.title }} »</p>
+        <button type="button" class="puzzle-page__btn" (click)="close()">Fermer</button>
+      </div>
+    }
+  }
+</div>
