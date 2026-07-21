@@ -88,7 +88,7 @@ Branche macro : **`feature/public-gallery`** — grille publique pour tous.
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
 | F01-US01 | Carousel 20 dernières | done | [lien](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
-| F02-US01 | Voir galerie publique | doing | [lien](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) — *grille `/explore` ; **paging 10×10** au scroll à faire* |
+| F02-US01 | Voir galerie publique | doing | [lien](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) — *grille + paging 10×10 au scroll* |
 | F03-US01 | Lightbox mono-œuvre | done | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) — *plus de fil multi-images* |
 | F03-US02 | Recherche auteur / galerie / dates | draft | [lien](./backlog/E01-galerie-publique/F03-exploration/US02-recherche-mots-clefs.md) |
 
@@ -186,4 +186,5 @@ Branche macro : **`feature/public-gallery`** — grille publique pour tous.
 - Menu Admin déroulant : **Comptes** | **Modération** | **Journal**.
 - Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721170000_audit_events.sql`).
 - Suite prioritaire : **E02 puzzle** (puis polish UI). Signalements / ban complet / social = plus tard.
-- En cours : **`feature/public-gallery`** — nav **Galerie** (`/explore`) pour tous ≠ **Mes œuvres** ; lightbox mono-œuvre OK ; **reste : infinite scroll 10×10**.
+- En cours : **`feature/public-gallery`** — grille + lightbox + **infinite scroll 10×10** (chargement seulement après scroll).
+- Migration à appliquer : `20260721180000_list_public_artworks_paging.sql`.

@@ -8,7 +8,7 @@
 
   @if (isLoading()) {
     <p class="explore-gallery__muted">Chargement…</p>
-  } @else if (errorMessage()) {
+  } @else if (errorMessage() && items().length === 0) {
     <p class="explore-gallery__error" role="alert">{{ errorMessage() }}</p>
   } @else if (items().length === 0) {
     <p class="explore-gallery__muted">
@@ -36,5 +36,12 @@
         </li>
       }
     </ul>
+
+    @if (hasMore()) {
+      <div class="explore-gallery__sentinel" #loadMoreSentinel aria-hidden="true"></div>
+    }
+    @if (isLoadingMore()) {
+      <p class="explore-gallery__muted">Chargement…</p>
+    }
   }
 </section>

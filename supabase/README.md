@@ -32,6 +32,7 @@ npx supabase db push
 | `20260721150000_moderation_events.sql` | Journal modération + RPC file pending |
 | `20260721160000_list_public_artworks.sql` | RPC explore : 20 dernières œuvres publiques |
 | `20260721170000_audit_events.sql` | Journal audit unifié + RPC Admin |
+| `20260721180000_list_public_artworks_paging.sql` | RPC explore : pagination limit/offset |
 
 Voir aussi **`STORAGE.md`** pour la vérif Dashboard du bucket `artworks`.
 

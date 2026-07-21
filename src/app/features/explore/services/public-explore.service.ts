@@ -4,8 +4,11 @@ import { SupabaseClientService } from '../../../core/supabase/supabase-client.se
 
 import type { PublicArtwork } from '../models/public-artwork.model';
 
+/** Taille de lot pour la grille Galerie (infinite scroll). */
+export const PUBLIC_GALLERY_PAGE_SIZE = 10;
+
 /**
- * Lecture des œuvres publiques (accueil carousel + feed explore).
+ * Lecture des œuvres publiques (accueil carousel + grille explore).
  * Accessible anonymement via RLS / RPC.
  */
 @Injectable({ providedIn: 'root' })
@@ -13,24 +16,30 @@ export class PublicExploreService {
   private readonly supabase = inject(SupabaseClientService);
 
   /**
-   * Liste les dernières œuvres publiques (max 20).
-   * @param limit Nombre max (plafonné à 20 côté SQL).
+   * Liste paginée des œuvres publiques (plus récentes d'abord).
+   * @param limit Taille du lot (plafonnée côté SQL).
+   * @param offset Décalage (0 = début).
    */
-  async listLatestPublic(limit = 20): Promise<{ items: PublicArtwork[]; error: string | null }> {
+  async listLatestPublic(
+    limit = PUBLIC_GALLERY_PAGE_SIZE,
+    offset = 0,
+  ): Promise<{ items: PublicArtwork[]; hasMore: boolean; error: string | null }> {
     if (!this.supabase.isConfigured()) {
-      return { items: [], error: 'Supabase non configuré.' };
+      return { items: [], hasMore: false, error: 'Supabase non configuré.' };
     }
 
     const client = this.supabase.getClient();
     const { data, error } = await client.rpc('list_public_artworks', {
       limit_count: limit,
+      offset_count: offset,
     });
 
     if (error) {
-      return { items: [], error: error.message };
+      return { items: [], hasMore: false, error: error.message };
     }
 
-    return { items: (data ?? []) as PublicArtwork[], error: null };
+    const items = (data ?? []) as PublicArtwork[];
+    return { items, hasMore: items.length === limit, error: null };
   }
 
   /**
