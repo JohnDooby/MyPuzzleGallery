@@ -57,16 +57,13 @@ Vue d’ensemble du backlog.
 | E10-F06-US01 | Disclaimer bandeau 1er usage | [US](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) | localStorage `mpg.disclaimer.accepted` |
 | E08-F01-US01 | Tracer publications / éditions / suppressions | [US](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) | `audit_events` ; IP Edge Function = suite |
 | E08-F01-US02 | Consulter journal Admin+ | [US](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) | Menu Admin → Journal |
+| E01-F02-US01 | Voir galerie publique | [US](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) | `/explore` pour tous ; paging 10×10 |
 
 ---
 
 ## Doing
 
-Branche macro : **`feature/public-gallery`** — grille publique pour tous.
-
-| US | Titre | Branche | Lien |
-|----|-------|---------|------|
-| E01-F02-US01 | Voir galerie publique | feature/public-gallery | [US](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) |
+*Aucune US en cours — `main` stable (auth, admin, galerie publique, accueil).*
 
 ---
 
