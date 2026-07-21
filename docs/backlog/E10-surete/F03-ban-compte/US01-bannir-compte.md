@@ -1,7 +1,7 @@
 # US01 — Bannir / désactiver un compte
 
 **Feature :** F03  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 
@@ -11,12 +11,12 @@ afin d’**empêcher un usage dangereux** et de **couper la diffusion publique**
 
 ## Critères d’acceptation
 
-- [ ] Action **Bannir / Désactiver** réservée Admin + SuperAdmin
-- [ ] Le compte banni **ne peut plus se connecter** (ni publier, ni aimer plus tard, etc.)
-- [ ] Toutes les œuvres de ce compte qui étaient **visibles publiquement** sont **retirées du public** immédiatement
-- [ ] On **ne supprime pas** le fait qu’elles étaient publiques : conserver une trace (ex. flag `wasPublic` / historique / statut `publicRequested` + `publicVisible=false`) pour audit et compréhension
-- [ ] L’action de ban est **auditée** (acteur admin, cible, date, IP, motif)
-- [ ] Confirmation explicite avant ban
+- [x] Action **Bannir / Désactiver** réservée **Admin + SuperAdmin** (RLS + UI)
+- [x] Le compte banni **ne peut plus se connecter** *(AuthService déconnecte si `is_banned`)*
+- [ ] Toutes les œuvres de ce compte qui étaient **visibles publiquement** sont **retirées du public** immédiatement *(dépend E03)*
+- [ ] On **ne supprime pas** le fait qu’elles étaient publiques *(dépend E03 / E08)*
+- [ ] L’action de ban est **auditée** *(dépend E08)*
+- [x] Confirmation explicite avant ban
 
 ## Hors scope
 
@@ -25,4 +25,6 @@ afin d’**empêcher un usage dangereux** et de **couper la diffusion publique**
 
 ## Notes
 
-Important PO : retirer du public **sans effacer** le marqueur « était en public ».
+Important PO : retirer du public **sans effacer** le marqueur « était en public ».  
+Branche `feature/admin` : UI + flag `is_banned` ; retrait œuvres / audit = suite.  
+Gestion des **rôles** (promouvoir Admin) reste **SuperAdmin only**.

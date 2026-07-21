@@ -4,6 +4,8 @@ import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import type { AppRole } from '../models/app-role.model';
 
+import { waitForAuthReady } from './wait-for-auth-ready';
+
 /**
  * Garde : nécessite un rôle parmi une liste.
  * Redirect :
@@ -12,12 +14,13 @@ import type { AppRole } from '../models/app-role.model';
  */
 export const requireRolesGuard =
   (allowedRoles: AppRole[]): CanActivateFn =>
-  () => {
-    const auth = inject(AuthService);
+  async () => {
     const router = inject(Router);
+    const auth = inject(AuthService);
 
-    const isAuthenticated = auth.isAuthenticated();
-    if (!isAuthenticated) {
+    await waitForAuthReady(auth);
+
+    if (!auth.isAuthenticated()) {
       return router.parseUrl('/auth');
     }
 
@@ -28,4 +31,3 @@ export const requireRolesGuard =
 
     return router.parseUrl('/');
   };
-

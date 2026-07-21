@@ -25,9 +25,9 @@ Vue d’ensemble du backlog.
 | Statut | Nb (approx.) |
 |--------|----------------|
 | done | 1 |
-| doing | 3 (vague auth A) |
+| doing | 2 (vague admin C) |
 | ready | 0 |
-| draft | ~27 |
+| draft | ~28 |
 | later | 2 (cadrages E09 / E11) |
 
 ---
@@ -42,27 +42,24 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-Branche macro : **`feature/auth`** — itération **A** (schéma `profiles` + RLS).
+Branche macro : **`feature/admin`** — itération **C** (gestion comptes Admin).
 
 | US | Titre | Branche | Lien |
 |----|-------|---------|------|
-| E04-F01-US01 | Trois rôles | feature/auth | [US](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
-| E04-F04-US01 | Pseudo public *(colonne + contrainte)* | feature/auth | [US](./backlog/E04-comptes-session/F04-pseudo/US01-pseudo-public.md) |
-| E07-F03-US01 | RLS *(partiel : `profiles` seulement)* | feature/auth | [US](./backlog/E07-plateforme/F03-rls-safe/US01-pas-de-fuite.md) |
+| E04-F01-US01 | Trois rôles *(UI admin)* | feature/admin | [US](./backlog/E04-comptes-session/F01-roles/US01-trois-roles.md) |
+| E10-F03-US01 | Bannir un compte *(partiel : flag + session, pas encore œuvres/audit)* | feature/admin | [US](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
 
 ---
 
-## Ready (suite vague auth — après A)
+## Ready (suite)
 
-| Ordre | US | Titre | Itération |
-|--------|----|-------|-----------|
-| 1 | E04-F02-US01 / US02 | Créer compte + sans validation MVP | B |
-| 2 | E04-F03-US01 / US02 | Login / logout + session | B |
-| 3 | E10-F06-US01 | Disclaimer à l’inscription | B |
-| 4 | E10-F07-US01 | Lien cadre âge / conditions | B |
-| 5 | Guard Admin + route stub | *(pas d’US dédiée encore)* | C |
+| Ordre | US | Titre | Notes |
+|--------|----|-------|-------|
+| 1 | E03… | Publication / artworks | Prochaine vague produit |
+| 2 | E05… | Modération œuvres | Après artworks |
+| 3 | E10-F03 suite | Ban : retrait public + audit | Dépend E03 / E08 |
 
-*Hors vague auth (plus tard) : E10-F04, E10-F05, artworks, modération, invites…*
+*Auth (A/B/C partiel) : merge `feature/auth` puis `feature/admin` quand validés.*
 
 ---
 
@@ -135,7 +132,7 @@ Branche macro : **`feature/auth`** — itération **A** (schéma `profiles` + RL
 | F01-US01 | Signaler une œuvre | draft | [lien](./backlog/E10-surete/F01-signalement/US01-signaler-oeuvre.md) |
 | F02-US01 | Traiter un signalement | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US01-traiter-signalement.md) |
 | F02-US02 | Retrait rapide du public | draft | [lien](./backlog/E10-surete/F02-traitement-signalements/US02-retrait-rapide-public.md) |
-| F03-US01 | Bannir un compte | draft | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
+| F03-US01 | Bannir un compte | doing | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
 | F04-US01 | Cycle privé / public | draft | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
 | F05-US01 | Formats / taille médias | draft | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
 | F06-US01 | Disclaimer clair | draft | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
