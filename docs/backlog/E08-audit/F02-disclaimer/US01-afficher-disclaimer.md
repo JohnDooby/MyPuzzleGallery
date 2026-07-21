@@ -1,7 +1,7 @@
 # US01 — Afficher un disclaimer
 
 **Feature :** F02  
-**Statut :** draft
+**Statut :** done
 
 ## Récit
 
@@ -21,3 +21,5 @@ afin de **savoir dans quel cadre je publie et j’interagis**.
 - Conseil juridique professionnel (le PO fera valider le texte)
 
 ## Notes
+
+Couvert côté UX par **E10-F06** (bandeau 1er usage + `/regles`).

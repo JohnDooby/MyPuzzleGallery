@@ -24,8 +24,8 @@ Vue d’ensemble du backlog.
 
 | Statut | Nb (approx.) |
 |--------|----------------|
-| done | 18 |
-| doing | 1 (disclaimer) |
+| done | 19 |
+| doing | 0 |
 | ready | 1 |
 | draft | ~13 |
 | later | 2 (cadrages E09 / E11) |
@@ -54,16 +54,13 @@ Vue d’ensemble du backlog.
 | E05-F01-US01 | Valider / refuser demande publique | [US](./backlog/E05-moderation/F01-moderer-oeuvre/US01-valider-publication.md) | Menu Admin → Modération + mini-journal |
 | E01-F01-US01 | Carousel 20 dernières | [US](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) | Accueil ; polish UI/UX plus tard |
 | E01-F03-US01 | Feed plein écran | [US](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) | `/explore` lightbox ; sans puzzle / signalement |
+| E10-F06-US01 | Disclaimer bandeau 1er usage | [US](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) | localStorage `mpg.disclaimer.accepted` |
 
 ---
 
 ## Doing
 
-Branche macro : **`feature/disclaimer`** — bandeau 1er usage.
-
-| US | Titre | Branche | Lien |
-|----|-------|---------|------|
-| E10-F06-US01 | Disclaimer bandeau 1er usage | feature/disclaimer | [US](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
+*Aucune US en cours — `main` à jour après merge `feature/disclaimer`.*
 
 ---
 
@@ -133,7 +130,7 @@ Branche macro : **`feature/disclaimer`** — bandeau 1er usage.
 |----|-------|--------|------|
 | F01-US01 | Tracer publications | draft | [lien](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) — *partiel : décisions modération dans `moderation_events`* |
 | F01-US02 | Consulter journal Admin+ | draft | [lien](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) — *partiel : journal récent sur `/admin/moderation`* |
-| F02-US01 | Disclaimer (E08) | draft | [lien](./backlog/E08-audit/F02-disclaimer/US01-afficher-disclaimer.md) — *couvert côté UX par E10-F06* |
+| F02-US01 | Disclaimer (E08) | done | [lien](./backlog/E08-audit/F02-disclaimer/US01-afficher-disclaimer.md) — *couvert par E10-F06* |
 
 *Note : le disclaimer UX prioritaire est **E10-F06** ; E08-F02 reste aligné.*
 
@@ -147,7 +144,7 @@ Branche macro : **`feature/disclaimer`** — bandeau 1er usage.
 | F03-US01 | Bannir un compte | done *(partiel)* | [lien](./backlog/E10-surete/F03-ban-compte/US01-bannir-compte.md) |
 | F04-US01 | Cycle privé / public | done | [lien](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
 | F05-US01 | Formats / taille médias | done | [lien](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
-| F06-US01 | Disclaimer clair | doing | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
+| F06-US01 | Disclaimer clair | done | [lien](./backlog/E10-surete/F06-disclaimer/US01-disclaimer-clair.md) |
 | F07-US01 | Cadre âge & famille | done | [lien](./backlog/E10-surete/F07-cadre-age-famille/US01-cadre-age-famille.md) |
 
 ---
@@ -164,7 +161,7 @@ Branche macro : **`feature/disclaimer`** — bandeau 1er usage.
 ## Dette doc / technique repérée
 
 - [ ] Écrire les US détaillées pour **E02-F01 Jouer un puzzle**
-- [ ] Harmoniser disclaimer E08-F02 vs E10-F06 (une seule US « done » à la fin)
+- [x] Harmoniser disclaimer E08-F02 vs E10-F06 — *E10-F06 livré ; E08-F02 marqué done (couvert)*
 - [ ] Valider PWA sur device réel (E06)
 - [x] Brancher secrets Supabase en CI (Pages) via GitHub Secrets + injection build — *workflow prêt (`env:sync:ci`)*
 - [ ] Compléter E07-F03 / E10-F03 : retrait œuvres au ban + tests de non-fuite
@@ -173,7 +170,7 @@ Branche macro : **`feature/disclaimer`** — bandeau 1er usage.
 
 ## Notes techniques
 
-- Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore (carousel + feed).
+- Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore, Disclaimer 1er usage.
 - Menu Admin déroulant : **Comptes** | **Modération**.
 - Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721160000_list_public_artworks.sql`).
-- En cours : **`feature/disclaimer`** (bandeau 1er usage).
+- Prochaine macro proposée : **E08 audit** (ou puzzle E02 / polish UI).

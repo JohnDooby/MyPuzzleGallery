@@ -1,7 +1,7 @@
 # US01 — Afficher et faire accepter le disclaimer
 
 **Feature :** F06  
-**Statut :** doing
+**Statut :** done
 
 ## Récit
 
