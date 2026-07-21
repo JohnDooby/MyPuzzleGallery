@@ -1,7 +1,7 @@
 # US01 — Documenter et respecter le cycle privé / public
 
 **Feature :** F04  
-**Statut :** doing
+**Statut :** done
 
 ## Récit
 

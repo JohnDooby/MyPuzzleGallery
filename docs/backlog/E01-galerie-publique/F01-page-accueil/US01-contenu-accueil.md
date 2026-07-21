@@ -1,7 +1,7 @@
 # US01 — Carousel des 20 dernières publications
 
 **Feature :** F01  
-**Statut :** draft
+**Statut :** ready
 
 ## Récit
 
