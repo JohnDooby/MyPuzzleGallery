@@ -1,0 +1,70 @@
+<section class="admin-audit">
+  <header class="admin-audit__header">
+    <h1 class="admin-audit__title">Journal d’audit</h1>
+    <p class="admin-audit__hint">
+      Publications, éditions, suppressions et décisions de modération. L’adresse IP sera renseignée
+      plus tard (Edge Function) — pour l’instant elle peut être vide.
+    </p>
+  </header>
+
+  <div class="admin-audit__toolbar">
+    <label class="admin-audit__field">
+      <span>Action</span>
+      <select
+        class="admin-audit__select"
+        [(ngModel)]="actionFilter"
+        (ngModelChange)="onFilter()"
+      >
+        @for (opt of actionFilters; track opt.value) {
+          <option [ngValue]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </label>
+    <label class="admin-audit__field admin-audit__field--grow">
+      <span>Pseudo</span>
+      <input
+        class="admin-audit__input"
+        type="search"
+        [(ngModel)]="pseudoFilter"
+        (keyup.enter)="onFilter()"
+        placeholder="Filtrer par pseudo…"
+      />
+    </label>
+    <button type="button" class="admin-audit__btn" (click)="onFilter()">Filtrer</button>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="admin-audit__error" role="alert">{{ errorMessage() }}</p>
+  }
+
+  @if (isLoading()) {
+    <p class="admin-audit__muted">Chargement…</p>
+  } @else if (events().length === 0) {
+    <p class="admin-audit__muted">Aucune entrée pour ces critères.</p>
+  } @else {
+    <ul class="admin-audit__list">
+      @for (event of events(); track event.id) {
+        <li class="admin-audit__item">
+          <div class="admin-audit__media">
+            @if (thumbUrls()[event.id]; as url) {
+              <img class="admin-audit__thumb" [src]="url" [alt]="event.artwork_title" />
+            } @else {
+              <div class="admin-audit__thumb admin-audit__thumb--empty" aria-hidden="true"></div>
+            }
+          </div>
+          <div class="admin-audit__body">
+            <p class="admin-audit__action">{{ actionLabel(event.action) }}</p>
+            <p class="admin-audit__meta">
+              {{ event.actor_pseudo }} · {{ event.created_at | date: 'dd/MM/yyyy HH:mm' }}
+              · IP {{ event.client_ip || 'non disponible' }}
+            </p>
+            <p class="admin-audit__work-title">« {{ event.artwork_title || '(sans titre)' }} »</p>
+            @if (event.artwork_description) {
+              <p class="admin-audit__desc">{{ event.artwork_description }}</p>
+            }
+          </div>
+        </li>
+      }
+    </ul>
+  }
+</section>

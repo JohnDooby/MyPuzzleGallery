@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 
 import type { AuthResult } from '../../../core/auth/models/auth-result.model';
 import { AuthService } from '../../../core/auth/auth.service';
+import { AuditService } from '../../../core/audit/audit.service';
 import { SupabaseClientService } from '../../../core/supabase/supabase-client.service';
 import type { ArtworkVisibility } from '../../gallery/models/artwork.model';
 
@@ -14,6 +15,7 @@ import type { ModerationEventRow, PendingArtwork } from '../models/moderation.mo
 export class AdminModerationService {
   private readonly supabase = inject(SupabaseClientService);
   private readonly auth = inject(AuthService);
+  private readonly audit = inject(AuditService);
 
   /**
    * Liste les œuvres en attente de validation publique.
@@ -102,7 +104,7 @@ export class AdminModerationService {
     const client = this.supabase.getClient();
     const { data: artwork, error: loadError } = await client
       .from('artworks')
-      .select('id, visibility_status')
+      .select('id, title, description, storage_path, visibility_status')
       .eq('id', artworkId)
       .maybeSingle();
 
@@ -136,6 +138,14 @@ export class AdminModerationService {
     if (auditError) {
       console.warn('[Moderation] Journal non enregistré', auditError.message);
     }
+
+    await this.audit.log({
+      action: decision === 'approved' ? 'moderation_approved' : 'moderation_rejected',
+      artworkId,
+      artworkTitle: artwork.title as string,
+      artworkDescription: artwork.description as string,
+      storagePath: artwork.storage_path as string,
+    });
 
     return { success: true };
   }

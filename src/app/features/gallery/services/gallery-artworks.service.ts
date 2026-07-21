@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 
 import type { AuthResult } from '../../../core/auth/models/auth-result.model';
 import { AuthService } from '../../../core/auth/auth.service';
+import { AuditService } from '../../../core/audit/audit.service';
 import { SupabaseClientService } from '../../../core/supabase/supabase-client.service';
 
 import type { CreateArtworkInput } from '../models/create-artwork-input.model';
@@ -16,6 +17,7 @@ import type { UpdateArtworkInput } from '../models/update-artwork-input.model';
 export class GalleryArtworksService {
   private readonly supabase = inject(SupabaseClientService);
   private readonly auth = inject(AuthService);
+  private readonly audit = inject(AuditService);
 
   /**
    * Liste les galeries du compte connecté.
@@ -153,6 +155,25 @@ export class GalleryArtworksService {
       return { success: false, message: insertError.message };
     }
 
+    const title = input.title.trim();
+    const description = input.description.trim();
+    await this.audit.log({
+      action: 'artwork_created',
+      artworkId,
+      artworkTitle: title,
+      artworkDescription: description,
+      storagePath,
+    });
+    if (input.requestPublic) {
+      await this.audit.log({
+        action: 'visibility_requested',
+        artworkId,
+        artworkTitle: title,
+        artworkDescription: description,
+        storagePath,
+      });
+    }
+
     return { success: true, artworkId };
   }
 
@@ -218,6 +239,24 @@ export class GalleryArtworksService {
     if (error) {
       return { success: false, message: error.message };
     }
+
+    const title = input.title.trim();
+    const description = input.description.trim();
+    await this.audit.log({
+      action: 'artwork_updated',
+      artworkId,
+      artworkTitle: title,
+      artworkDescription: description,
+    });
+    if (currentVisibility !== 'pending_public' && nextVisibility === 'pending_public') {
+      await this.audit.log({
+        action: 'visibility_requested',
+        artworkId,
+        artworkTitle: title,
+        artworkDescription: description,
+      });
+    }
+
     return { success: true };
   }
 
@@ -230,6 +269,15 @@ export class GalleryArtworksService {
     if (!userId || artwork.owner_id !== userId) {
       return { success: false, message: 'Suppression non autorisée.' };
     }
+
+    // Snapshot avant suppression (FK artwork_id → SET NULL).
+    await this.audit.log({
+      action: 'artwork_deleted',
+      artworkId: artwork.id,
+      artworkTitle: artwork.title,
+      artworkDescription: artwork.description,
+      storagePath: artwork.storage_path,
+    });
 
     const client = this.supabase.getClient();
     const { error: dbError } = await client

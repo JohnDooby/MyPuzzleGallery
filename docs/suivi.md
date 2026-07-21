@@ -25,9 +25,9 @@ Vue d’ensemble du backlog.
 | Statut | Nb (approx.) |
 |--------|----------------|
 | done | 19 |
-| doing | 0 |
-| ready | 1 |
-| draft | ~13 |
+| doing | 2 (audit) |
+| ready | 0 |
+| draft | ~12 |
 | later | 2 (cadrages E09 / E11) |
 
 ---
@@ -60,15 +60,18 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-*Aucune US en cours — `main` à jour après merge `feature/disclaimer`.*
+Branche macro : **`feature/audit`** — journal unifié + page Admin.
+
+| US | Titre | Branche | Lien |
+|----|-------|---------|------|
+| E08-F01-US01 | Tracer publications / éditions / suppressions | feature/audit | [US](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) |
+| E08-F01-US02 | Consulter journal Admin+ | feature/audit | [US](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) |
 
 ---
 
 ## Ready (suite priorisée)
 
-| Ordre | US | Titre | Notes |
-|--------|----|-------|-------|
-| 1 | E08-F01-US01 / US02 | Audit élargi + consultation | Mini-journal modération déjà posé ; manque publish/edit/delete + IP |
+*Aucune US ready — suite = puzzle E02, signalements, polish UI, ou IP Edge Function.*
 
 ---
 
@@ -128,8 +131,8 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Tracer publications | draft | [lien](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) — *partiel : décisions modération dans `moderation_events`* |
-| F01-US02 | Consulter journal Admin+ | draft | [lien](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) — *partiel : journal récent sur `/admin/moderation`* |
+| F01-US01 | Tracer publications | doing | [lien](./backlog/E08-audit/F01-journal-audit/US01-tracer-actions.md) |
+| F01-US02 | Consulter journal Admin+ | doing | [lien](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) |
 | F02-US01 | Disclaimer (E08) | done | [lien](./backlog/E08-audit/F02-disclaimer/US01-afficher-disclaimer.md) — *couvert par E10-F06* |
 
 *Note : le disclaimer UX prioritaire est **E10-F06** ; E08-F02 reste aligné.*
@@ -171,6 +174,6 @@ Vue d’ensemble du backlog.
 ## Notes techniques
 
 - Livré sur **`main`** : Auth, Admin, Publication, Modération, Explore, Disclaimer 1er usage.
-- Menu Admin déroulant : **Comptes** | **Modération**.
-- Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721160000_list_public_artworks.sql`).
-- Prochaine macro proposée : **E08 audit** (ou puzzle E02 / polish UI).
+- Menu Admin déroulant : **Comptes** | **Modération** | **Journal**.
+- Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721170000_audit_events.sql`).
+- En cours : **`feature/audit`** (table `audit_events` + `/admin/audit` ; IP Edge Function plus tard).

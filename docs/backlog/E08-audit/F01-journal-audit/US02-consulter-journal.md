@@ -1,7 +1,7 @@
 # US02 — Consulter le journal (Admin & SuperAdmin)
 
 **Feature :** F01  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 

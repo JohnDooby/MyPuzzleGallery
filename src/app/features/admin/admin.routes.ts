@@ -5,7 +5,7 @@ import { requireRolesGuard } from '../../core/auth/guards/require-roles.guard';
 const staffGuard = requireRolesGuard(['admin', 'superadmin']);
 
 /**
- * Routes Admin (lazy) — Comptes + Modération, réservées Admin / SuperAdmin.
+ * Routes Admin (lazy) — Comptes, Modération, Journal, réservées Admin / SuperAdmin.
  */
 export const ADMIN_ROUTES: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'accounts' },
@@ -24,5 +24,11 @@ export const ADMIN_ROUTES: Routes = [
       import('./components/admin-moderation-page/admin-moderation-page').then(
         (m) => m.AdminModerationPage,
       ),
+  },
+  {
+    path: 'audit',
+    canActivate: [staffGuard],
+    loadComponent: () =>
+      import('./components/admin-audit-page/admin-audit-page').then((m) => m.AdminAuditPage),
   },
 ];
