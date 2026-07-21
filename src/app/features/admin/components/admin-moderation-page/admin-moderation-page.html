@@ -1,0 +1,82 @@
+<section class="moderation">
+  <h1 class="moderation__title">Modération</h1>
+  <p class="moderation__lead">
+    Œuvres en demande de publication publique. Valider = visible de tous. Refuser = reste hors
+    vitrine.
+  </p>
+
+  @if (errorMessage()) {
+    <p class="moderation__error" role="alert">{{ errorMessage() }}</p>
+  }
+  @if (successMessage()) {
+    <p class="moderation__success" role="status">{{ successMessage() }}</p>
+  }
+
+  <h2 class="moderation__section-title">File d’attente</h2>
+
+  @if (isLoading()) {
+    <p class="moderation__muted">Chargement…</p>
+  } @else if (pending().length === 0) {
+    <p class="moderation__muted">Aucune œuvre en attente.</p>
+  } @else {
+    <ul class="moderation__list">
+      @for (item of pending(); track item.id) {
+        <li class="moderation__card">
+          <div class="moderation__media">
+            @if (thumbUrls()[item.id]; as url) {
+              <img class="moderation__image" [src]="url" [alt]="item.title" />
+            } @else {
+              <div class="moderation__image moderation__image--empty" aria-hidden="true"></div>
+            }
+          </div>
+          <div class="moderation__body">
+            <p class="moderation__item-title">{{ item.title }}</p>
+            <p class="moderation__muted">par {{ item.author_pseudo }}</p>
+            @if (item.description) {
+              <p class="moderation__desc">{{ item.description }}</p>
+            }
+            <p class="moderation__muted">
+              Demandée le {{ item.created_at | date: 'dd/MM/yyyy HH:mm' }}
+              @if (item.puzzle_enabled) {
+                · Puzzle demandé
+              }
+            </p>
+            <div class="moderation__actions">
+              <button
+                type="button"
+                class="moderation__btn moderation__btn--ok"
+                [disabled]="busyId() === item.id"
+                (click)="onApprove(item)"
+              >
+                Valider
+              </button>
+              <button
+                type="button"
+                class="moderation__btn moderation__btn--danger"
+                [disabled]="busyId() === item.id"
+                (click)="onReject(item)"
+              >
+                Refuser
+              </button>
+            </div>
+          </div>
+        </li>
+      }
+    </ul>
+  }
+
+  <h2 class="moderation__section-title">Journal récent</h2>
+  @if (events().length === 0) {
+    <p class="moderation__muted">Aucune décision enregistrée pour l’instant.</p>
+  } @else {
+    <ul class="moderation__journal">
+      @for (event of events(); track event.id) {
+        <li class="moderation__journal-item">
+          <span class="moderation__journal-decision">{{ decisionLabel(event.decision) }}</span>
+          « {{ event.artwork_title }} » ({{ event.author_pseudo }}) — par
+          {{ event.actor_pseudo }} · {{ event.created_at | date: 'dd/MM/yyyy HH:mm' }}
+        </li>
+      }
+    </ul>
+  }
+</section>

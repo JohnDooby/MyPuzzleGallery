@@ -1,7 +1,7 @@
 # US01 — Valider ou refuser une demande publique
 
 **Feature :** F01  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 

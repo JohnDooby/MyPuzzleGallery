@@ -21,7 +21,41 @@
         <a routerLink="/gallery" routerLinkActive="is-active">Galerie</a>
       }
       @if (isStaff()) {
-        <a routerLink="/admin" routerLinkActive="is-active">Admin</a>
+        <div class="shell__dropdown" [class.is-open]="adminMenuOpen()">
+          <button
+            type="button"
+            class="shell__dropdown-trigger"
+            [class.is-active]="adminMenuOpen()"
+            [attr.aria-expanded]="adminMenuOpen()"
+            aria-haspopup="true"
+            (click)="toggleAdminMenu($event)"
+          >
+            Admin
+          </button>
+          @if (adminMenuOpen()) {
+            <div
+              class="shell__dropdown-panel"
+              role="menu"
+              aria-label="Menu Admin"
+              (click)="onAdminPanelClick($event)"
+            >
+              <a
+                role="menuitem"
+                routerLink="/admin/accounts"
+                routerLinkActive="is-active"
+                (click)="closeAdminMenu()"
+                >Comptes</a
+              >
+              <a
+                role="menuitem"
+                routerLink="/admin/moderation"
+                routerLinkActive="is-active"
+                (click)="closeAdminMenu()"
+                >Modération</a
+              >
+            </div>
+          }
+        </div>
       }
       @if (isAuthenticated()) {
         <a routerLink="/auth" class="shell__user-link" routerLinkActive="is-active"

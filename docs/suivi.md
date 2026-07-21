@@ -24,10 +24,10 @@ Vue d’ensemble du backlog.
 
 | Statut | Nb (approx.) |
 |--------|----------------|
-| done | 10 |
-| doing | 5 (vague publication P1) |
+| done | ~15 |
+| doing | 1 (modération) |
 | ready | ~2 |
-| draft | ~18 |
+| draft | ~16 |
 | later | 2 (cadrages E09 / E11) |
 
 ---
@@ -51,27 +51,23 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-Branche macro : **`feature/publication`** — itération **P3** (édition + suppression).
+Branche macro : **`feature/moderation`** — file Admin + mini-journal.
 
 | US | Titre | Branche | Lien |
 |----|-------|---------|------|
-| E03-F01-US01 | Publier depuis le device | feature/publication | [US](./backlog/E03-publication/F01-formulaire-publication/US01-publier-oeuvre.md) |
-| E03-F03-US01 | Modifier une œuvre *(prévu P3)* | feature/publication | [US](./backlog/E03-publication/F03-editer-oeuvre/US01-modifier-oeuvre.md) |
-| E03-F04-US01 | Supprimer *(prévu P3)* | feature/publication | [US](./backlog/E03-publication/F04-supprimer-oeuvre/US01-supprimer-oeuvre.md) |
-| E10-F04-US01 | Cycle privé / public | feature/publication | [US](./backlog/E10-surete/F04-prive-vs-public/US01-cycle-prive-public.md) |
-| E10-F05-US01 | Formats / taille + compression client | feature/publication | [US](./backlog/E10-surete/F05-garde-fous-medias/US01-formats-taille.md) |
+| E05-F01-US01 | Valider / refuser demande publique | feature/moderation | [US](./backlog/E05-moderation/F01-moderer-oeuvre/US01-valider-publication.md) |
 
 ---
 
-## Ready (suite après P1)
+## Ready (suite)
 
 | Ordre | US | Titre | Notes |
 |--------|----|-------|-------|
-| 1 | E03-F01 UI | Formulaire `/gallery/publish` + Mes œuvres | P2 |
-| 2 | E03-F03 / F04 UI | Édition + suppression | P3 |
+| 1 | E01… | Explore / carousel public | Afficher les `public` |
+| 2 | E08… | Audit élargi | Mini-journal modération déjà posé |
 | 3 | E10-F06-US01 | Disclaimer bandeau 1er usage | Plus tard |
 
-*Ensuite : E05 modération Admin, E08 audit, E01 explore.*
+*Publication (E03) livrée sur `main`.*
 
 ---
 
