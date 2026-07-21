@@ -1,4 +1,4 @@
-# US02 — Compte utilisable sans validation (pour le moment)
+# US02 — Compte utilisable sans validation (MVP)
 
 **Feature :** F02  
 **Statut :** draft
@@ -7,18 +7,20 @@
 
 En tant que **nouvel utilisateur**,  
 je veux **utiliser mon compte dès l’inscription**,  
-afin de **publier et explorer sans étape de validation**.
+afin de **ne pas attendre une validation d’e-mail ou d’Admin**.
 
 ## Critères d’acceptation
 
-- [ ] Après création de compte réussie, je peux me connecter et utiliser les fonctions Normal **sans** validation e-mail / Admin
-- [ ] Aucun statut « en attente de validation de compte » n’est requis pour l’instant
-- [ ] La doc / disclaimer peuvent indiquer que des contrôles existent sur le **contenu** (modération), pas sur l’activation du compte
+- [ ] Aucune étape « confirme ton e-mail » / « compte en attente » au MVP
+- [ ] Après inscription, connexion et fonctions Normal disponibles immédiatement
+- [ ] Les **conditions d’accès** et le disclaimer précisent clairement :
+  - pas de validation de compte à l’activation ;
+  - en revanche **modération** pour le public + **audit** des publications
 
 ## Hors scope
 
-- Réintroduire une validation de compte plus tard
+- Réintroduire une validation de compte plus tard (possible si ouverture large)
 
 ## Notes
 
-Décision PO 2026-07-20 : pas de validation de compte pour le moment.
+Noir sur blanc : **validation de compte = non (MVP)** ; **contrôles contenu = oui**.

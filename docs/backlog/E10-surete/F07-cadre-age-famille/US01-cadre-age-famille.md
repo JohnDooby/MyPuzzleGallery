@@ -6,39 +6,34 @@
 ## Récit
 
 En tant que **parent / responsable** et **ado**,  
-je veux **comprendre le cadre d’usage**,  
-afin de **savoir que c’est un espace supervisé, pas un réseau anonyme**.
+je veux **voir le cadre d’accès clairement**,  
+afin de **savoir que l’espace est supervisé, audité et modéré**.
 
-## Proposition de cadrage (texte à adapter)
+## Référence
 
-**Positionnement :**  
-MyPuzzleGallery est un espace de partage d’images **entre personnes de confiance** (famille, proches, cercle scolaire encadré). Ce n’est **pas** un réseau social ouvert anonyme.
+Texte canonique : [`docs/conditions-acces.md`](../../../../conditions-acces.md)
 
-**Âge (proposition) :**
-- Utilisation **recommandée avec accord parental** pour les mineurs
-- L’inscription implique que l’utilisateur (ou son responsable) accepte le disclaimer et les règles
-- Pas de promesse d’anonymat : **pseudo** public + **journal d’audit** consultable par les modérateurs
+## Points obligatoires à faire figurer (UI / page Règles)
 
-**Engagements plateforme :**
-- Aucune publication **publique** sans **modération humaine** (Admin)
-- Signalement facile + retrait rapide du public
-- Possibilité de **bannir** un compte et de retirer ses contenus publics
-- Formats d’image restreints (PNG/JPEG)
-
-**Contact :**  
-Une adresse / moyen de contact **modération / responsable** est affiché (page À propos / disclaimer).
+- [ ] Espace **familial / supervisé**, pas réseau anonyme
+- [ ] Comptes **faciles** ; **pas** de validation de compte au MVP
+- [ ] Mineurs : **accord / supervision parentale recommandés** — **sans** présenter ça comme une preuve RGPD technique de consentement
+- [ ] **Modération humaine** obligatoire avant tout passage public
+- [ ] **Audit** : qui publie quoi (image, titre, description), date, IP — consultable Admin+
+- [ ] Signalement, retrait rapide, ban
+- [ ] Pseudo seul en public
+- [ ] Formats PNG/JPEG, pas de GIF, taille max
 
 ## Critères d’acceptation
 
-- [ ] Une page ou section **« Règles & sécurité »** reprend ce cadrage
-- [ ] Référence croisée depuis le disclaimer et l’inscription
-- [ ] Pas d’ambiguïté : espace **supervisé**, contenus publics **modérés**
+- [ ] Page **Règles & sécurité** (ou équivalent) reprend les conditions d’accès
+- [ ] Lien depuis inscription + disclaimer
+- [ ] Aucune formulation du type « consentement parental vérifié » au MVP
 
 ## Hors scope
 
-- Vérification d’âge technique forte (document d’identité) au MVP
-- Obligation légale figée sans relecture humaine / juridique
+- Double opt-in parent / vérif d’âge forte (évolution possible)
 
 ## Notes
 
-Objectif PO : **ultra sécurisé pour les enfants** — légal, RGPD, prévention contenus inappropriés / prédateurs. Ce cadrage doit rester visible et honnête.
+Honnêteté > faux sentiment de conformité.

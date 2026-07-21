@@ -3,6 +3,9 @@
 | Terme | Définition |
 |-------|------------|
 | **Safe** | Priorité produit : légal/RGPD + protection mineurs |
+| **Conditions d’accès** | Règles d’entrée — `docs/conditions-acces.md` |
+| Validation de compte | *Non au MVP* — usage immédiat après inscription |
+| Consentement parental technique | *Non au MVP* — supervision familiale **déclarée**, formulation honnête |
 | Pseudo | Seule info personnelle publique |
 | Privée | Œuvre visible seulement par l’auteur — pas de modération |
 | Demande publique | Auteur demande le public → file modération |
@@ -12,11 +15,11 @@
 | Signalement | Alerte utilisateur sur une œuvre |
 | Ban / désactivation | Compte empêché de se connecter ; œuvres publiques retirées de la vitrine |
 | File de modération | File Admin des demandes publiques |
-| Journal d’audit | Traces (publications prioritaires : image, titre, description, date, IP) |
-| Disclaimer | Bandeau type cookies sur la traçabilité / sécurité |
+| Journal d’audit | Traces (publications : image, titre, description, date, IP) — Admin+ |
+| Disclaimer | Bandeau type cookies : **audit + modération** obligatoirement visibles |
 | Garde-fous médias | PNG/JPEG seulement, max **10 Mo**, pas de GIF |
 | Feed Explore | Fil plein écran |
 | Carousel accueil | 20 dernières publications publiques validées |
 | Galerie nommée | Catégorie perso d’œuvres d’un compte |
 | Normal / Admin / SuperAdmin | Rôles |
-| J’aime / Commentaires | Features **à part** (E11 / E09), hors MVP social actuel |
+| J’aime / Commentaires | Features à part (E11 / E09), hors MVP social actuel |

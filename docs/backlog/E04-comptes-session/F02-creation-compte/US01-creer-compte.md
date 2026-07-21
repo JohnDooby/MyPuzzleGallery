@@ -6,19 +6,22 @@
 ## Récit
 
 En tant que **nouvel utilisateur**,  
-je veux **créer mon compte**,  
-afin de **pouvoir déposer mes œuvres et utiliser la galerie en mode connecté**.
+je veux **créer mon compte facilement** (comme dans beaucoup de jeux),  
+afin d’**utiliser l’appli sans parcours compliqué**.
 
 ## Critères d’acceptation
 
-- [ ] Formulaire d’inscription accessible sur mobile / tablette
-- [ ] Les informations minimales requises sont collectées *(e-mail / pseudo / mot de passe — à figer)*
-- [ ] Un compte **Normal** est créé par défaut à l’inscription *(sauf seed SuperAdmin)*
+- [ ] Formulaire d’inscription simple, mobile / tablette
+- [ ] Champs minimaux : au moins **pseudo**, identifiants de connexion (e-mail ou équivalent + mot de passe — à figer)
+- [ ] Compte **Normal** créé par défaut
+- [ ] Avant ou pendant l’inscription : accès / acceptation des **[conditions d’accès](../../../../conditions-acces.md)** et du **disclaimer** (audit + modération)
+- [ ] Textes visibles rappelant : espace supervisé, **modération** du public, **audit** des publications
 
 ## Hors scope
 
-- Attribution Admin / SuperAdmin en self-service
+- Validation e-mail / activation Admin (voir US02)
+- Vérification technique du consentement parental (hors MVP — voir conditions d’accès)
 
 ## Notes
 
-À préciser : champs exacts, règles de mot de passe, âge / consentement parental éventuel.
+Décision PO : UX compte **facile** ; le safe porte sur **contenu + audit + modération**, pas sur un tunnel d’inscription lourd.
