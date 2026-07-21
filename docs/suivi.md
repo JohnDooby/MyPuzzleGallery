@@ -51,7 +51,7 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-Branche macro : **`feature/publication`** — itération **P2** (UI publish + Mes œuvres).
+Branche macro : **`feature/publication`** — itération **P3** (édition + suppression).
 
 | US | Titre | Branche | Lien |
 |----|-------|---------|------|

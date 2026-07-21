@@ -10,6 +10,9 @@
   @if (errorMessage()) {
     <p class="my-artworks__error" role="alert">{{ errorMessage() }}</p>
   }
+  @if (successMessage()) {
+    <p class="my-artworks__success" role="status">{{ successMessage() }}</p>
+  }
 
   @if (isLoading()) {
     <p class="my-artworks__muted">Chargement…</p>
@@ -29,15 +32,28 @@
               <div class="my-artworks__thumb my-artworks__thumb--empty" aria-hidden="true"></div>
             }
           </div>
-          <div class="my-artworks__meta">
-            <p class="my-artworks__name">{{ artwork.title }}</p>
-            <p class="my-artworks__muted">
-              {{ visibilityLabel(artwork.visibility_status) }}
-              @if (artwork.puzzle_enabled) {
-                · Puzzle
-              }
-              · {{ artwork.created_at | date: 'dd/MM/yyyy' }}
-            </p>
+          <div class="my-artworks__body">
+            <div class="my-artworks__meta">
+              <p class="my-artworks__name">{{ artwork.title }}</p>
+              <p class="my-artworks__muted">
+                {{ visibilityLabel(artwork.visibility_status) }}
+                @if (artwork.puzzle_enabled) {
+                  · Puzzle
+                }
+                · {{ artwork.created_at | date: 'dd/MM/yyyy' }}
+              </p>
+            </div>
+            <div class="my-artworks__actions">
+              <a class="my-artworks__btn" [routerLink]="['/gallery', artwork.id, 'edit']">Modifier</a>
+              <button
+                type="button"
+                class="my-artworks__btn my-artworks__btn--danger"
+                [disabled]="busyId() === artwork.id"
+                (click)="onDelete(artwork)"
+              >
+                Supprimer
+              </button>
+            </div>
           </div>
         </li>
       }

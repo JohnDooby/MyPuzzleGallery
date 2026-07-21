@@ -28,6 +28,7 @@ npx supabase db push
 | `20260721120000_admin_list_profiles.sql` | RPC staff : profils + e-mail Auth |
 | `20260721133000_admin_can_ban.sql` | Admin peut bannir ; rôle reste SuperAdmin |
 | `20260721140000_galleries_artworks_storage.sql` | Galeries, artworks, RLS, bucket Storage privé |
+| `20260721143000_artwork_author_unpublish.sql` | Auteur peut retirer une œuvre du public |
 
 Voir aussi **`STORAGE.md`** pour la vérif Dashboard du bucket `artworks`.
 

@@ -1,0 +1,78 @@
+<section class="edit-artwork">
+  <header class="edit-artwork__header">
+    <h1 class="edit-artwork__title">Modifier l’œuvre</h1>
+    <a class="edit-artwork__back" routerLink="/gallery">Mes œuvres</a>
+  </header>
+
+  @if (isLoading()) {
+    <p class="edit-artwork__muted">Chargement…</p>
+  } @else if (errorMessage() && !artwork()) {
+    <p class="edit-artwork__error" role="alert">{{ errorMessage() }}</p>
+  } @else if (artwork(); as current) {
+    @if (previewUrl(); as url) {
+      <img class="edit-artwork__preview" [src]="url" [alt]="current.title" />
+    }
+
+    <p class="edit-artwork__hint">
+      Le fichier image ne peut pas être remplacé ici. Décochez « public » pour repasser en privé
+      (y compris si l’œuvre était déjà publique). Une nouvelle demande publique repasse en
+      modération.
+    </p>
+
+    <form class="edit-artwork__form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="edit-artwork__field">
+        <label class="edit-artwork__label" for="edit-title">Titre</label>
+        <input id="edit-title" class="edit-artwork__input" type="text" formControlName="title" maxlength="120" />
+      </div>
+
+      <div class="edit-artwork__field">
+        <label class="edit-artwork__label" for="edit-description">Description</label>
+        <textarea
+          id="edit-description"
+          class="edit-artwork__textarea"
+          rows="4"
+          formControlName="description"
+          maxlength="2000"
+        ></textarea>
+      </div>
+
+      <div class="edit-artwork__field">
+        <label class="edit-artwork__label" for="edit-hours">Heures passées (optionnel)</label>
+        <input
+          id="edit-hours"
+          class="edit-artwork__input"
+          type="text"
+          inputmode="decimal"
+          formControlName="hoursSpent"
+        />
+      </div>
+
+      <div class="edit-artwork__field">
+        <label class="edit-artwork__label" for="edit-gallery">Galerie</label>
+        <select id="edit-gallery" class="edit-artwork__input" formControlName="galleryId">
+          @for (gallery of galleries(); track gallery.id) {
+            <option [value]="gallery.id">{{ gallery.name }}</option>
+          }
+        </select>
+      </div>
+
+      <label class="edit-artwork__check">
+        <input type="checkbox" formControlName="requestPublic" />
+        <span>Demander / conserver une demande de passage en <strong>public</strong></span>
+      </label>
+
+      <label class="edit-artwork__check">
+        <input type="checkbox" formControlName="puzzleEnabled" />
+        <span>Ouvert au mode <strong>puzzle</strong></span>
+      </label>
+
+      @if (errorMessage()) {
+        <p class="edit-artwork__error" role="alert">{{ errorMessage() }}</p>
+      }
+
+      <button class="edit-artwork__submit" type="submit" [disabled]="isSubmitting()">
+        {{ isSubmitting() ? 'Enregistrement…' : 'Enregistrer' }}
+      </button>
+    </form>
+  }
+</section>

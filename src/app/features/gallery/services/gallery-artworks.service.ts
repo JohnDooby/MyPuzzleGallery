@@ -5,8 +5,9 @@ import { AuthService } from '../../../core/auth/auth.service';
 import { SupabaseClientService } from '../../../core/supabase/supabase-client.service';
 
 import type { CreateArtworkInput } from '../models/create-artwork-input.model';
-import { ARTWORK_SELECT_COLUMNS, type Artwork } from '../models/artwork.model';
+import { ARTWORK_SELECT_COLUMNS, type Artwork, type ArtworkVisibility } from '../models/artwork.model';
 import { GALLERY_SELECT_COLUMNS, type Gallery } from '../models/gallery.model';
+import type { UpdateArtworkInput } from '../models/update-artwork-input.model';
 
 /**
  * Galeries et œuvres de l'utilisateur connecté (feature gallery).
@@ -153,6 +154,119 @@ export class GalleryArtworksService {
     }
 
     return { success: true, artworkId };
+  }
+
+  /**
+   * Charge une œuvre appartenant au compte connecté.
+   * @param artworkId Identifiant de l'œuvre.
+   */
+  async getMyArtwork(artworkId: string): Promise<{ artwork: Artwork | null; error: string | null }> {
+    const userId = this.requireUserId();
+    if (!userId) {
+      return { artwork: null, error: 'Connectez-vous pour voir cette œuvre.' };
+    }
+
+    const client = this.supabase.getClient();
+    const { data, error } = await client
+      .from('artworks')
+      .select(ARTWORK_SELECT_COLUMNS)
+      .eq('id', artworkId)
+      .eq('owner_id', userId)
+      .maybeSingle();
+
+    if (error) {
+      return { artwork: null, error: error.message };
+    }
+    if (!data) {
+      return { artwork: null, error: 'Œuvre introuvable.' };
+    }
+    return { artwork: data as Artwork, error: null };
+  }
+
+  /**
+   * Met à jour les métadonnées d'une œuvre (pas le fichier image).
+   * @param artworkId Identifiant.
+   * @param input Champs éditables.
+   * @param currentVisibility Statut actuel (pour calculer la transition).
+   */
+  async updateArtwork(
+    artworkId: string,
+    input: UpdateArtworkInput,
+    currentVisibility: ArtworkVisibility,
+  ): Promise<AuthResult> {
+    const userId = this.requireUserId();
+    if (!userId) {
+      return { success: false, message: 'Connectez-vous pour modifier.' };
+    }
+
+    const nextVisibility = this.resolveAuthorVisibility(currentVisibility, input.requestPublic);
+
+    const client = this.supabase.getClient();
+    const { error } = await client
+      .from('artworks')
+      .update({
+        title: input.title.trim(),
+        description: input.description.trim(),
+        hours_spent: input.hoursSpent,
+        gallery_id: input.galleryId,
+        puzzle_enabled: input.puzzleEnabled,
+        visibility_status: nextVisibility,
+      })
+      .eq('id', artworkId)
+      .eq('owner_id', userId);
+
+    if (error) {
+      return { success: false, message: error.message };
+    }
+    return { success: true };
+  }
+
+  /**
+   * Supprime une œuvre (Storage + ligne BDD).
+   * @param artwork Œuvre à supprimer.
+   */
+  async deleteArtwork(artwork: Artwork): Promise<AuthResult> {
+    const userId = this.requireUserId();
+    if (!userId || artwork.owner_id !== userId) {
+      return { success: false, message: 'Suppression non autorisée.' };
+    }
+
+    const client = this.supabase.getClient();
+    const { error: dbError } = await client
+      .from('artworks')
+      .delete()
+      .eq('id', artwork.id)
+      .eq('owner_id', userId);
+
+    if (dbError) {
+      return { success: false, message: dbError.message };
+    }
+
+    const { error: storageError } = await client.storage
+      .from('artworks')
+      .remove([artwork.storage_path]);
+
+    if (storageError) {
+      console.warn('[Gallery] Fichier Storage non supprimé', storageError.message);
+    }
+
+    return { success: true };
+  }
+
+  /**
+   * Calcule le prochain statut demandé par l'auteur (sans self-publish).
+   */
+  private resolveAuthorVisibility(
+    current: ArtworkVisibility,
+    requestPublic: boolean,
+  ): ArtworkVisibility {
+    if (requestPublic) {
+      if (current === 'public') {
+        return 'public';
+      }
+      return 'pending_public';
+    }
+    return 'private';
   }
 
   /**

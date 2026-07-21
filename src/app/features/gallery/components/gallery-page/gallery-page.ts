@@ -6,7 +6,7 @@ import type { Artwork, ArtworkVisibility } from '../../models/artwork.model';
 import { GalleryArtworksService } from '../../services/gallery-artworks.service';
 
 /**
- * Page « Mes œuvres » — liste des publications du compte connecté.
+ * Page « Mes œuvres » — liste, édition et suppression.
  */
 @Component({
   selector: 'app-gallery-page',
@@ -25,6 +25,8 @@ export class GalleryPage implements OnInit {
 
   protected readonly isLoading = signal(true);
   protected readonly errorMessage = signal<string | null>(null);
+  protected readonly successMessage = signal<string | null>(null);
+  protected readonly busyId = signal<string | null>(null);
 
   /**
    * Charge la liste au montage.
@@ -48,6 +50,34 @@ export class GalleryPage implements OnInit {
       case 'rejected':
         return 'Refusée (non publique)';
     }
+  }
+
+  /**
+   * Supprime une œuvre après confirmation.
+   * @param artwork Œuvre cible.
+   */
+  protected async onDelete(artwork: Artwork): Promise<void> {
+    const ok = window.confirm(
+      `Supprimer définitivement « ${artwork.title} » ?\nCette action est irréversible.`,
+    );
+    if (!ok) {
+      return;
+    }
+
+    this.errorMessage.set(null);
+    this.successMessage.set(null);
+    this.busyId.set(artwork.id);
+
+    const result = await this.artworksService.deleteArtwork(artwork);
+    this.busyId.set(null);
+
+    if (!result.success) {
+      this.errorMessage.set(result.message);
+      return;
+    }
+
+    this.successMessage.set('Œuvre supprimée.');
+    await this.reload();
   }
 
   /**

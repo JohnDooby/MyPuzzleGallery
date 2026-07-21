@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { requireAuthGuard } from '../../core/auth/guards/require-auth.guard';
 
 /**
- * Routes de la feature Galerie (lazy) — mes œuvres + publication.
+ * Routes de la feature Galerie (lazy) — mes œuvres + publication + édition.
  */
 export const GALLERY_ROUTES: Routes = [
   {
@@ -17,5 +17,11 @@ export const GALLERY_ROUTES: Routes = [
     canActivate: [requireAuthGuard],
     loadComponent: () =>
       import('./components/publish-page/publish-page').then((m) => m.PublishPage),
+  },
+  {
+    path: ':id/edit',
+    canActivate: [requireAuthGuard],
+    loadComponent: () =>
+      import('./components/edit-artwork-page/edit-artwork-page').then((m) => m.EditArtworkPage),
   },
 ];
