@@ -24,19 +24,30 @@
     <ul class="home__carousel" aria-label="Carousel des dernières publications">
       @for (item of items(); track item.id) {
         <li class="home__slide">
-          <button
-            type="button"
-            class="home__card"
-            (click)="openArtwork(item)"
-            [attr.aria-label]="'Voir « ' + item.title + ' » de ' + item.author_pseudo"
-          >
-            @if (thumbUrls()[item.id]; as url) {
-              <img class="home__image" [src]="url" [alt]="item.title" />
-            } @else {
-              <div class="home__image home__image--empty" aria-hidden="true"></div>
+          <div class="home__card">
+            <button
+              type="button"
+              class="home__media-btn"
+              (click)="openArtwork(item)"
+              [attr.aria-label]="'Voir « ' + item.title + ' » de ' + item.author_pseudo"
+            >
+              @if (thumbUrls()[item.id]; as url) {
+                <img class="home__image" [src]="url" [alt]="item.title" />
+              } @else {
+                <div class="home__image home__image--empty" aria-hidden="true"></div>
+              }
+            </button>
+            @if (item.puzzle_enabled) {
+              <button
+                type="button"
+                class="home__puzzle-btn"
+                (click)="playPuzzle(item, $event)"
+              >
+                Puzzle
+              </button>
             }
             <span class="home__pseudo">{{ item.author_pseudo }}</span>
-          </button>
+          </div>
         </li>
       }
     </ul>
