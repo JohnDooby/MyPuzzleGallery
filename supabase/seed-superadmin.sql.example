@@ -1,0 +1,18 @@
+-- Exemple : promouvoir le premier SuperAdmin (à exécuter UNE FOIS dans le SQL Editor).
+-- Ne pas committer d’UUID réel ni de mot de passe.
+--
+-- Prérequis :
+-- 1. Migration profiles appliquée (+ correctif bootstrap si erreur P0001).
+-- 2. Compte créé dans Authentication → Users → Add user
+--    (e-mail + mot de passe choisis hors repo).
+-- 3. Remplacer <USER_UUID> par l’id du user (Dashboard Auth → user → UUID).
+--
+-- Note : le SQL Editor n’a pas de session JWT (auth.uid() null). Le trigger
+-- autorise ce seed uniquement s’il n’existe encore aucun superadmin.
+
+update public.profiles
+set role = 'superadmin'
+where id = '<USER_UUID>';
+
+-- Vérification :
+-- select id, pseudo, role, is_banned from public.profiles where role = 'superadmin';
