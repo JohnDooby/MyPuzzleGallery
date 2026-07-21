@@ -1,7 +1,7 @@
 import {
   Component,
   ElementRef,
-  HostListener,
+  NgZone,
   OnDestroy,
   OnInit,
   inject,
@@ -26,18 +26,17 @@ interface TrayPiece extends PuzzlePieceDef {
   placed: boolean;
 }
 
-interface DragState {
+interface ActiveDrag {
   pieceId: string;
   pointerId: number;
   grabOffsetX: number;
   grabOffsetY: number;
-  x: number;
-  y: number;
   fromTray: boolean;
 }
 
 /**
  * Page puzzle plein écran : plateau + rail de pièces, snap jigsaw.
+ * Le suivi pointermove est hors zone Angular (DOM + rAF) pour limiter le jank tactile.
  */
 @Component({
   selector: 'app-puzzle-page',
@@ -49,8 +48,10 @@ export class PuzzlePage implements OnInit, OnDestroy {
   private readonly explore = inject(PublicExploreService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly zone = inject(NgZone);
 
   private readonly boardSurface = viewChild<ElementRef<HTMLElement>>('boardSurface');
+  private readonly ghostEl = viewChild<ElementRef<HTMLElement>>('ghostEl');
 
   protected readonly artwork = signal<PublicArtwork | null>(null);
   protected readonly imageUrl = signal<string | null>(null);
@@ -59,7 +60,8 @@ export class PuzzlePage implements OnInit, OnDestroy {
   protected readonly trayPieces = signal<TrayPiece[]>([]);
   protected readonly placedIds = signal<Set<string>>(new Set());
   protected readonly won = signal(false);
-  protected readonly drag = signal<DragState | null>(null);
+  /** Id de la pièce en cours de drag (null = pas de drag) — pas de coords (évite CD à chaque move). */
+  protected readonly draggingPieceId = signal<string | null>(null);
 
   protected readonly cols = PUZZLE_COLS;
   protected readonly rows = PUZZLE_ROWS;
@@ -71,6 +73,42 @@ export class PuzzlePage implements OnInit, OnDestroy {
 
   private layoutPieces: PuzzlePieceDef[] = [];
   private returnUrl = '/explore';
+  private activeDrag: ActiveDrag | null = null;
+  private pendingX = 0;
+  private pendingY = 0;
+  private rafId = 0;
+
+  private readonly onWindowPointerMove = (event: PointerEvent): void => {
+    const d = this.activeDrag;
+    if (!d || event.pointerId !== d.pointerId) {
+      return;
+    }
+    event.preventDefault();
+    this.pendingX = event.clientX - d.grabOffsetX;
+    this.pendingY = event.clientY - d.grabOffsetY;
+    if (this.rafId === 0) {
+      this.rafId = requestAnimationFrame(() => {
+        this.rafId = 0;
+        this.applyGhostTransform();
+      });
+    }
+  };
+
+  private readonly onWindowPointerUp = (event: PointerEvent): void => {
+    const d = this.activeDrag;
+    if (!d || event.pointerId !== d.pointerId) {
+      return;
+    }
+    this.finishDrag(d, event.clientX, event.clientY);
+  };
+
+  private readonly onWindowPointerCancel = (event: PointerEvent): void => {
+    const d = this.activeDrag;
+    if (!d || event.pointerId !== d.pointerId) {
+      return;
+    }
+    this.cancelDrag();
+  };
 
   /**
    * Style absolu d'une pièce placée (avec débordement tenons).
@@ -87,6 +125,7 @@ export class PuzzlePage implements OnInit, OnDestroy {
       height: `${h + 2 * bleedY}%`,
     };
   }
+
   /**
    * Charge l'œuvre et prépare le puzzle.
    */
@@ -95,11 +134,22 @@ export class PuzzlePage implements OnInit, OnDestroy {
     if (ret && ret.startsWith('/')) {
       this.returnUrl = ret;
     }
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('pointermove', this.onWindowPointerMove, { passive: false });
+      window.addEventListener('pointerup', this.onWindowPointerUp);
+      window.addEventListener('pointercancel', this.onWindowPointerCancel);
+    });
     void this.bootstrap();
   }
 
   ngOnDestroy(): void {
-    // Rien à nettoyer hors listeners pointer (detachés à pointerup).
+    window.removeEventListener('pointermove', this.onWindowPointerMove);
+    window.removeEventListener('pointerup', this.onWindowPointerUp);
+    window.removeEventListener('pointercancel', this.onWindowPointerCancel);
+    if (this.rafId !== 0) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = 0;
+    }
   }
 
   /**
@@ -120,12 +170,12 @@ export class PuzzlePage implements OnInit, OnDestroy {
    * Pièces encore dans le rail (non placées), hors drag en cours depuis le rail.
    */
   protected visibleTrayPieces(): TrayPiece[] {
-    const dragging = this.drag();
+    const draggingId = this.draggingPieceId();
     return this.trayPieces().filter((p) => {
       if (p.placed) {
         return false;
       }
-      if (dragging && dragging.pieceId === p.id && dragging.fromTray) {
+      if (draggingId && draggingId === p.id) {
         return false;
       }
       return true;
@@ -143,52 +193,77 @@ export class PuzzlePage implements OnInit, OnDestroy {
    * Démarre un drag depuis le rail.
    */
   protected onTrayPointerDown(event: PointerEvent, piece: TrayPiece): void {
-    if (piece.placed || this.won()) {
+    if (piece.placed || this.won() || this.activeDrag) {
       return;
     }
     event.preventDefault();
-    (event.target as HTMLElement).setPointerCapture?.(event.pointerId);
-    this.drag.set({
+    event.stopPropagation();
+
+    const target = event.currentTarget as HTMLElement;
+    target.setPointerCapture?.(event.pointerId);
+    const rect = target.getBoundingClientRect();
+    const grabOffsetX = event.clientX - rect.left;
+    const grabOffsetY = event.clientY - rect.top;
+
+    this.activeDrag = {
       pieceId: piece.id,
       pointerId: event.pointerId,
-      grabOffsetX: 40,
-      grabOffsetY: 40,
-      x: event.clientX - 40,
-      y: event.clientY - 40,
+      grabOffsetX,
+      grabOffsetY,
       fromTray: true,
+    };
+    this.pendingX = event.clientX - grabOffsetX;
+    this.pendingY = event.clientY - grabOffsetY;
+
+    this.draggingPieceId.set(piece.id);
+    // Le ghost n'existe qu'après le prochain rendu Angular.
+    queueMicrotask(() => {
+      this.applyGhostTransform();
+      requestAnimationFrame(() => this.applyGhostTransform());
     });
   }
 
-  @HostListener('window:pointermove', ['$event'])
-  protected onPointerMove(event: PointerEvent): void {
-    const d = this.drag();
-    if (!d || event.pointerId !== d.pointerId) {
+  /**
+   * Applique la position du ghost hors change detection.
+   */
+  private applyGhostTransform(): void {
+    const el = this.ghostEl()?.nativeElement;
+    if (!el) {
       return;
     }
-    this.drag.set({
-      ...d,
-      x: event.clientX - d.grabOffsetX,
-      y: event.clientY - d.grabOffsetY,
+    el.style.transform = `translate3d(${this.pendingX}px, ${this.pendingY}px, 0)`;
+  }
+
+  /**
+   * Termine le drag et tente le snap (reprise zone Angular).
+   */
+  private finishDrag(d: ActiveDrag, clientX: number, clientY: number): void {
+    this.clearActiveDragMotion();
+    this.zone.run(() => {
+      this.tryPlace(d, clientX, clientY);
+      this.draggingPieceId.set(null);
     });
   }
 
-  @HostListener('window:pointerup', ['$event'])
-  protected onPointerUp(event: PointerEvent): void {
-    const d = this.drag();
-    if (!d || event.pointerId !== d.pointerId) {
-      return;
-    }
-    this.tryPlace(d, event.clientX, event.clientY);
-    this.drag.set(null);
+  /**
+   * Annule le drag sans placement.
+   */
+  private cancelDrag(): void {
+    this.clearActiveDragMotion();
+    this.zone.run(() => {
+      this.draggingPieceId.set(null);
+    });
   }
 
-  @HostListener('window:pointercancel', ['$event'])
-  protected onPointerCancel(event: PointerEvent): void {
-    const d = this.drag();
-    if (!d || event.pointerId !== d.pointerId) {
-      return;
+  /**
+   * Remet à zéro le suivi pointer / rAF.
+   */
+  private clearActiveDragMotion(): void {
+    this.activeDrag = null;
+    if (this.rafId !== 0) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = 0;
     }
-    this.drag.set(null);
   }
 
   /**
@@ -247,7 +322,7 @@ export class PuzzlePage implements OnInit, OnDestroy {
   /**
    * Tente de placer la pièce sous le pointeur (snap cellule).
    */
-  private tryPlace(d: DragState, clientX: number, clientY: number): void {
+  private tryPlace(d: ActiveDrag, clientX: number, clientY: number): void {
     const piece = this.layoutPieces.find((p) => p.id === d.pieceId);
     const surface = this.boardSurface()?.nativeElement;
     if (!piece || !surface) {
@@ -269,7 +344,6 @@ export class PuzzlePage implements OnInit, OnDestroy {
     const col = Math.min(this.cols - 1, Math.max(0, Math.floor(relX * this.cols)));
     const row = Math.min(this.rows - 1, Math.max(0, Math.floor(relY * this.rows)));
 
-    // Snap uniquement sur la bonne case (tolérance = cellule courante).
     if (col !== piece.col || row !== piece.row) {
       return;
     }
