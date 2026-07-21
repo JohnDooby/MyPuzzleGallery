@@ -1,0 +1,20 @@
+<section class="home">
+  <h1 class="home__title">{{ appName }}</h1>
+  <p class="home__lead">
+    Espace familial supervisé pour publier des dessins et les jouer en puzzle.
+  </p>
+
+  <div class="home__status" aria-live="polite">
+    <p>
+      Supabase configuré :
+      <strong>{{ isConfigured() ? 'oui' : 'non' }}</strong>
+    </p>
+    @if (authReachable() === null) {
+      <p>Vérification de la connexion…</p>
+    } @else if (authReachable()) {
+      <p class="home__ok">Connexion Auth OK</p>
+    } @else {
+      <p class="home__ko">Connexion Auth indisponible (vérifier .env / env:sync)</p>
+    }
+  </div>
+</section>

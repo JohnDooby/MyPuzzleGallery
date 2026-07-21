@@ -2,14 +2,18 @@
  * Tests unitaires du composant racine App.
  * Vérifie le montage et la présence du routeur / prompt PWA.
  */
+import { provideRouter } from '@angular/router';
 import { TestBed } from '@angular/core/testing';
+
 import { App } from './app';
+import { routes } from './app.routes';
 
 describe('App', () => {
   // --- Arrange commun ---
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)],
     }).compileComponents();
   });
 

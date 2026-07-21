@@ -1,3 +1,27 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+/**
+ * Routes racine : shell + features en lazy-loading.
+ */
+export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./core/layout/shell/shell').then((m) => m.Shell),
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./features/home/home.routes').then((m) => m.HOME_ROUTES),
+      },
+      {
+        path: 'gallery',
+        loadChildren: () =>
+          import('./features/gallery/gallery.routes').then((m) => m.GALLERY_ROUTES),
+      },
+      {
+        path: 'auth',
+        loadChildren: () => import('./features/auth/auth.routes').then((m) => m.AUTH_ROUTES),
+      },
+    ],
+  },
+  { path: '**', redirectTo: '' },
+];

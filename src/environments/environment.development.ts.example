@@ -1,0 +1,10 @@
+/**
+ * Exemple d'environnement de développement.
+ * Copier vers environment.development.ts (fichier gitignoré) et renseigner.
+ * Ou lancer : npm run env:sync (lit le fichier .env).
+ */
+export const environment = {
+  production: false,
+  supabaseUrl: 'https://YOUR_PROJECT_REF.supabase.co',
+  supabaseAnonKey: 'YOUR_SUPABASE_ANON_KEY',
+};

@@ -157,3 +157,8 @@ Vue d’ensemble du backlog.
 - [ ] Écrire les US détaillées pour **E02-F01 Jouer un puzzle**
 - [ ] Harmoniser disclaimer E08-F02 vs E10-F06 (une seule US « done » à la fin)
 - [ ] Valider PWA sur device réel (E06)
+- [ ] Brancher secrets Supabase en CI (Pages) via GitHub Secrets + injection build — *workflow prêt (`env:sync:ci`)*
+
+## Notes techniques en cours
+
+Branche `feature/shell-routes-supabase` : shell + routes lazy + client Supabase (clé anon via `.env` local, non commitée).

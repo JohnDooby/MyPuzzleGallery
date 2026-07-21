@@ -1,0 +1,34 @@
+.home__title {
+  margin: 0 0 var(--spacing-sm);
+  font-size: var(--font-size-lg);
+}
+
+.home__lead {
+  margin: 0 0 var(--spacing-lg);
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.home__status {
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+}
+
+.home__status p {
+  margin: 0 0 var(--spacing-sm);
+}
+
+.home__status p:last-child {
+  margin-bottom: 0;
+}
+
+.home__ok {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+}
+
+.home__ko {
+  color: var(--color-text-muted);
+}
