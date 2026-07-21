@@ -1,0 +1,128 @@
+<section class="admin-accounts">
+  <header class="admin-accounts__header">
+    <h1 class="admin-accounts__title">Admin — Comptes</h1>
+
+    @if (isSuperAdmin()) {
+      <p class="admin-accounts__hint">
+        Vous êtes SuperAdmin : vous pouvez promouvoir, rétrograder et bannir (sauf votre propre
+        compte).
+      </p>
+    } @else {
+      <p class="admin-accounts__hint">
+        Consultation seule. Les modifications de rôle et de ban sont réservées au SuperAdmin.
+      </p>
+    }
+
+    <div class="admin-accounts__toolbar">
+      <label class="admin-accounts__search">
+        <span class="admin-accounts__sort-label">Rechercher</span>
+        <input
+          class="admin-accounts__input"
+          type="search"
+          placeholder="Pseudo ou e-mail…"
+          autocomplete="off"
+          [value]="searchQuery()"
+          (input)="onSearchChange($any($event.target).value)"
+        />
+      </label>
+      <label class="admin-accounts__sort">
+        <span class="admin-accounts__sort-label">Trier par</span>
+        <select
+          class="admin-accounts__select"
+          [value]="sortField()"
+          (change)="onSortFieldChange($any($event.target).value)"
+        >
+          <option value="created_at">Date de création</option>
+          <option value="pseudo">Pseudo (login)</option>
+          <option value="email">E-mail</option>
+        </select>
+      </label>
+      <button type="button" class="admin-accounts__btn" (click)="toggleSortDirection()">
+        {{ sortAsc() ? 'Croissant' : 'Décroissant' }}
+      </button>
+    </div>
+
+    @if (errorMessage()) {
+      <p class="admin-accounts__error" role="alert">{{ errorMessage() }}</p>
+    }
+    @if (successMessage()) {
+      <p class="admin-accounts__success" role="status">{{ successMessage() }}</p>
+    }
+  </header>
+
+  <div class="admin-accounts__scroll" aria-live="polite">
+    @if (isLoading()) {
+      <p class="admin-accounts__muted">Chargement des comptes…</p>
+    } @else if (visibleAccounts().length === 0) {
+      <p class="admin-accounts__muted">
+        {{ searchQuery().trim() ? 'Aucun compte ne correspond à la recherche.' : 'Aucun compte trouvé.' }}
+      </p>
+    } @else {
+      <ul class="admin-accounts__list">
+        @for (account of visibleAccounts(); track account.id) {
+          <li class="admin-accounts__card">
+            <div class="admin-accounts__meta">
+              <p class="admin-accounts__pseudo">{{ account.pseudo }}</p>
+              <p class="admin-accounts__email">{{ account.email || 'E-mail indisponible' }}</p>
+              <p class="admin-accounts__muted">
+                {{ roleLabel(account.role) }}
+                @if (account.is_banned) {
+                  · <span class="admin-accounts__banned">Banni</span>
+                } @else {
+                  · Actif
+                }
+                · créé le {{ account.created_at | date: 'dd/MM/yyyy HH:mm' }}
+              </p>
+            </div>
+
+            @if (canManage(account)) {
+              <div class="admin-accounts__actions">
+                @if (account.role === 'normal') {
+                  <button
+                    type="button"
+                    class="admin-accounts__btn"
+                    [disabled]="busyProfileId() === account.id"
+                    (click)="promoteToAdmin(account)"
+                  >
+                    Promouvoir Admin
+                  </button>
+                }
+                @if (account.role === 'admin') {
+                  <button
+                    type="button"
+                    class="admin-accounts__btn"
+                    [disabled]="busyProfileId() === account.id"
+                    (click)="demoteToNormal(account)"
+                  >
+                    Rétrograder Normal
+                  </button>
+                }
+                @if (!account.is_banned) {
+                  <button
+                    type="button"
+                    class="admin-accounts__btn admin-accounts__btn--danger"
+                    [disabled]="busyProfileId() === account.id"
+                    (click)="ban(account)"
+                  >
+                    Bannir
+                  </button>
+                } @else {
+                  <button
+                    type="button"
+                    class="admin-accounts__btn"
+                    [disabled]="busyProfileId() === account.id"
+                    (click)="unban(account)"
+                  >
+                    Débannir
+                  </button>
+                }
+              </div>
+            } @else if (account.id === currentUserId()) {
+              <p class="admin-accounts__muted">Votre compte</p>
+            }
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</section>

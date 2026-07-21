@@ -25,6 +25,10 @@ export const routes: Routes = [
         path: 'regles',
         loadChildren: () => import('./features/rules/rules.routes').then((m) => m.RULES_ROUTES),
       },
+      {
+        path: 'admin',
+        loadChildren: () => import('./features/admin/admin.routes').then((m) => m.ADMIN_ROUTES),
+      },
     ],
   },
   { path: '**', redirectTo: '' },

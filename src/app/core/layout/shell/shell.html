@@ -10,6 +10,9 @@
         >Accueil</a
       >
       <a routerLink="/gallery" routerLinkActive="is-active">Galerie</a>
+      @if (isStaff()) {
+        <a routerLink="/admin" routerLinkActive="is-active">Admin</a>
+      }
       @if (isAuthenticated()) {
         <a routerLink="/auth" class="shell__user-link" routerLinkActive="is-active"
           >{{ pseudo() }}</a

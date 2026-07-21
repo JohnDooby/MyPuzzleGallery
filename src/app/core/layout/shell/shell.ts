@@ -28,6 +28,9 @@ export class Shell {
   /** Pseudo public du compte connecté. */
   protected readonly pseudo = this.auth.pseudo;
 
+  /** true si Admin ou SuperAdmin (lien Admin visible). */
+  protected readonly isStaff = this.auth.isStaff;
+
   /**
    * Déconnecte l'utilisateur courant.
    * Le state UI se met à jour via les signaux du `AuthService`.
