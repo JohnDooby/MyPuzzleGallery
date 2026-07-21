@@ -24,7 +24,7 @@ Vue d’ensemble du backlog.
 
 | Statut | Nb (approx.) |
 |--------|----------------|
-| done | 23 |
+| done | 24 |
 | doing | 0 |
 | ready | 1 (polish) |
 | draft | ~6 |
@@ -59,6 +59,7 @@ Vue d’ensemble du backlog.
 | E08-F01-US02 | Consulter journal Admin+ | [US](./backlog/E08-audit/F01-journal-audit/US02-consulter-journal.md) | Menu Admin → Journal |
 | E01-F02-US01 | Voir galerie publique | [US](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) | `/explore` pour tous ; paging 10×10 |
 | E02-F01-US01 | Jouer un puzzle tactile | [US](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/US01-jouer-puzzle.md) | Plein écran 6×5 ; entrée Accueil / Galerie |
+| E02-F01-US02 | Fluidité du drag puzzle | [US](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/US02-perf-drag.md) | rAF/DOM hors zone ; à valider mobile |
 
 ---
 
@@ -94,7 +95,7 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01 | Jouer un puzzle | done | [feature](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/feature.md) / [US01](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/US01-jouer-puzzle.md) |
+| F01 | Jouer un puzzle | done | [feature](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/feature.md) / [US01](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/US01-jouer-puzzle.md) / [US02](./backlog/E02-mode-puzzle/F01-jouer-un-puzzle/US02-perf-drag.md) |
 | F02-US01 | Voir stats puzzle | draft | [lien](./backlog/E02-mode-puzzle/F02-stats-puzzle/US01-voir-stats.md) |
 | F02-US02 | Enregistrer réussite | draft | [lien](./backlog/E02-mode-puzzle/F02-stats-puzzle/US02-enregistrer-reussite.md) |
 

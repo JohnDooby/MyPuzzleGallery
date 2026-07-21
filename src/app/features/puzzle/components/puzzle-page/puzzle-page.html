@@ -1,4 +1,7 @@
-<div class="puzzle-page">
+<div
+  class="puzzle-page"
+  [class.puzzle-page--dragging]="draggingPieceId() !== null"
+>
   <button type="button" class="puzzle-page__close" (click)="close()" aria-label="Fermer">
     ×
   </button>
@@ -88,11 +91,11 @@
       }
     </div>
 
-    @if (drag(); as d) {
-      @if (pieceById(d.pieceId); as piece) {
-        <div class="puzzle-page__ghost" [style.transform]="'translate(' + d.x + 'px,' + d.y + 'px)'">
+    @if (draggingPieceId(); as pieceId) {
+      @if (pieceById(pieceId); as piece) {
+        <div #ghostEl class="puzzle-page__ghost" aria-hidden="true">
           <svg
-            class="puzzle-page__svg"
+            class="puzzle-page__svg puzzle-page__svg--ghost"
             [attr.viewBox]="viewMin + ' ' + viewMin + ' ' + viewSize + ' ' + viewSize"
           >
             <defs>

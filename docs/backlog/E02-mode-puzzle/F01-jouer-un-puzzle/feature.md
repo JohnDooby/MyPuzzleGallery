@@ -11,6 +11,7 @@ Lancer un puzzle à partir d’une œuvre publique, assembler les pièces au doi
 | Id | Titre | Statut |
 |----|-------|--------|
 | US01 | Jouer un puzzle tactile (plein écran) | done |
+| US02 | Fluidité du drag (perf + tactile) | done |
 
 ## Notes techniques
 
