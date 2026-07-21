@@ -30,6 +30,7 @@ npx supabase db push
 | `20260721140000_galleries_artworks_storage.sql` | Galeries, artworks, RLS, bucket Storage privé |
 | `20260721143000_artwork_author_unpublish.sql` | Auteur peut retirer une œuvre du public |
 | `20260721150000_moderation_events.sql` | Journal modération + RPC file pending |
+| `20260721160000_list_public_artworks.sql` | RPC explore : 20 dernières œuvres publiques |
 
 Voir aussi **`STORAGE.md`** pour la vérif Dashboard du bucket `artworks`.
 

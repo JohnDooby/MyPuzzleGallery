@@ -25,9 +25,9 @@ Vue d’ensemble du backlog.
 | Statut | Nb (approx.) |
 |--------|----------------|
 | done | 16 |
-| doing | 0 |
-| ready | 3 |
-| draft | ~14 |
+| doing | 2 (explore) |
+| ready | 2 |
+| draft | ~13 |
 | later | 2 (cadrages E09 / E11) |
 
 ---
@@ -57,7 +57,12 @@ Vue d’ensemble du backlog.
 
 ## Doing
 
-*Aucune US en cours — `main` à jour après merge `feature/moderation`.*
+Branche macro : **`feature/explore`** — carousel accueil + feed lightbox.
+
+| US | Titre | Branche | Lien |
+|----|-------|---------|------|
+| E01-F01-US01 | Carousel 20 dernières | feature/explore | [US](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
+| E01-F03-US01 | Feed plein écran | feature/explore | [US](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) |
 
 ---
 
@@ -65,9 +70,8 @@ Vue d’ensemble du backlog.
 
 | Ordre | US | Titre | Notes |
 |--------|----|-------|-------|
-| 1 | E01-F01-US01 (+ F02) | Accueil / carousel + consultation publique | Afficher les œuvres `public` |
-| 2 | E08-F01-US01 / US02 | Audit élargi + consultation | Mini-journal modération déjà posé ; manque publish/edit/delete + IP |
-| 3 | E10-F06-US01 | Disclaimer bandeau 1er usage | Page `/regles` existe ; bandeau device reste |
+| 1 | E08-F01-US01 / US02 | Audit élargi + consultation | Mini-journal modération déjà posé ; manque publish/edit/delete + IP |
+| 2 | E10-F06-US01 | Disclaimer bandeau 1er usage | Page `/regles` existe ; bandeau device reste |
 
 ---
 
@@ -77,9 +81,9 @@ Vue d’ensemble du backlog.
 
 | Id | Titre | Statut | Lien |
 |----|-------|--------|------|
-| F01-US01 | Carousel 20 dernières | ready *(priorité 1)* | [lien](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
+| F01-US01 | Carousel 20 dernières | doing | [lien](./backlog/E01-galerie-publique/F01-page-accueil/US01-contenu-accueil.md) |
 | F02-US01 | Voir galerie publique | draft | [lien](./backlog/E01-galerie-publique/F02-consultation-publique/US01-voir-galerie-publique.md) |
-| F03-US01 | Feed plein écran | draft | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) |
+| F03-US01 | Feed plein écran | doing | [lien](./backlog/E01-galerie-publique/F03-exploration/US01-fil-exploration.md) — *MVP sans puzzle / signalement* |
 | F03-US02 | Recherche auteur / galerie / dates | draft | [lien](./backlog/E01-galerie-publique/F03-exploration/US02-recherche-mots-clefs.md) |
 
 ### E02 — Puzzle
@@ -171,5 +175,5 @@ Vue d’ensemble du backlog.
 
 - Livré sur **`main`** : Auth, Admin comptes, Publication (E03), Modération (E05) + mini-journal.
 - Menu Admin déroulant : **Comptes** | **Modération**.
-- Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721150000_moderation_events.sql`).
-- Prochaine macro proposée : **E01 explore / carousel public** (les œuvres `public` existent mais pas encore de vitrine).
+- Migrations SQL à appliquer sur le projet Supabase si pas déjà fait (dossier `supabase/migrations/`, dernière : `20260721160000_list_public_artworks.sql`).
+- En cours : **`feature/explore`** (carousel + feed lightbox).

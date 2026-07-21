@@ -1,7 +1,7 @@
 # US01 — Défiler le fil d’exploration (feed plein écran)
 
 **Feature :** F03  
-**Statut :** draft
+**Statut :** doing
 
 ## Récit
 

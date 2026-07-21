@@ -1,45 +1,73 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 import { APP_BRANDING } from '../../../../core/branding/app-branding';
-import { SupabaseClientService } from '../../../../core/supabase/supabase-client.service';
+import type { PublicArtwork } from '../../../explore/models/public-artwork.model';
+import { PublicExploreService } from '../../../explore/services/public-explore.service';
 
 /**
- * Page d'accueil provisoire : smoke test shell + connexion Supabase.
+ * Page d'accueil : branding + carousel des dernières œuvres publiques.
  */
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
 export class HomePage implements OnInit {
-  private readonly supabase = inject(SupabaseClientService);
+  private readonly explore = inject(PublicExploreService);
+  private readonly router = inject(Router);
 
   /** Nom de l'application. */
   protected readonly appName = APP_BRANDING.name;
 
-  /** Config Supabase présente dans l'environnement. */
-  protected readonly isConfigured = this.supabase.isConfigured;
-
-  /** Résultat du ping Auth (null = en cours / non lancé). */
-  protected readonly authReachable = signal<boolean | null>(null);
+  protected readonly items = signal<PublicArtwork[]>([]);
+  protected readonly thumbUrls = signal<Record<string, string>>({});
+  protected readonly isLoading = signal(true);
+  protected readonly errorMessage = signal<string | null>(null);
 
   /**
-   * Vérifie au chargement que Supabase répond (getSession).
+   * Charge le carousel au montage.
    */
   ngOnInit(): void {
-    void this.checkSupabase();
+    void this.loadCarousel();
   }
 
   /**
-   * Ping Auth Supabase pour valider URL + clé anon.
+   * Ouvre le feed lightbox sur l'œuvre choisie.
+   * @param artwork Œuvre publique.
    */
-  private async checkSupabase(): Promise<void> {
-    if (!this.supabase.isConfigured()) {
-      this.authReachable.set(false);
+  protected openArtwork(artwork: PublicArtwork): void {
+    void this.router.navigate(['/explore', artwork.id]);
+  }
+
+  /**
+   * Charge les 20 dernières publications + miniatures.
+   */
+  private async loadCarousel(): Promise<void> {
+    this.isLoading.set(true);
+    this.errorMessage.set(null);
+
+    const result = await this.explore.listLatestPublic(20);
+    if (result.error) {
+      this.errorMessage.set(result.error);
+      this.items.set([]);
+      this.isLoading.set(false);
       return;
     }
-    const ok = await this.supabase.pingAuth();
-    this.authReachable.set(ok);
+
+    this.items.set(result.items);
+
+    const urls: Record<string, string> = {};
+    await Promise.all(
+      result.items.map(async (item) => {
+        const url = await this.explore.getSignedImageUrl(item.storage_path);
+        if (url) {
+          urls[item.id] = url;
+        }
+      }),
+    );
+    this.thumbUrls.set(urls);
+    this.isLoading.set(false);
   }
 }

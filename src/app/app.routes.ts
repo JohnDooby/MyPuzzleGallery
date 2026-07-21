@@ -13,6 +13,11 @@ export const routes: Routes = [
         loadChildren: () => import('./features/home/home.routes').then((m) => m.HOME_ROUTES),
       },
       {
+        path: 'explore',
+        loadChildren: () =>
+          import('./features/explore/explore.routes').then((m) => m.EXPLORE_ROUTES),
+      },
+      {
         path: 'gallery',
         loadChildren: () =>
           import('./features/gallery/gallery.routes').then((m) => m.GALLERY_ROUTES),

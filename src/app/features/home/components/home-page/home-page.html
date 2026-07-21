@@ -4,17 +4,41 @@
     Espace familial supervisé pour publier des dessins et les jouer en puzzle.
   </p>
 
-  <div class="home__status" aria-live="polite">
-    <p>
-      Supabase configuré :
-      <strong>{{ isConfigured() ? 'oui' : 'non' }}</strong>
-    </p>
-    @if (authReachable() === null) {
-      <p>Vérification de la connexion…</p>
-    } @else if (authReachable()) {
-      <p class="home__ok">Connexion Auth OK</p>
-    } @else {
-      <p class="home__ko">Connexion Auth indisponible (vérifier .env / env:sync)</p>
+  <div class="home__section-head">
+    <h2 class="home__section-title">Dernières publications</h2>
+    @if (items().length > 0) {
+      <a class="home__explore-link" routerLink="/explore">Tout voir</a>
     }
   </div>
+
+  @if (isLoading()) {
+    <p class="home__muted">Chargement…</p>
+  } @else if (errorMessage()) {
+    <p class="home__error" role="alert">{{ errorMessage() }}</p>
+  } @else if (items().length === 0) {
+    <p class="home__muted">
+      Aucune œuvre publique pour le moment. Après validation par un Admin, les nouveautés
+      apparaîtront ici.
+    </p>
+  } @else {
+    <ul class="home__carousel" aria-label="Carousel des dernières publications">
+      @for (item of items(); track item.id) {
+        <li class="home__slide">
+          <button
+            type="button"
+            class="home__card"
+            (click)="openArtwork(item)"
+            [attr.aria-label]="'Voir « ' + item.title + ' » de ' + item.author_pseudo"
+          >
+            @if (thumbUrls()[item.id]; as url) {
+              <img class="home__image" [src]="url" [alt]="item.title" />
+            } @else {
+              <div class="home__image home__image--empty" aria-hidden="true"></div>
+            }
+            <span class="home__pseudo">{{ item.author_pseudo }}</span>
+          </button>
+        </li>
+      }
+    </ul>
+  }
 </section>
